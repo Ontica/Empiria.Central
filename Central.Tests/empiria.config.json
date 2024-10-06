@@ -1,0 +1,22 @@
+﻿{
+  "appName": "Empiria Central Framework Tests Suite",
+  "version": "8.0",
+  "date": "2024-10-05",
+  "settings": [
+    {
+      "type": "",
+      "key": "ApplicationKey",
+      "value": "{{APPLICATION-KEY}}"
+    },
+    {
+      "type": "",
+      "key": "GlobalConfigurationFile",
+      "value": "{{GLOBAL-CONFIGURATION-FILE}}"
+    },
+    {
+      "type": "Tests",
+      "key": "Testing.SessionToken",
+      "value": "{{TESTING-SESSION-TOKEN}}"
+    }
+  ]
+}
