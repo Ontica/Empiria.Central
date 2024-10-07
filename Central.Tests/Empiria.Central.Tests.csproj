@@ -74,12 +74,10 @@
   <ItemGroup Condition=" '$(Configuration)' != 'Multisolutions' ">
     <PackageReference Include="Empiria.Central" Version="8.0.0" />
     <PackageReference Include="Empiria.Tests" Version="1.0.0" />
-    <PackageReference Include="Empiria.Data.Oracle" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Central\Empiria.Central.csproj" />
     <ProjectReference Include="..\..\extensions\Tests\Empiria.Tests.csproj" />
-    <ProjectReference Include="..\..\extensions\Data.Oracle\Empiria.Data.Oracle.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="empiria.config.json">
