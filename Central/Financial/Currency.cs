@@ -25,28 +25,19 @@ namespace Empiria.Financial {
       // Required by Empiria Framework.
     }
 
-    static public Currency Parse(int id) {
-      return BaseObject.ParseId<Currency>(id);
-    }
+    static public Currency Parse(int id) => ParseId<Currency>(id);
 
-    static public Currency Parse(string uid) {
-      return BaseObject.ParseKey<Currency>(uid);
-    }
+    static public Currency Parse(string uid) => ParseKey<Currency>(uid);
 
-    static public Currency Default {
-      get { return Currency.Parse(defaultCurrencyId); }
-    }
+    static public FixedList<Currency> GetList() => GetList<Currency>().ToFixedList();
 
-    static public Currency Empty => BaseObject.ParseEmpty<Currency>();
+    static public Currency Default => Parse(defaultCurrencyId);
+
+    static public Currency Empty => ParseEmpty<Currency>();
 
     #endregion Constructors and parsers
 
     #region Properties
-
-    public string Abbreviation {
-      get { return base.NamedKey; }
-    }
-
 
     public bool HasSymbol {
       get {
@@ -54,6 +45,11 @@ namespace Empiria.Financial {
       }
     }
 
+    public string ISOCode {
+      get {
+        return base.ExtendedDataField.Get<string>("isoCode", string.Empty);
+      }
+    }
 
     public string Symbol {
       get {

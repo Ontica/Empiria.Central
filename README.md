@@ -1,5 +1,9 @@
 # Empiria Central Framework
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/dc23fc20838844b188170dfd00697fdb)](https://app.codacy.com/gh/Ontica/Empiria.Central/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+&nbsp; &nbsp;
+[![Maintainability](https://api.codeclimate.com/v1/badges/3c44a98c1031be47c7a1/maintainability)](https://codeclimate.com/github/Ontica/Empiria.Central/maintainability)
+
 Empiria Central Framework es un conjunto de componentes y servicios centralizados, 
 que pueden ser utilizados de forma común en diversas aplicaciones.
 

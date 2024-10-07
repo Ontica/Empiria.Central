@@ -160,7 +160,7 @@ namespace Empiria.Financial {
         return _amount.ToString();
 
       } else {
-        return _amount.ToString("0,###.00##" + " " + _currency.Abbreviation);
+        return _amount.ToString("0,###.00##" + " " + _currency.ISOCode);
 
       }
     }
