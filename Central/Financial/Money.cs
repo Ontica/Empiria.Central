@@ -8,31 +8,21 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-using Empiria.Json;
-
 namespace Empiria.Financial {
 
   /// <summary>Value type that represents a currency amount.</summary>
   public struct Money {
 
-    #region Fields
-
-    private Currency _currency;
-
-    private decimal _amount;
-
-    #endregion Fields
-
     #region Constructors and parsers
 
-    private Money(Money money) {
-      _currency = money.Currency;
-      _amount = money.Amount;
+    public Money(decimal amount) {
+      Currency = Currency.Default;
+      Amount = amount;
     }
 
-    private Money(Currency currency, decimal amount) {
-      _currency = currency;
-      _amount = amount;
+    public Money(Currency currency, decimal amount) {
+      Currency = currency;
+      Amount = amount;
     }
 
     static public Money Parse(decimal amount) {
@@ -41,11 +31,6 @@ namespace Empiria.Financial {
 
     static public Money Parse(Currency currency, decimal amount) {
       return new Money(currency, amount);
-    }
-
-    static public Money Parse(JsonObject json) {
-      return Money.Parse(json.Get("CurrencyId", Currency.Default),
-                         json.Get("Value", 0m));
     }
 
     static public Money Empty {
@@ -61,17 +46,11 @@ namespace Empiria.Financial {
     #region Properties
 
     public decimal Amount {
-      get { return _amount; }
+      get;
     }
 
-
     public Currency Currency {
-      get {
-        if (_currency == null) {
-          _currency = Currency.Default;
-        }
-        return _currency;
-      }
+      get;
     }
 
     #endregion Properties
@@ -79,47 +58,37 @@ namespace Empiria.Financial {
     #region Operators overloading
 
     static public Money operator +(Money moneyA, Money moneyB) {
-      Money temp = new Money(moneyA);
+      Assertion.Require(moneyA.Currency.Equals(moneyB.Currency),
+                        $"No se puede hacer la suma de monedas distintas: " +
+                        $"{moneyA.Currency.Name} {moneyB.Currency.Name}.");
 
-      temp._amount += moneyB.Amount;
-
-      return temp;
+      return new Money(moneyA.Currency, moneyA.Amount + moneyB.Amount);
     }
 
 
     static public Money operator -(Money moneyA, Money moneyB) {
-      Money temp = new Money(moneyA);
+      Assertion.Require(moneyA.Currency.Equals(moneyB.Currency),
+                        $"No se puede hacer la resta de monedas distintas: " +
+                        $"{moneyA.Currency.Name} {moneyB.Currency.Name}.");
 
-      temp._amount -= moneyB.Amount;
-
-      return temp;
+      return new Money(moneyA.Currency, moneyA.Amount - moneyB.Amount);
     }
 
 
     static public Money operator *(Money money, decimal scalar) {
-      Money temp = new Money(money);
-
-      temp._amount *= scalar;
-
-      return temp;
+      return new Money(money.Currency, money.Amount * scalar);
     }
 
 
     static public Money operator *(decimal scalar, Money money) {
-      Money temp = new Money(money);
-
-      temp._amount *= scalar;
-
-      return temp;
+      return new Money(money.Currency, money.Amount * scalar);
     }
 
 
-    static public Money operator /(Money moneyA, decimal scalar) {
-      Money temp = new Money(moneyA);
+    static public Money operator /(Money money, decimal scalar) {
+      Assertion.Require(scalar != 0, "No se puede una cantidad monetaria entre cero.");
 
-      temp._amount /= scalar;
-
-      return temp;
+      return new Money(money.Currency, money.Amount / scalar);
     }
 
 
@@ -147,20 +116,20 @@ namespace Empiria.Financial {
 
 
     public override int GetHashCode() {
-      return (_currency.GetHashCode() ^ _amount.GetHashCode());
+      return (Currency, Amount).GetHashCode();
     }
 
 
     public override string ToString() {
 
-      if (this._currency.Equals(Currency.Default)) {
-        return _amount.ToString("C2");
+      if (Currency.Equals(Currency.Default)) {
+        return Amount.ToString("C2");
 
-      } else if (this._currency.Equals(Currency.Empty)) {
-        return _amount.ToString();
+      } else if (Currency.Equals(Currency.Empty)) {
+        return Amount.ToString();
 
       } else {
-        return _amount.ToString("0,###.00##" + " " + _currency.ISOCode);
+        return Amount.ToString("0,###.00##" + " " + Currency.ISOCode);
 
       }
     }

@@ -7,6 +7,7 @@
 *  Summary  : Value type that handles quantity data, a pair unit-amount data type.                           *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
+
 using System;
 
 namespace Empiria.Measurement {
@@ -14,24 +15,11 @@ namespace Empiria.Measurement {
   /// <summary>Value type that handles quantity data, a pair unit-amount data type.</summary>
   public struct Quantity {
 
-    #region Fields
-
-    private Unit _unit;
-    private decimal _amount;
-
-    #endregion Fields
-
     #region Constructors and parsers
 
-    private Quantity(Quantity quantity) {
-      _unit = quantity.Unit;
-      _amount = quantity.Amount;
-    }
-
-
-    private Quantity(Unit unit, decimal amount) {
-      _unit = unit;
-      _amount = amount;
+    public Quantity(Unit unit, decimal amount) {
+      Unit = unit;
+      Amount = amount;
     }
 
 
@@ -58,16 +46,12 @@ namespace Empiria.Measurement {
     #region Properties
 
     public decimal Amount {
-      get {
-        return _amount;
-      }
+      get;
     }
 
 
     public Unit Unit {
-      get {
-        return _unit;
-      }
+      get;
     }
 
     #endregion Properties
@@ -75,47 +59,37 @@ namespace Empiria.Measurement {
     #region Operators overloading
 
     static public Quantity operator +(Quantity quantityA, Quantity quantityB) {
-      Quantity temp = new Quantity(quantityA);
+      Assertion.Require(quantityA.Unit.Equals(quantityB.Unit),
+                  $"No se puede hacer la suma entre unidades distintas: " +
+                  $"{quantityA.Unit.Name} {quantityB.Unit.Name}.");
 
-      temp._amount += quantityB.Amount;
-
-      return temp;
+      return new Quantity(quantityA.Unit, quantityA.Amount + quantityB.Amount);
     }
 
 
     static public Quantity operator -(Quantity quantityA, Quantity quantityB) {
-      Quantity temp = new Quantity(quantityA);
+      Assertion.Require(quantityA.Unit.Equals(quantityB.Unit),
+                  $"No se puede hacer la resta entre unidades distintas: " +
+                  $"{quantityA.Unit.Name} {quantityB.Unit.Name}.");
 
-      temp._amount -= quantityB.Amount;
-
-      return temp;
+      return new Quantity(quantityA.Unit, quantityA.Amount - quantityB.Amount);
     }
 
 
     static public Quantity operator *(Quantity quantity, decimal scalar) {
-      Quantity temp = new Quantity(quantity);
-
-      temp._amount *= scalar;
-
-      return temp;
+      return new Quantity(quantity.Unit, quantity.Amount * scalar);
     }
 
 
     static public Quantity operator *(decimal scalar, Quantity quantity) {
-      Quantity temp = new Quantity(quantity);
-
-      temp._amount *= scalar;
-
-      return temp;
+      return new Quantity(quantity.Unit, quantity.Amount * scalar);
     }
 
 
     static public Quantity operator /(Quantity quantity, decimal scalar) {
-      Quantity temp = new Quantity(quantity);
+      Assertion.Require(scalar != 0, "No se puede dividr una cantidad entre cero.");
 
-      temp._amount /= scalar;
-
-      return temp;
+      return new Quantity(quantity.Unit, quantity.Amount / scalar);
     }
 
 
@@ -143,7 +117,7 @@ namespace Empiria.Measurement {
 
 
     public override int GetHashCode() {
-      return _unit.GetHashCode() ^ _amount.GetHashCode();
+      return (Unit, Amount).GetHashCode();
     }
 
 
@@ -151,7 +125,7 @@ namespace Empiria.Measurement {
       if (Unit.Format == "Hectareas") {
         return FormatToHectareasString();
       }
-      return EmpiriaString.TrimAll(_amount.ToString("#,##0.00######") + " " + _unit.Abbr);
+      return EmpiriaString.TrimAll(Amount.ToString("#,##0.00######") + " " + Unit.Abbr);
     }
 
     #endregion Methods
@@ -159,16 +133,16 @@ namespace Empiria.Measurement {
     #region Helpers
 
     private string FormatToHectareasString() {
-      var ha = Math.Truncate(_amount);
-      var area = Math.Truncate((_amount - ha) * 100);
-      var meters = (_amount - ha - area / 100) * 10000;
+      var ha = Math.Truncate(Amount);
+      var area = Math.Truncate((Amount - ha) * 100);
+      var meters = (Amount - ha - area / 100) * 10000;
 
       if (meters == 0) {
-        return $"{ha.ToString("00")}-{area.ToString("00")}-00 {_unit.Abbr}";
+        return $"{ha.ToString("00")}-{area.ToString("00")}-00 {Unit.Abbr}";
       } else if (Math.Truncate(meters) == meters) {
-        return $"{ha.ToString("00")}-{area.ToString("00")}-{meters.ToString("00")} {_unit.Abbr}";
+        return $"{ha.ToString("00")}-{area.ToString("00")}-{meters.ToString("00")} {Unit.Abbr}";
       } else {
-        return $"{ha.ToString("00")}-{area.ToString("00")}-{meters.ToString("00.00######")} {_unit.Abbr}";
+        return $"{ha.ToString("00")}-{area.ToString("00")}-{meters.ToString("00.00######")} {Unit.Abbr}";
       }
     }
 
