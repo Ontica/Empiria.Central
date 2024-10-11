@@ -2,22 +2,20 @@
   <PropertyGroup>
     <Company>Ontica</Company>
     <Product>Empiria Central Framework</Product>
-    <Description>
-      Optional web api interface for Empiria Central Framework types.
-    </Description>
-    <Copyright>(c) 2002-2024. La Vía Óntica SC, Ontica LLC y de los autores. Todos los derechos reservados.</Copyright>
+    <Description>Tests suite for Empiria Central Framework Services.</Description>
+    <Copyright>(c) 2002-2024. La Vía Óntica SC, Ontica LLC and contributors.</Copyright>
     <Version>8.0.0</Version>
     <AssemblyVersion>8.0.0</AssemblyVersion>
     <FileVersion>8.0.0.0</FileVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseUrl>https://github.com/Ontica/Empiria.Central/blob/master/Central.WebApi/LICENSE.txt</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/Ontica/Empiria.Central/tree/master/Central.WebApi</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/Ontica/Empiria.Central/tree/master/Central.Services.Tests/LICENSE.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Ontica/Empiria.Central/tree/master/Central.Services</PackageProjectUrl>
     <PackageIconUrl>http://www.ontica.org/logo.ontica.png</PackageIconUrl>
     <PackageTags>
-      accounts, authorization, calendars, contracts, documents, events, electronic sign, geography,
-      measurement, money, parties, postings, procedures, projects, protocols, relations, roles
-      servicios web, web api
+      tests suite, unit tests, integration tests, accounts, authorization, calendars, contracts, documents, 
+      events, electronic sign, geography, measurement, money, parties, postings, procedures, projects, 
+      protocols, relations, roles, Empiria, framework, services
     </PackageTags>
     <RepositoryUrl>https://github.com/Ontica/Empiria.Central</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -26,8 +24,8 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <NeutralLanguage></NeutralLanguage>
     <Configurations>Debug;Release;Multisolutions</Configurations>
-    <AssemblyName>Empiria.Central.WebApi</AssemblyName>
-    <RootNamespace>Empiria.Central.WebApi</RootNamespace>
+    <AssemblyName>Empiria.Central.Services.Tests</AssemblyName>
+    <RootNamespace>Empiria.Tests.Central.Services</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Multisolutions|AnyCPU' ">
     <OutputPath>bin\</OutputPath>
@@ -41,12 +39,11 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-    <NoWarn />
+    <NoWarn>CS3016</NoWarn>
     <WarningsAsErrors />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\</OutputPath>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE</DefineConstants>
@@ -56,20 +53,40 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-    <NoWarn />
+    <NoWarn>CS3016</NoWarn>
     <WarningsAsErrors />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.Net.Http" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xunit.abstractions" Version="2.0.3" />
+    <PackageReference Include="xunit.analyzers" Version="1.1.0" />
+    <PackageReference Include="xunit.assert" Version="2.4.2" />
+    <PackageReference Include="xunit.core" Version="2.4.2" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.4.2" />
+    <PackageReference Include="xunit.extensibility.execution" Version="2.4.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)' != 'Multisolutions' ">
-    <PackageReference Include="Empiria.WebApi" Version="2.0.0" />
     <PackageReference Include="Empiria.Central" Version="8.0.0" />
     <PackageReference Include="Empiria.Central.Services" Version="8.0.0" />
+    <PackageReference Include="Empiria.Tests" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\extensions\WebApi\Empiria.WebApi.csproj" />
     <ProjectReference Include="..\Central\Empiria.Central.csproj" />
     <ProjectReference Include="..\Central.Services\Empiria.Central.Services.csproj" />
+    <ProjectReference Include="..\..\extensions\Tests\Empiria.Tests.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="empiria.config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="empiria.environment.vars.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
