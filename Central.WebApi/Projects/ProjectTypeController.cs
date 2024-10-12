@@ -12,6 +12,7 @@ using System.Web.Http;
 using Empiria.WebApi;
 
 using Empiria.Projects.Services;
+using Empiria.Projects.Services.Adapters;
 
 namespace Empiria.Projects.WebApi {
 
@@ -28,6 +29,18 @@ namespace Empiria.Projects.WebApi {
         FixedList<NamedEntityDto> list = usecases.GetProjectTypes();
 
         return new CollectionModel(base.Request, list);
+      }
+    }
+
+
+    [HttpGet]
+    [Route("v2/budgeting/project-types/{projectTypeUID:guid}/projects")]
+    public CollectionModel GetProjectTypeProjects([FromUri] string projectTypeUID) {
+
+      using (var usecases = ProjectServices.ServiceInteractor()) {
+        FixedList<ProjectDto> projects = usecases.GetProjectTypeProjects(projectTypeUID);
+
+        return new CollectionModel(base.Request, projects);
       }
     }
 
