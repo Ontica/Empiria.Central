@@ -13,7 +13,7 @@ using Xunit;
 using Empiria.Projects;
 using Empiria.Projects.Services;
 
-namespace Empiria.Tests.Central.Projects.Services {
+namespace Empiria.Tests.Projects.Services {
 
   /// <summary>Test cases for project type services.</summary>
   public class ProjectTypeServicesTests {
@@ -87,4 +87,4 @@ namespace Empiria.Tests.Central.Projects.Services {
 
   }  // class ProjectTypeServicesTests
 
-}  // namespace Empiria.Tests.Central.Projects.Services
+}  // namespace Empiria.Tests.Projects.Services

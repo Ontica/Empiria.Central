@@ -8,7 +8,7 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-namespace Empiria.Tests.Central.Services {
+namespace Empiria.Tests {
 
   /// <summary>Provides testing constants for Empiria Central Services.</summary>
   static public class TestingConstants {
@@ -16,4 +16,4 @@ namespace Empiria.Tests.Central.Services {
 
   }  // class TestingConstants
 
-}  // namespace Empiria.Tests.Central.Services
+}  // namespace Empiria.Tests
