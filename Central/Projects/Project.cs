@@ -17,6 +17,10 @@ namespace Empiria.Projects {
 
     #region Constructors and parsers
 
+    private Project() {
+      // Required by Empiria Framework.
+    }
+
     internal Project(ProjectType projectType, string name) {
       Assertion.Require(projectType, nameof(projectType));
       Assertion.Require(name, nameof(name));
