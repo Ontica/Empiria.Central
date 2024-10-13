@@ -29,20 +29,12 @@ namespace Empiria.Projects {
       this.Name = name;
     }
 
-    static public Project Parse(int id) {
-      return BaseObject.ParseId<Project>(id);
-    }
+    static public Project Parse(int id) => ParseId<Project>(id);
 
     static public Project Parse(string typeUID) => ParseKey<Project>(typeUID);
 
     static public FixedList<Project> GetList() {
       return BaseObject.GetList<Project>(string.Empty, string.Empty)
-                       .FindAll(x => x.Status == StateEnums.EntityStatus.Active)
-                       .ToFixedList();
-    }
-
-    static public FixedList<Project> GetListFor(ProjectType projectType) {
-      return BaseObject.GetList<Project>()
                        .ToFixedList();
     }
 
@@ -54,7 +46,7 @@ namespace Empiria.Projects {
 
     public ProjectType ProjectType {
       get {
-        return ExtendedDataField.Get<ProjectType>("projectTypeId");
+        return ExtendedDataField.Get("projectTypeId", ProjectType.Empty);
       }
       private set {
         ExtendedDataField.Set("projectTypeId", value.Id);

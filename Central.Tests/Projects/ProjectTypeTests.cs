@@ -2,9 +2,9 @@
 *                                                                                                            *
 *  Module   : Projects                                   Component : Test cases                              *
 *  Assembly : Empiria.Central.Tests.dll                  Pattern   : Unit tests                              *
-*  Type     : ProjectTests                               License   : Please read LICENSE.txt file            *
+*  Type     : ProjectTypeTests                           License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Unit tests for Project type.                                                                   *
+*  Summary  : Unit tests for ProjectType type.                                                               *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
@@ -15,11 +15,11 @@ using Empiria.Projects;
 namespace Empiria.Tests.Projects {
 
   /// <summary>Unit tests for Project type.</summary>
-  public class ProjectTests {
+  public class ProjectTypeTests {
 
     [Fact]
-    public void Should_Get_All_Projects() {
-      var sut = Project.GetList();
+    public void Should_Get_All_ProjectTypes() {
+      var sut = ProjectType.GetList();
 
       Assert.NotNull(sut);
       Assert.NotEmpty(sut);
@@ -27,14 +27,25 @@ namespace Empiria.Tests.Projects {
 
 
     [Fact]
-    public void Should_Get_Empty_Project() {
-      var sut = Project.Empty;
+    public void Should_Get_All_ProjectType_Projects() {
+      var projectTypes = ProjectType.GetList();
 
-      Assert.NotNull(sut);
-      Assert.NotNull(sut.ProjectType);
-      Assert.Equal(ProjectType.Empty, sut.ProjectType);
+      foreach (var projectType in projectTypes) {
+        var sut = projectType.GetProjects();
+
+        Assert.NotNull(sut);
+      }
     }
 
-  }  // ProjectTests
+
+    [Fact]
+    public void Should_Get_Empty_ProjectType() {
+      var sut = ProjectType.Empty;
+
+      Assert.NotNull(sut);
+      Assert.Empty(sut.GetProjects());
+    }
+
+  }  // ProjectTypeTests
 
 }  // namespace Empiria.Tests.Projects

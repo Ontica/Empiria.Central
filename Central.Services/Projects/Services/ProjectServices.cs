@@ -64,7 +64,7 @@ namespace Empiria.Projects.Services {
 
       var projectType = ProjectType.Parse(projectTypeUID);
 
-      FixedList<Project> values = Project.GetListFor(projectType);
+      FixedList<Project> values = projectType.GetProjects();
 
       return ProjectMapper.Map(values);
     }

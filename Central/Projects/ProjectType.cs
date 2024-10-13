@@ -42,6 +42,12 @@ namespace Empiria.Projects {
 
     #region Methods
 
+    public FixedList<Project> GetProjects() {
+      return BaseObject.GetList<Project>()
+                       .ToFixedList()
+                       .FindAll(x => x.ProjectType.Equals(this));
+    }
+
     internal void Delete() {
       base.Status = EntityStatus.Deleted;
 
