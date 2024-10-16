@@ -79,6 +79,13 @@ namespace Empiria.Parties {
       };
     }
 
+
+    public string Keywords {
+      get {
+        return EmpiriaString.BuildKeywords(TaxCode, TaxEntityName, TaxZipCode);
+      }
+    }
+
     #endregion Methods
 
   }  // class TaxData

@@ -24,6 +24,8 @@ namespace Empiria.Parties {
   [PartitionedType(typeof(PartyType))]
   public abstract class Party : BaseObject, IHistoricObject, INamedEntity {
 
+    static private int PRIMARY_PARTY_ID = ConfigurationData.Get("PrimaryPartyId", 1);
+
     #region Constructors and parsers
 
     protected Party() {
@@ -57,8 +59,9 @@ namespace Empiria.Parties {
       return PartyDataService.GetPartiesInDate<T>(date);
     }
 
+    static public Party Empty => ParseEmpty<Person>();
 
-    static public Party Empty => BaseObject.ParseEmpty<Person>();
+    static public Party Primary => Parse(PRIMARY_PARTY_ID);
 
     #endregion Constructors and parsers
 
@@ -73,7 +76,7 @@ namespace Empiria.Parties {
 
     [DataField("PARTY_NAME")]
     public string Name {
-      get; protected set;
+      get; private set;
     }
 
 
@@ -98,7 +101,7 @@ namespace Empiria.Parties {
 
     [DataField("PARTY_START_DATE")]
     internal DateTime StartDate {
-      get; set;
+      get; private set;
     }
 
 
@@ -122,13 +125,13 @@ namespace Empiria.Parties {
 
     [DataField("PARTY_STATUS", Default = EntityStatus.Active)]
     public EntityStatus Status {
-      get; protected set;
+      get; private set;
     }
 
 
     [DataField("PARTY_CONTACT_ID")]
     public Contacts.Contact Contact {
-      get; protected set;
+      get; private set;
     }
 
     #endregion Properties

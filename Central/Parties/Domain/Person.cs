@@ -44,7 +44,7 @@ namespace Empiria.Parties {
     }
 
 
-    static public new Person Empty => BaseObject.ParseEmpty<Person>();
+    static public new Person Empty => ParseEmpty<Person>();
 
 
     #endregion Constructors and parsers
@@ -91,11 +91,12 @@ namespace Empiria.Parties {
     }
 
 
-    public override string Keywords {
+    public string FullName {
       get {
-        return EmpiriaString.BuildKeywords(base.Keywords, LastName, LastName2, FirstName);
+        return EmpiriaString.TrimAll($"{FirstName} {LastName} {LastName2}");
       }
     }
+
 
     public TaxData TaxData {
       get {
@@ -103,6 +104,13 @@ namespace Empiria.Parties {
       }
       private set {
         base.ExtendedData.SetIfValue("taxData", value.ToJson());
+      }
+    }
+
+
+    public override string Keywords {
+      get {
+        return EmpiriaString.BuildKeywords(Name, LastName, LastName2, FirstName, TaxData.Keywords);
       }
     }
 
