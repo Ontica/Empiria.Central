@@ -32,16 +32,11 @@ namespace Empiria.Parties {
       // Required by Empiria Framework for all partitioned types.
     }
 
-    static public PartyRelation Parse(int id) {
-      return BaseObject.ParseId<PartyRelation>(id);
-    }
+    static public PartyRelation Parse(int id) => ParseId<PartyRelation>(id);
 
+    static public PartyRelation Parse(string uid) => ParseKey<PartyRelation>(uid);
 
-    static public PartyRelation Parse(string uid) {
-      return BaseObject.ParseKey<PartyRelation>(uid);
-    }
-
-    static public PartyRelation Empty => BaseObject.ParseEmpty<PartyRelation>();
+    static public PartyRelation Empty => ParseEmpty<PartyRelation>();
 
     #endregion Constructors and parsers
 
@@ -53,23 +48,26 @@ namespace Empiria.Parties {
       }
     }
 
+
     [DataField("PARTY_RELATION_ROLE_ID")]
-    public PartyRole Role {
-      get; protected set;
+    protected internal PartyRole Role {
+      get; private set;
     }
 
 
     [DataField("COMMISSIONER_PARTY_ID")]
-    public Party Commissioner {
-      get; protected set;
+    protected internal Party Commissioner {
+      get; private set;
     }
+
 
     [DataField("RESPONSIBLE_PARTY_ID")]
-    public Party Responsible {
-      get; protected set;
+    protected internal Party Responsible {
+      get; private set;
     }
 
-    [DataField("PTY_RELATION_EXT_DATA")]
+
+    [DataField("PARTY_RELATION_EXT_DATA")]
     protected internal JsonObject ExtendedData {
       get; private set;
     }
@@ -82,35 +80,39 @@ namespace Empiria.Parties {
     }
 
 
-    [DataField("PTY_RELATION_HISTORIC_ID")]
+    [DataField("PARTY_RELATION_HISTORIC_ID")]
     public int HistoricId {
       get; private set;
     }
 
 
-    [DataField("PTY_RELATION_START_DATE")]
-    internal DateTime StartDate {
-      get; set;
-    }
-
-    [DataField("PTY_RELATION_END_DATE")]
-    internal DateTime EndDate {
+    [DataField("PARTY_RELATION_START_DATE")]
+    public DateTime StartDate {
       get; private set;
     }
 
-    [DataField("PTY_RELATION_POSTED_BY_ID")]
+
+    [DataField("PARTY_RELATION_END_DATE")]
+    public DateTime EndDate {
+      get; private set;
+    }
+
+
+    [DataField("PARTY_RELATION_POSTED_BY_ID")]
     internal int PostedById {
       get; private set;
     }
 
-    [DataField("PTY_RELATION_POSTING_TIME")]
+
+    [DataField("PARTY_RELATION_POSTING_TIME")]
     internal DateTime PostingTime {
       get; private set;
     }
 
-    [DataField("PTY_RELATION_STATUS", Default = EntityStatus.Active)]
+
+    [DataField("PARTY_RELATION_STATUS", Default = EntityStatus.Active)]
     public EntityStatus Status {
-      get; protected set;
+      get; private set;
     }
 
     #endregion Properties
@@ -143,6 +145,7 @@ namespace Empiria.Parties {
       PartyDataService.CloseHistoricPartyRelation(historyOf);
       PartyDataService.WritePartyRelation(this);
     }
+
 
     protected void Update(PartyRelationFields fields) {
       this.Role = PartyRole.Parse(fields.RoleUID);
