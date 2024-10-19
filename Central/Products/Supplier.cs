@@ -1,16 +1,18 @@
 ﻿/* Empiria Central  ******************************************************************************************
 *                                                                                                            *
-*  Module   : Parties                                    Component : Domain Layer                            *
+*  Module   : Products                                   Component : Domain Layer                            *
 *  Assembly : Empiria.Central.dll                        Pattern   : Information Holder                      *
 *  Type     : Supplier                                   License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Represents a supplier.                                                                         *
+*  Summary  : Represents a supplier. A supplier is a relation between two parties.                           *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-namespace Empiria.Parties {
+using Empiria.Parties;
 
-  /// <summary>Represents a supplier.</summary>
+namespace Empiria.Products {
+
+  /// <summary>Represents a supplier. A supplier is a relation between two parties.</summary>
   public class Supplier : PartyRelation, INamedEntity {
 
     #region Constructors and parsers
@@ -37,7 +39,7 @@ namespace Empiria.Parties {
 
     public string Name {
       get {
-        return base.Responsible.Name;
+        return Responsible.Name;
       }
     }
 
@@ -64,14 +66,14 @@ namespace Empiria.Parties {
 
     public Party Customer {
       get {
-        return base.Commissioner;
+        return Commissioner;
       }
     }
 
 
-    public Party This {
+    public Party AsParty {
       get {
-        return base.Responsible;
+        return Responsible;
       }
     }
 
@@ -86,4 +88,4 @@ namespace Empiria.Parties {
 
   } // class Supplier
 
-} // namespace Empiria.Parties
+} // namespace Empiria.Products

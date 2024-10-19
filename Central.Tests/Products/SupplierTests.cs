@@ -1,6 +1,6 @@
 ﻿/* Empiria Central  ******************************************************************************************
 *                                                                                                            *
-*  Module   : Parties                                    Component : Test cases                              *
+*  Module   : Products                                   Component : Test cases                              *
 *  Assembly : Empiria.Central.Tests.dll                  Pattern   : Unit tests                              *
 *  Type     : SupplierTests                              License   : Please read LICENSE.txt file            *
 *                                                                                                            *
@@ -10,9 +10,9 @@
 
 using Xunit;
 
-using Empiria.Parties;
+using Empiria.Products;
 
-namespace Empiria.Tests.Parties {
+namespace Empiria.Tests.Products {
 
   /// <summary>Unit tests for Supplier instances.</summary>
   public class SupplierTests {
@@ -28,7 +28,7 @@ namespace Empiria.Tests.Parties {
 
     [Fact]
     public void Should_Get_All_Suppliers() {
-      var sut = Supplier.GetList<Supplier>();
+      var sut = BaseObject.GetList<Supplier>();
 
       Assert.NotNull(sut);
       Assert.NotEmpty(sut);
@@ -36,4 +36,4 @@ namespace Empiria.Tests.Parties {
 
   }  // class SupplierTests
 
-}  // namespace Empiria.Tests
+}  // namespace Empiria.Tests.Products
