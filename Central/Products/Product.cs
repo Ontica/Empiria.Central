@@ -8,6 +8,8 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using System;
+
 using Empiria.Json;
 using Empiria.Ontology;
 using Empiria.Parties;
@@ -50,49 +52,94 @@ namespace Empiria.Products {
     }
 
 
-    [DataField("ProductInternalCode")]
-    public string InternalCode {
-      get;
-      private set;
-    }
-
-
-    [DataField("ProductName")]
+    [DataField("PRODUCT_NAME")]
     public string Name {
       get;
       private set;
     }
 
 
-    [DataField("ProductDescription")]
+    [DataField("PRODUCT_DESCRIPTION")]
     public string Description {
       get;
       private set;
     }
 
 
-    [DataField("ProductUnitId")]
-    public ProductUnit Unit {
+    [DataField("PRODUCT_INTERNAL_CODE")]
+    public string InternalCode {
       get;
       private set;
     }
 
 
-    [DataField("ProductManagerId")]
+    [DataField("PRODUCT_TAGS")]
+    private string _tags = string.Empty;
+
+    public FixedList<string> Tags {
+      get {
+        return _tags.Split(' ').ToFixedList();
+      }
+    }
+
+
+    [DataField("PRODUCT_ATTRIBUTES")]
+    public JsonObject Attributes {
+      get;
+      private set;
+    }
+
+
+    [DataField("PRODUCT_BILLING_DATA")]
+    public JsonObject BillingData {
+      get;
+      private set;
+    }
+
+
+    [DataField("PRODUCT_BUDGETING_DATA")]
+    public JsonObject BudgetingData {
+      get;
+      private set;
+    }
+
+
+    [DataField("PRODUCT_BASE_UNIT_ID")]
+    public ProductUnit BaseUnit {
+      get;
+      private set;
+    }
+
+
+    [DataField("PRODUCT_MANAGER_ID")]
     public Party Manager {
       get;
       private set;
     }
 
 
-    [DataField("ProductExtensionData")]
+    [DataField("PRODUCT_EXT_DATA")]
     protected internal JsonObject ExtensionData {
       get;
       private set;
     }
 
 
-    [DataField("ProductStatus")]
+    [DataField("PRODUCT_START_DATE")]
+    public DateTime StartDate {
+      get;
+      private set;
+    }
+
+
+    [DataField("PRODUCT_END_DATE")]
+    public DateTime EndDate {
+      get;
+      private set;
+    }
+
+
+    [DataField("PRODUCT_STATUS", Default = EntityStatus.Active)]
     public EntityStatus Status {
       get;
       private set;
