@@ -17,7 +17,7 @@ namespace Empiria.Products {
 
   /// <summary>Partitioned type that represents a good or a service.</summary>
   [PartitionedType(typeof(ProductType))]
-  public class Product : BaseObject {
+  public class Product : BaseObject, INamedEntity {
 
     #region Constructors and parsers
 
@@ -101,7 +101,8 @@ namespace Empiria.Products {
 
     protected internal virtual string Keywords {
       get {
-        return EmpiriaString.BuildKeywords(InternalCode, Name, ProductType.DisplayName, Description);
+        return EmpiriaString.BuildKeywords(InternalCode, Name,
+                                           ProductType.DisplayName, Description);
       }
     }
 
