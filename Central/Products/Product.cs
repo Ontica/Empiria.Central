@@ -21,18 +21,23 @@ namespace Empiria.Products {
   [PartitionedType(typeof(ProductType))]
   public class Product : BaseObject, INamedEntity {
 
+    static readonly DateTime DEFAULT_START_DATE = new DateTime(2021, 1, 1);
+
     #region Constructors and parsers
 
     protected Product(ProductType powertype) : base(powertype) {
       // Required by Empiria Framework for all partitioned types.
     }
 
-    internal protected Product(ProductType powertype, string name) : base(powertype) {
+    internal protected Product(ProductKind productKind, string name) : base(productKind.ProductType) {
+      ProductKind = productKind;
       name = EmpiriaString.Clean(name);
 
       Assertion.Require(name, nameof(name));
 
-      this.Name = name;
+      Name = name;
+      BaseUnit = ProductUnit.Empty;
+      Manager = Party.Primary;
     }
 
     static public Product Parse(int id) => ParseId<Product>(id);
@@ -51,6 +56,12 @@ namespace Empiria.Products {
       }
     }
 
+
+    [DataField("PRODUCT_KIND_ID")]
+    public ProductKind ProductKind {
+      get;
+      private set;
+    }
 
     [DataField("PRODUCT_NAME")]
     public string Name {
@@ -157,8 +168,32 @@ namespace Empiria.Products {
 
     #region Methods
 
+    internal void Delete() {
+      this.Status = EntityStatus.Deleted;
+      this.EndDate = DateTime.Today;
+    }
+
+
     protected override void OnSave() {
-      throw new System.NotImplementedException();
+      if (this.IsNew) {
+        StartDate = DEFAULT_START_DATE;
+        EndDate = ExecutionServer.DateMaxValue;
+      }
+      ProductDataService.WriteProduct(this);
+    }
+
+
+    internal void Update(ProductFields fields) {
+      Assertion.Require(fields, nameof(fields));
+
+      fields.EnsureValid();
+
+      Name = PatchCleanField(fields.Name, Name);
+      Description = PatchCleanField(fields.Description, Description);
+      InternalCode = PatchCleanField(fields.InternalCode, InternalCode);
+      _tags = PatchField(string.Join(" ", fields.Tags), _tags);
+      BaseUnit = PatchField(fields.BaseUnitUID, BaseUnit);
+      Manager = PatchField(fields.ManagerUID, Manager);
     }
 
     #endregion Methods
