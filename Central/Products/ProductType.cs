@@ -26,7 +26,7 @@ namespace Empiria.Products {
 
     static internal new ProductType Parse(string typeName) => Parse<ProductType>(typeName);
 
-    static public ProductType Empty => Parse("ObjectType.ProductType");
+    static public ProductType Empty => Parse("ObjectTypeInfo.PowerType.ProductType");
 
     #endregion Constructors and parsers
 
