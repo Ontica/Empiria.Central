@@ -30,19 +30,29 @@ namespace Empiria.Products {
 
     #region Properties
 
-    public string Code {
+    public string Abbreviation {
       get {
-        return base.ExtendedDataField.Get("code", "N/D");
+        return base.ExtendedDataField.Get("abbreviation", string.Empty);
       }
-      set {
-        base.ExtendedDataField.SetIfValue("code", value);
+      private set {
+        base.ExtendedDataField.SetIfValue("abbreviation", value);
+      }
+    }
+
+
+    public FixedList<string> SATCodes {
+      get {
+        return base.ExtendedDataField.GetFixedList<string>("SATCodes", false);
+      }
+      private set {
+        base.ExtendedDataField.SetIfValue("SATCodes", value);
       }
     }
 
 
     public override string Keywords {
       get {
-        return EmpiriaString.BuildKeywords(Name, Code);
+        return EmpiriaString.BuildKeywords(Name, Abbreviation);
       }
     }
 
