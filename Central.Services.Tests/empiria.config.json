@@ -15,7 +15,7 @@
     },
     {
       "type": "Tests",
-      "key": "Testing.SessionToken",
+      "key": "SessionToken",
       "value": "{{TESTING-SESSION-TOKEN}}"
     }
   ]
