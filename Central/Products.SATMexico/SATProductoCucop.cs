@@ -2,31 +2,31 @@
 *                                                                                                            *
 *  Module   : Products SAT Mexico                        Component : Domain Layer                            *
 *  Assembly : Empiria.Central.dll                        Pattern   : Information Holder                      *
-*  Type     : SATCucop                                   License   : Please read LICENSE.txt file            *
+*  Type     : SATProductoCucop                           License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Producto o servicio con partidas presupuestales del gasto corriente,                           *
-*             de acuerdo al catálogo CUCoP del SAT México.                                                   *
+*  Summary  : Producto o servicio con partidas presupuestales del gasto corriente, de acuerdo al             *
+*             catálogo CUCoP (Clasificador Único de las Contrataciones Públicas) del SAT México.             *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
 namespace Empiria.Products.SATMexico {
 
-  /// <summary>Producto o servicio con partidas presupuestales del gasto corriente,
-  /// de acuerdo al catálogo CUCoP del SAT México.</summary>
-  public class SATCucop : SATDataItem {
+  /// <summary>Producto o servicio con partidas presupuestales del gasto corriente, de acuerdo al
+  /// catálogo CUCoP (Clasificador Único de las Contrataciones Públicas) del SAT México.</summary>
+  public class SATProductoCucop : SATDataItem {
 
     #region Constructors and parsers
 
-    static public SATCucop Parse(int id) => ParseId<SATCucop>(id);
+    static public SATProductoCucop Parse(int id) => ParseId<SATProductoCucop>(id);
 
-    static public SATCucop Parse(string uid) => ParseKey<SATCucop>(uid);
+    static public SATProductoCucop Parse(string uid) => ParseKey<SATProductoCucop>(uid);
 
-    static public FixedList<SATCucop> GetList() {
-      return BaseObject.GetList<SATCucop>()
+    static public FixedList<SATProductoCucop> GetList() {
+      return BaseObject.GetList<SATProductoCucop>()
                        .ToFixedList();
     }
 
-    static public SATCucop Empty => ParseEmpty<SATCucop>();
+    static public SATProductoCucop Empty => ParseEmpty<SATProductoCucop>();
 
     #endregion Constructors and parsers
 
@@ -72,6 +72,6 @@ namespace Empiria.Products.SATMexico {
 
     #endregion Properties
 
-  } // class SATCucop
+  } // class SATProductoCucop
 
 } // namespace Empiria.Products.SATMexico

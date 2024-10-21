@@ -2,7 +2,7 @@
 *                                                                                                            *
 *  Module   : Products SAT Mexico                          Component : Web Api                               *
 *  Assembly : Empiria.Central.WebApi.dll                   Pattern   : Web api controller                    *
-*  Type     : SATCucopController                           License   : Please read LICENSE.txt file          *
+*  Type     : SATProductoCucopController                   License   : Please read LICENSE.txt file          *
 *                                                                                                            *
 *  Summary  : Web API para leer y actualizar los productos del catálogo CUCoP del SAT México.                *
 *                                                                                                            *
@@ -15,20 +15,20 @@ using Empiria.WebApi;
 namespace Empiria.Products.SATMexico.WebApi {
 
   /// <summary>Web API para leer y actualizar los productos del catálogo CUCoP del SAT México.</summary>
-  public class SATCucopController : WebApiController {
+  public class SATProductoCucopController : WebApiController {
 
     #region Query web apis
 
     [HttpGet]
     [Route("v2/products/sat-mexico/productos-cucop")]
     public CollectionModel SearchSATCucopProducts([FromUri] string keywords) {
-      FixedList<SATCucop> list = SATCucop.GetList();
+      FixedList<SATProductoCucop> list = SATProductoCucop.GetList();
 
       return new CollectionModel(Request, list.MapToNamedEntityList());
     }
 
     #endregion Query web apis
 
-  }  // class SATCucopController
+  }  // class SATProductoCucopController
 
 }  // namespace Empiria.Products.SATMexico.WebApi
