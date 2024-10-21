@@ -45,7 +45,6 @@ namespace Empiria.Tests.Products {
     }
 
 
-
     [Fact]
     public void Should_Get_All_Products() {
       var sut = BaseObject.GetFullList<Product>();

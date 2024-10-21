@@ -11,7 +11,6 @@
 using Empiria.Services;
 
 using Empiria.Products.Services.Adapters;
-using Empiria.Ontology;
 
 namespace Empiria.Products.Services {
 
@@ -74,8 +73,7 @@ namespace Empiria.Products.Services {
     }
 
 
-    public FixedList<ProductDto> SearchProducts() {
-
+    public FixedList<ProductDto> SearchProducts(string keywords) {
       FixedList<Product> values = Product.GetList<Product>()
                                          .ToFixedList();
 

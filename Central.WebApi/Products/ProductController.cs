@@ -61,10 +61,10 @@ namespace Empiria.Products.WebApi {
 
     [HttpGet]
     [Route("v2/products")]
-    public CollectionModel SearchProducts() {
+    public CollectionModel SearchProducts([FromUri] string keywords) {
 
       using (var services = ProductServices.ServiceInteractor()) {
-        FixedList<ProductDto> products = services.SearchProducts();
+        FixedList<ProductDto> products = services.SearchProducts(keywords);
 
         return new CollectionModel(base.Request, products);
       }

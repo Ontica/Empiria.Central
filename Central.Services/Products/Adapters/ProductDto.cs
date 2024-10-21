@@ -4,7 +4,7 @@
 *  Assembly : Empiria.Central.Services.dll               Pattern   : Output DTO                              *
 *  Type     : ProductDto                                 License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Services for Product instances.                                                                *
+*  Summary  : Output DTO for Product instances.                                                              *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
@@ -12,6 +12,7 @@ using System;
 
 namespace Empiria.Products.Services.Adapters {
 
+  /// <summary>Output DTO for Product instances.</summary>
   public class ProductDto {
 
     public string UID {
