@@ -2,9 +2,10 @@
 *                                                                                                            *
 *  Module   : Products SAT Mexico                          Component : Web Api                               *
 *  Assembly : Empiria.Central.WebApi.dll                   Pattern   : Web api controller                    *
-*  Type     : SATCucopController                           License   : Please read LICENSE.txt file          *
+*  Type     : SATProductoController                        License   : Please read LICENSE.txt file          *
 *                                                                                                            *
-*  Summary  : Web API para leer y actualizar los productos del catálogo CUCoP del SAT México.                *
+*  Summary  : Web API para leer y actualizar el catálogo de productos y servicios para la facturación        *
+*             electrónica de acuerdo al SAT México.                                                          *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
@@ -14,21 +15,22 @@ using Empiria.WebApi;
 
 namespace Empiria.Products.SATMexico.WebApi {
 
-  /// <summary>Web API para leer y actualizar los productos del catálogo CUCoP del SAT México.</summary>
-  public class SATCucopController : WebApiController {
+  /// <summary>Web API para leer y actualizar el catálogo de productos y servicios para la facturación
+  ///electrónica de acuerdo al SAT México.</summary>
+  public class SATProductoController : WebApiController {
 
     #region Query web apis
 
     [HttpGet]
-    [Route("v2/products/sat-mexico/productos-cucop")]
-    public CollectionModel SearchSATCucopProducts([FromUri] string keywords) {
-      FixedList<SATCucop> list = SATCucop.GetList();
+    [Route("v2/products/sat-mexico/productos")]
+    public CollectionModel SearchSATProductos([FromUri] string keywords) {
+      FixedList<SATProducto> list = SATProducto.GetList();
 
       return new CollectionModel(Request, list.MapToNamedEntityList());
     }
 
     #endregion Query web apis
 
-  }  // class SATCucopController
+  }  // class SATProductoController
 
 }  // namespace Empiria.Products.SATMexico.WebApi

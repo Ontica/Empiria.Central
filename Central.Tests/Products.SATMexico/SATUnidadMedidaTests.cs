@@ -2,9 +2,9 @@
 *                                                                                                            *
 *  Module   : Products SAT Mexico                        Component : Test cases                              *
 *  Assembly : Empiria.Central.Core.Tests.dll             Pattern   : Unit tests                              *
-*  Type     : SATCucopTests                              License   : Please read LICENSE.txt file            *
+*  Type     : SATUnidadMedidaTests                       License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Unit tests for SATCucop instances.                                                             *
+*  Summary  : Unit tests for SATUnidadMedida instances.                                                      *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
@@ -14,13 +14,12 @@ using Empiria.Products.SATMexico;
 
 namespace Empiria.Tests.Products.SATMexico {
 
-  /// <summary>Unit tests for SATCucop instances.</summary>
-  public class SATCucopTests {
-
+  /// <summary>Unit tests for SATUnidadMedida instances.</summary>
+  public class SATUnidadMedidaTests {
 
     [Fact]
-    public void Should_Read_All_SATCucop_Instances() {
-      var sut = SATCucop.GetList();
+    public void Should_Read_All_SATUnidadMedida_Instances() {
+      var sut = SATUnidadMedida.GetList();
 
       Assert.NotNull(sut);
       Assert.NotEmpty(sut);
@@ -28,12 +27,12 @@ namespace Empiria.Tests.Products.SATMexico {
 
 
     [Fact]
-    public void Should_Read_Empty_SATCucop() {
-      var sut = SATCucop.Empty;
+    public void Should_Read_Empty_SATUnidadMedida() {
+      var sut = SATUnidadMedida.Empty;
 
       Assert.NotNull(sut);
     }
 
-  }  // class SATCucopTests
+  }  // class SATUnidadMedidaTests
 
 }  // namespace Empiria.Tests.Products.SATMexico
