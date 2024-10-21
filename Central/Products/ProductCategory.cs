@@ -4,16 +4,35 @@
 *  Assembly : Empiria.Central.dll                        Pattern   : Information Holder                      *
 *  Type     : ProductCategory                            License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Represents a product category which holds products of the same kind and product type.          *
+*  Summary  : Represents a product category which holds products of the same kind or product type.           *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using System.Linq;
+
+using Empiria.StateEnums;
+
 namespace Empiria.Products {
 
-  /// <summary>Represents a product category which holds products of the same kind and product type.</summary>
+  /// <summary>Represents a product category which holds products of the same kind or product type.</summary>
   public class ProductCategory : GeneralObject {
 
     #region Constructors and parsers
+
+    private ProductCategory() {
+      // Required by Empiria Framework
+    }
+
+    internal ProductCategory(ProductType productType, string name) {
+      Assertion.Require(productType, nameof(productType));
+
+      name = EmpiriaString.Clean(name);
+
+      Assertion.Require(name, nameof(name));
+
+      ProductType = productType;
+      Name = name;
+    }
 
     static public ProductCategory Parse(int id) => ParseId<ProductCategory>(id);
 
@@ -30,22 +49,22 @@ namespace Empiria.Products {
 
     #region Properties
 
-    public string Description {
-      get {
-        return base.ExtendedDataField.Get("description", string.Empty);
-      }
-      private set {
-        base.ExtendedDataField.SetIfValue("description", EmpiriaString.TrimAll(value));
-      }
-    }
-
-
     public ProductType ProductType {
       get {
         return base.ExtendedDataField.Get("productTypeId", ProductType.Empty);
       }
       private set {
         base.ExtendedDataField.SetIf("productTypeId", value.Id, value.Id != -1);
+      }
+    }
+
+
+    public string Description {
+      get {
+        return base.ExtendedDataField.Get("description", string.Empty);
+      }
+      private set {
+        base.ExtendedDataField.SetIfValue("description", EmpiriaString.TrimAll(value));
       }
     }
 
@@ -62,12 +81,13 @@ namespace Empiria.Products {
 
     public bool IsAssignable {
       get {
-        return base.ExtendedDataField.Get("isAssignable", false);
+        return base.ExtendedDataField.Get("isAssignable", IsEmptyInstance ? false : true);
       }
       private set {
         base.ExtendedDataField.SetIf("isAssignable", value, value == false);
       }
     }
+
 
     public ProductCategory Parent {
       get {
@@ -86,6 +106,31 @@ namespace Empiria.Products {
     }
 
     #endregion Properties
+
+    #region Methods
+
+    internal void Delete() {
+      base.Status = EntityStatus.Deleted;
+    }
+
+
+    internal void Update(ProductCategoryFields fields) {
+      Assertion.Require(fields, nameof(fields));
+
+      fields.EnsureValid();
+
+      Name = PatchField(fields.Name, Name);
+      Description = PatchField(fields.Description, Description);
+      Parent = PatchField(fields.ParentCategoryUID, Parent);
+      IsAssignable = PatchField(fields.IsAssignable, IsAssignable);
+
+      if (fields.ProductUnits.Length != 0) {
+        ProductUnits = fields.ProductUnits.Select(x => ProductUnit.Parse(x))
+                                          .ToFixedList();
+      }
+    }
+
+    #endregion Methods
 
   } // class ProductCategory
 
