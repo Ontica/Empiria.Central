@@ -2,9 +2,9 @@
 *                                                                                                            *
 *  Module   : Products                                   Component : Test cases                              *
 *  Assembly : Empiria.Central.Tests.dll                  Pattern   : Unit tests                              *
-*  Type     : ProductKindTests                           License   : Please read LICENSE.txt file            *
+*  Type     : ProductCategoryTests                       License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Unit tests for ProductKind instances.                                                          *
+*  Summary  : Unit tests for ProductCategory instances.                                                      *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
@@ -14,12 +14,12 @@ using Empiria.Products;
 
 namespace Empiria.Tests.Products {
 
-  /// <summary>Unit tests for ProductKind instances.</summary>
-  public class ProductKindTests {
+  /// <summary>Unit tests for ProductCategory instances.</summary>
+  public class ProductCategoryTests {
 
     [Fact]
-    public void Should_Get_All_Product_Kinds() {
-      var sut = BaseObject.GetList<ProductKind>();
+    public void Should_Get_All_Product_Categories() {
+      var sut = BaseObject.GetList<ProductCategory>();
 
       Assert.NotNull(sut);
       Assert.NotEmpty(sut);
@@ -27,8 +27,8 @@ namespace Empiria.Tests.Products {
 
 
     [Fact]
-    public void Should_Get_Empty_ProductKind() {
-      var sut = ProductKind.Empty;
+    public void Should_Get_Empty_ProductCategory() {
+      var sut = ProductCategory.Empty;
 
       Assert.Equal(-1, sut.Id);
       Assert.Equal("Empty", sut.UID);
@@ -40,10 +40,10 @@ namespace Empiria.Tests.Products {
 
 
     [Fact]
-    public void Should_Parse_All_Product_Kinds() {
-      var kinds = BaseObject.GetList<ProductKind>();
+    public void Should_Parse_All_Product_Categories() {
+      var categories = BaseObject.GetList<ProductCategory>();
 
-      foreach (var sut in kinds) {
+      foreach (var sut in categories) {
         Assert.NotNull(sut.Parent);
         Assert.NotEmpty(sut.Name);
         Assert.True(sut.IsAssignable || true);
@@ -51,6 +51,6 @@ namespace Empiria.Tests.Products {
       }
     }
 
-  }  // class ProductKindTests
+  }  // class ProductCategoryTests
 
 }  // namespace Empiria.Tests.Products

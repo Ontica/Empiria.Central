@@ -29,8 +29,10 @@ namespace Empiria.Products {
       // Required by Empiria Framework for all partitioned types.
     }
 
-    internal protected Product(ProductKind productKind, string name) : base(productKind.ProductType) {
-      ProductKind = productKind;
+    internal protected Product(ProductCategory productCategory, string name) :
+                                                                base(productCategory.ProductType) {
+      ProductCategory = productCategory;
+
       name = EmpiriaString.Clean(name);
 
       Assertion.Require(name, nameof(name));
@@ -57,11 +59,12 @@ namespace Empiria.Products {
     }
 
 
-    [DataField("PRODUCT_KIND_ID")]
-    public ProductKind ProductKind {
+    [DataField("PRODUCT_CATEGORY_ID")]
+    public ProductCategory ProductCategory {
       get;
       private set;
     }
+
 
     [DataField("PRODUCT_NAME")]
     public string Name {

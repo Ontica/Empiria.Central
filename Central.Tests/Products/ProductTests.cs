@@ -23,13 +23,13 @@ namespace Empiria.Tests.Products {
 
     [Fact]
     public void Should_Create_A_Product() {
-      var productKind = ProductKind.Parse(TestingConstants.PRODUCT_KIND_UID);
+      var productCategory = ProductCategory.Parse(TestingConstants.PRODUCT_CATEGORY_UID);
       var name = "   A    new   product  ";
 
-      var sut = new Product(productKind, name);
+      var sut = new Product(productCategory, name);
 
-      Assert.Equal(productKind, sut.ProductKind);
-      Assert.Equal(productKind.ProductType, sut.ProductType);
+      Assert.Equal(productCategory, sut.ProductCategory);
+      Assert.Equal(productCategory.ProductType, sut.ProductType);
       Assert.Equal(EmpiriaString.Clean(name), sut.Name);
     }
 
@@ -63,8 +63,8 @@ namespace Empiria.Tests.Products {
       Assert.Equal("Empty", sut.UID);
       Assert.NotNull(sut.ProductType);
       Assert.Equal(ProductType.Empty, sut.ProductType);
-      Assert.NotNull(sut.ProductKind);
-      Assert.Equal(ProductKind.Empty, sut.ProductKind);
+      Assert.NotNull(sut.ProductCategory);
+      Assert.Equal(ProductCategory.Empty, sut.ProductCategory);
       Assert.NotEmpty(sut.Name);
       Assert.NotNull(sut.InternalCode);
       Assert.NotNull(sut.Description);
@@ -81,8 +81,8 @@ namespace Empiria.Tests.Products {
       foreach (var sut in products) {
         Assert.NotNull(sut.ProductType);
         Assert.NotEqual(ProductType.Empty, sut.ProductType);
-        Assert.NotNull(sut.ProductKind);
-        Assert.NotEqual(ProductKind.Empty, sut.ProductKind);
+        Assert.NotNull(sut.ProductCategory);
+        Assert.NotEqual(ProductCategory.Empty, sut.ProductCategory);
         Assert.NotEmpty(sut.Name);
         Assert.NotNull(sut.InternalCode);
         Assert.NotNull(sut.Description);

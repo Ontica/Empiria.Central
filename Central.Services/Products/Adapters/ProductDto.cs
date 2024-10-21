@@ -42,7 +42,7 @@ namespace Empiria.Products.Services.Adapters {
       get; internal set;
     }
 
-    public NamedEntityDto ProductKind {
+    public NamedEntityDto ProductCategory {
       get; internal set;
     }
 

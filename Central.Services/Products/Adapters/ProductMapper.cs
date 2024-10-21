@@ -30,7 +30,7 @@ namespace Empiria.Products.Services.Adapters {
         Tags = product.Tags,
         BaseUnit = product.BaseUnit.MapToNamedEntity(),
         Manager = product.Manager.MapToNamedEntity(),
-        ProductKind = product.ProductKind.MapToNamedEntity(),
+        ProductCategory = product.ProductCategory.MapToNamedEntity(),
         ProductType = product.ProductType.MapToNamedEntity(),
         StartDate = product.StartDate,
         EndDate = product.EndDate,

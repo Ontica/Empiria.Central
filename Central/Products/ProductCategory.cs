@@ -2,29 +2,29 @@
 *                                                                                                            *
 *  Module   : Products                                   Component : Domain Layer                            *
 *  Assembly : Empiria.Central.dll                        Pattern   : Information Holder                      *
-*  Type     : ProductKind                                License   : Please read LICENSE.txt file            *
+*  Type     : ProductCategory                            License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Represents a product kind.                                                                     *
+*  Summary  : Represents a product category which holds products of the same kind and product type.          *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
 namespace Empiria.Products {
 
-  /// <summary>Represents a product kind.</summary>
-  public class ProductKind : GeneralObject {
+  /// <summary>Represents a product category which holds products of the same kind and product type.</summary>
+  public class ProductCategory : GeneralObject {
 
     #region Constructors and parsers
 
-    static public ProductKind Parse(int id) => ParseId<ProductKind>(id);
+    static public ProductCategory Parse(int id) => ParseId<ProductCategory>(id);
 
-    static public ProductKind Parse(string uid) => ParseKey<ProductKind>(uid);
+    static public ProductCategory Parse(string uid) => ParseKey<ProductCategory>(uid);
 
-    static public FixedList<ProductKind> GetList() {
-      return BaseObject.GetList<ProductKind>()
+    static public FixedList<ProductCategory> GetList() {
+      return BaseObject.GetList<ProductCategory>()
                        .ToFixedList();
     }
 
-    static public ProductKind Empty => ParseEmpty<ProductKind>();
+    static public ProductCategory Empty => ParseEmpty<ProductCategory>();
 
     #endregion Constructors and parsers
 
@@ -69,12 +69,12 @@ namespace Empiria.Products {
       }
     }
 
-    public ProductKind Parent {
+    public ProductCategory Parent {
       get {
-        return base.ExtendedDataField.Get("parentKindId", ProductKind.Empty);
+        return base.ExtendedDataField.Get("parentCategoryId", ProductCategory.Empty);
       }
       private set {
-        base.ExtendedDataField.SetIf("productKindId", value.Id, value.Id != -1);
+        base.ExtendedDataField.SetIf("parentCategoryId", value.Id, value.Id != -1);
       }
     }
 
@@ -87,6 +87,6 @@ namespace Empiria.Products {
 
     #endregion Properties
 
-  } // class ProductKind
+  } // class ProductCategory
 
 } // namespace Empiria.Products

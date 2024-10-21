@@ -16,7 +16,7 @@ namespace Empiria.Products {
 
     static internal void WriteProduct(Product o) {
       var op = DataOperation.Parse("write_PMS_PRODUCT", o.Id, o.UID,
-                  o.ProductType.Id, o.ProductKind.Id, o.Name, o.Description,
+                  o.ProductType.Id, o.ProductCategory.Id, o.Name, o.Description,
                   o.InternalCode, string.Join(" ", o.Tags), o.Attributes.ToString(),
                   o.BillingData.ToString(), o.BudgetingData.ToString(),
                   o.BaseUnit.Id, o.Manager.Id, o.ExtensionData.ToString(),

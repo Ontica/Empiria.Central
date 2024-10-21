@@ -41,7 +41,7 @@ namespace Empiria.Tests.Products.Services {
     public void Should_Create_A_Product() {
 
       var fields = new ProductFields {
-        ProductKindUID = TestingConstants.PRODUCT_KIND_UID,
+        ProductCategoryUID = TestingConstants.PRODUCT_CATEGORY_UID,
         Name = "Servicios de desarrollo de software"
       };
 
@@ -80,7 +80,7 @@ namespace Empiria.Tests.Products.Services {
     public void Should_Update_A_Product() {
       var fields = new ProductFields {
         UID = TestingConstants.PRODUCT_UID,
-        ProductKindUID = TestingConstants.PRODUCT_KIND_UID,
+        ProductCategoryUID = TestingConstants.PRODUCT_CATEGORY_UID,
         Name = "Servicios de desarrollo de software II"
       };
 

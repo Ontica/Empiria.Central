@@ -37,12 +37,12 @@ namespace Empiria.Products.Services {
 
       fields.EnsureValid();
 
-      Assertion.Require(fields.ProductKindUID, nameof(fields.ProductKindUID));
+      Assertion.Require(fields.ProductCategoryUID, nameof(fields.ProductCategoryUID));
       Assertion.Require(fields.Name, nameof(fields.Name));
 
-      var productKind = ProductKind.Parse(fields.ProductKindUID);
+      var productCategory = ProductCategory.Parse(fields.ProductCategoryUID);
 
-      var product = new Product(productKind, fields.Name);
+      var product = new Product(productCategory, fields.Name);
 
       product.Update(fields);
 

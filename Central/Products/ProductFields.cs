@@ -15,7 +15,7 @@ namespace Empiria.Products {
   /// <summary>Input fields DTO used to create and update Product instances.</summary>
   public class ProductFields : NamedEntityFields {
 
-    public string ProductKindUID {
+    public string ProductCategoryUID {
       get; set;
     } = string.Empty;
 
@@ -55,8 +55,8 @@ namespace Empiria.Products {
       fields.Description = EmpiriaString.Clean(fields.Description);
       fields.InternalCode = EmpiriaString.Clean(fields.InternalCode);
 
-      if (fields.ProductKindUID.Length != 0) {
-        _ = ProductKind.Parse(fields.ProductKindUID);
+      if (fields.ProductCategoryUID.Length != 0) {
+        _ = ProductCategory.Parse(fields.ProductCategoryUID);
       }
       if (fields.BaseUnitUID.Length != 0) {
         _ = ProductUnit.Parse(fields.BaseUnitUID);
