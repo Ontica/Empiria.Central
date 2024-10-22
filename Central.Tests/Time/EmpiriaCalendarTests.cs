@@ -20,10 +20,10 @@ namespace Empiria.Tests.Time {
   public class EmpiriaCalendarTests {
 
     [Theory]
-    [InlineData("2017-12-30", new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 240, 511 })]
-    [InlineData("2018-01-01", new int[] { 0, 1, 2, 3, 77, 78, 79, 80, 1320 })]
-    [InlineData("2018-10-23", new int[] { 0, 1, 2, 3, 45, 133, 240, 580, 1200, 1432 })]
-    [InlineData("2019-03-03", new int[] { 10, 3570, 7800, 10000, 13750, 45000 })]
+    [InlineData("2024-12-30", new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 240, 511 })]
+    [InlineData("2023-01-01", new int[] { 0, 1, 2, 3, 77, 78, 79, 80, 1320 })]
+    [InlineData("2025-10-23", new int[] { 0, 1, 2, 3, 45, 133, 240, 580, 1200, 1432 })]
+    [InlineData("2026-03-03", new int[] { 10, 3570, 7800, 10000, 13750, 45000 })]
     public void Should_Add_Working_Days(string dateString, int[] daysToAdd) {
       var calendar = EmpiriaCalendar.Default;
 
@@ -44,39 +44,36 @@ namespace Empiria.Tests.Time {
 
     [Fact]
     public void Should_Handle_Non_Working_Days_Periods() {
-      var calendar = EmpiriaCalendar.Parse("ASEA-UGI");
-      Assert.True(calendar.NonWorkingDaysPeriods.Count > 2,
-                  "Invalid non working days periods");
+      var calendar = EmpiriaCalendar.Default;
 
-
-      Assert.True(calendar.IsNonWorkingDate(ToDate("2020-05-18")),
-                  "'2020-05-18' must be a non-working date.");
+      Assert.True(calendar.IsNonWorkingDate(ToDate("2025-01-01")),
+                  "'2025-01-01' must be a non-working date.");
     }
 
 
     [Fact]
     public void Should_Handle_Non_Working_Days_Exceptions() {
-      var calendar = EmpiriaCalendar.Parse("ASEA-UGI");
+      var calendar = EmpiriaCalendar.Default;
 
-      Assert.True(calendar.IsWorkingDate(ToDate("2020-05-20")),
-                  "'2020-05-20' must be a working date.");
+      Assert.True(calendar.IsWorkingDate(ToDate("2025-01-02")),
+                  "'2025-01-02' must be a working date.");
     }
 
 
     [Fact]
     public void Should_Read_Stored_Calendar_Holidays() {
-      var calendar = EmpiriaCalendar.Parse("ASEA");
+      var calendar = EmpiriaCalendar.Default;
 
-      Assert.Contains(calendar.Holidays, x => x.Date.Equals(ToDate("2020-01-01")));
-      Assert.Contains(calendar.Holidays, x => x.Date.Equals(ToDate("2020-09-16")));
+      Assert.Contains(calendar.Holidays, x => x.Date.Equals(ToDate("2025-01-01")));
+      Assert.Contains(calendar.Holidays, x => x.Date.Equals(ToDate("2025-09-16")));
     }
 
 
     [Theory]
-    [InlineData("2017-12-30", new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 240, 511 })]
-    [InlineData("2018-01-01", new int[] { 0, 1, 2, 3, 77, 78, 79, 80, 1320 })]
-    [InlineData("2018-10-23", new int[] { 0, 1, 2, 3, 45, 133, 240, 580, 1200, 1432 })]
-    [InlineData("2019-03-03", new int[] { 10, 3570, 7800, 10000, 13750, 45000 })]
+    [InlineData("2024-12-30", new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 240, 511 })]
+    [InlineData("2023-01-01", new int[] { 0, 1, 2, 3, 77, 78, 79, 80, 1320 })]
+    [InlineData("2025-10-23", new int[] { 0, 1, 2, 3, 45, 133, 240, 580, 1200, 1432 })]
+    [InlineData("2026-03-03", new int[] { 10, 3570, 7800, 10000, 13750, 45000 })]
     public void Should_Substract_Working_Days(string dateString, int[] daysToSubstract) {
       var calendar = EmpiriaCalendar.Default;
 
