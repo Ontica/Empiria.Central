@@ -1,4 +1,4 @@
-﻿/* Empiria Financial *****************************************************************************************
+﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : Projects                                     Component : Web Api                               *
 *  Assembly : Empiria.Central.WebApi.dll                   Pattern   : Web Api Controller                    *
@@ -25,14 +25,61 @@ namespace Empiria.Projects.WebApi {
     [Route("v2/projects")]
     public CollectionModel GetProjects() {
 
-      using (var usecases = ProjectServices.ServiceInteractor()) {
-        FixedList<ProjectDto> projects = usecases.GetProjectsList();
+      using (var services = ProjectServices.ServiceInteractor()) {
+        FixedList<ProjectDto> projects = services.GetProjectsList();
 
         return new CollectionModel(base.Request, projects);
       }
     }
 
+
     #endregion Web Apis
+
+    #region Command web apis
+
+    [HttpPost]
+    [Route("v2/projects")]
+    public SingleObjectModel CreateProject([FromBody] ProjectFields fields) {
+
+      base.RequireBody(fields);
+
+      using (var service = ProjectServices.ServiceInteractor()) {
+        ProjectDto project = service.CreateProject(fields);
+
+        return new SingleObjectModel(base.Request, project);
+      }
+    }
+
+
+    [HttpDelete]
+    [Route("v2/projects/{projectUID:guid}")]
+    public NoDataModel DeleteProject([FromUri] string projectUID) {
+
+      using (var service = ProjectServices.ServiceInteractor()) {
+        _ = service.DeleteProject(projectUID);
+
+        return new NoDataModel(base.Request);
+      }
+    }
+
+
+    [HttpPut, HttpPatch]
+    [Route("v2/projects/{projectUID:guid}")]
+    public SingleObjectModel UpdateProject([FromUri] string projectUID,
+                                           [FromBody] ProjectFields fields) {
+
+      base.RequireBody(fields);
+
+      Assertion.Require(projectUID == fields.UID, "projectUID mismatch.");
+
+      using (var service = ProjectServices.ServiceInteractor()) {
+        ProjectDto project = service.UpdateProject(fields);
+
+        return new SingleObjectModel(base.Request, project);
+      }
+    }
+
+    #endregion Command web apis
 
   }  // class ProjectController
 

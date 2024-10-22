@@ -9,6 +9,7 @@
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
 using Empiria.Services;
+using Empiria.StateEnums;
 
 using Empiria.Projects.Services.Adapters;
 
@@ -36,7 +37,13 @@ namespace Empiria.Projects.Services {
 
       fields.EnsureValid();
 
-      var project = new Project(fields.GetProjectType(), fields.Name);
+      var projectType = ProjectType.Parse(fields.ProjectTypeUID);
+
+      Assertion.Require(projectType.Status != EntityStatus.Deleted,
+                        "No es posible crear un proyecto con un tipo de proyecto " +
+                        "que está marcado como eliminado.");
+
+      var project = new Project(projectType, fields.Name);
 
       project.Update(fields);
 
@@ -61,9 +68,9 @@ namespace Empiria.Projects.Services {
 
     public FixedList<ProjectDto> GetProjectsList() {
 
-      FixedList<Project> values = Project.GetList();
+      FixedList<Project> projects = Project.GetList();
 
-      return ProjectMapper.Map(values);
+      return ProjectMapper.Map(projects);
     }
 
 

@@ -19,6 +19,8 @@ namespace Empiria.Tests {
 
     static internal readonly string PRODUCT_UID = "39bf118b-aaf9-46f3-ae69-e871ac9d9c50";
 
+    static internal readonly string PROJECT_ID = "8965587c-982e-49aa-bc81-0339e5d66578";
+
     static internal readonly string PROJECT_TYPE_ID = "fbc0f83d-ab5e-4596-a6dc-9d94ccdacf9a";
 
   }  // class TestingConstants

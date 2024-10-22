@@ -23,6 +23,10 @@ namespace Empiria.Projects {
 
     internal Project(ProjectType projectType, string name) {
       Assertion.Require(projectType, nameof(projectType));
+      Assertion.Require(projectType.Status != EntityStatus.Deleted, "projectType has deleted status.");
+
+      name = EmpiriaString.Clean(name);
+
       Assertion.Require(name, nameof(name));
 
       this.ProjectType = projectType;
@@ -34,8 +38,9 @@ namespace Empiria.Projects {
     static public Project Parse(string typeUID) => ParseKey<Project>(typeUID);
 
     static public FixedList<Project> GetList() {
-      return BaseObject.GetList<Project>(string.Empty, string.Empty)
-                       .ToFixedList();
+      return BaseObject.GetList<Project>()
+                       .ToFixedList()
+                       .FindAll(x => x.Status != EntityStatus.Deleted);
     }
 
     static public Project Empty => ParseEmpty<Project>();
@@ -46,9 +51,15 @@ namespace Empiria.Projects {
 
     public ProjectType ProjectType {
       get {
-        return ExtendedDataField.Get("projectTypeId", ProjectType.Empty);
+        if (this.IsEmptyInstance) {
+          return ProjectType.Empty;
+        }
+        return ExtendedDataField.Get<ProjectType>("projectTypeId");
       }
       private set {
+        if (this.IsEmptyInstance) {
+          return;
+        }
         ExtendedDataField.Set("projectTypeId", value.Id);
       }
     }
@@ -56,7 +67,7 @@ namespace Empiria.Projects {
 
     public string Code {
       get {
-        return ExtendedDataField.Get("code", "N/D");
+        return ExtendedDataField.Get("code", string.Empty);
       }
       private set {
         ExtendedDataField.SetIfValue("code", value);
@@ -66,7 +77,7 @@ namespace Empiria.Projects {
 
     public string Description {
       get {
-        return ExtendedDataField.Get("description", "N/D");
+        return ExtendedDataField.Get("description", string.Empty);
       }
       private set {
         ExtendedDataField.SetIfValue("description", value);
@@ -75,7 +86,7 @@ namespace Empiria.Projects {
 
     public override string Keywords {
       get {
-        return EmpiriaString.BuildKeywords(base.Keywords, Code, ProjectType.Name, Description);
+        return EmpiriaString.BuildKeywords(Name, Code, ProjectType.Name, Description);
       }
     }
 

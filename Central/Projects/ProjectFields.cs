@@ -33,13 +33,13 @@ namespace Empiria.Projects {
   static internal class ProjectFieldsExtensions {
 
     static internal void EnsureValid(this ProjectFields fields) {
-      if (fields.ProjectTypeUID.Length != 0) {
-        _ = fields.GetProjectType();
-      }
-    }
+      fields.Name = EmpiriaString.Clean(fields.Name);
+      fields.Code = EmpiriaString.Clean(fields.Code);
+      fields.Description = EmpiriaString.Clean(fields.Description);
 
-    static internal ProjectType GetProjectType(this ProjectFields fields) {
-      return ProjectType.Parse(fields.ProjectTypeUID);
+      if (fields.ProjectTypeUID.Length != 0) {
+        _ = ProjectType.Parse(fields.ProjectTypeUID);
+      }
     }
 
   }  // class ProjectFieldsExtensions
