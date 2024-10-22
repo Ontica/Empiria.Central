@@ -4,7 +4,7 @@
 *  Assembly : Empiria.Central.dll                        Pattern   : Information Holder                      *
 *  Type     : ProjectType                                License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Describes a project type.                                                                      *
+*  Summary  : Describes a project type. Every Project instance must have a ProjectType.                      *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
@@ -12,7 +12,7 @@ using Empiria.StateEnums;
 
 namespace Empiria.Projects {
 
-  /// <summary>Describes a project type.</summary>
+  /// <summary>Describes a project type. Every Project instance must have a ProjectType.</summary>
   public class ProjectType : GeneralObject {
 
     #region Constructors and parsers
@@ -21,10 +21,12 @@ namespace Empiria.Projects {
       // Required by Empiria Framework.
     }
 
-    public ProjectType(string name) {
+    internal ProjectType(string name) {
+      name = EmpiriaString.Clean(name);
+
       Assertion.Require(name, nameof(name));
 
-      Update(name);
+      Name = name;
     }
 
     static public ProjectType Parse(int typeId) => ParseId<ProjectType>(typeId);
@@ -40,15 +42,27 @@ namespace Empiria.Projects {
 
     #endregion Constructors and parsers
 
+    #region Properties
+
+    public bool HasProjects {
+      get {
+        return GetProjects().Count > 0;
+      }
+    }
+
+    #endregion Properties
+
     #region Methods
 
     public FixedList<Project> GetProjects() {
-      return BaseObject.GetList<Project>()
-                       .ToFixedList()
-                       .FindAll(x => x.ProjectType.Equals(this));
+      return Project.GetList()
+                    .FindAll(x => x.ProjectType.Equals(this) && x.Status != EntityStatus.Deleted);
     }
 
+
     internal void Delete() {
+      Assertion.Require(!HasProjects, "Can not delete this project type because has assigned projects.");
+
       base.Status = EntityStatus.Deleted;
 
       base.MarkAsDirty();

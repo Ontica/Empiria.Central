@@ -10,6 +10,8 @@
 
 using Empiria.Services;
 
+using Empiria.Projects.Services.Adapters;
+
 namespace Empiria.Projects.Services {
 
   /// <summary>Provides services for ProyectType instances.</summary>
@@ -30,6 +32,9 @@ namespace Empiria.Projects.Services {
     #region Services
 
     public NamedEntityDto CreateProjectType(NamedEntityFields fields) {
+
+      fields.Name = EmpiriaString.Clean(fields.Name);
+
       Assertion.Require(fields, nameof(fields));
 
       var projectType = new ProjectType(fields.Name);
@@ -40,20 +45,36 @@ namespace Empiria.Projects.Services {
     }
 
 
-    public void DeleteProjectType(string projectTypeUID) {
+    public NamedEntityDto DeleteProjectType(string projectTypeUID) {
       Assertion.Require(projectTypeUID, nameof(projectTypeUID));
 
       var projectType = ProjectType.Parse(projectTypeUID);
 
+      Assertion.Require(!projectType.HasProjects,
+                        "No se puede eliminar el tipo de proyecto debido a que tiene proyectos asignados");
+
       projectType.Delete();
 
       projectType.Save();
+
+      return projectType.MapToNamedEntity();
     }
 
 
     public FixedList<NamedEntityDto> GetProjectTypes() {
       return ProjectType.GetList()
                         .MapToNamedEntityList();
+    }
+
+
+    public FixedList<ProjectDto> GetProjectTypeProjects(string projectTypeUID) {
+      Assertion.Require(projectTypeUID, nameof(projectTypeUID));
+
+      var projectType = ProjectType.Parse(projectTypeUID);
+
+      FixedList<Project> values = projectType.GetProjects();
+
+      return ProjectMapper.Map(values);
     }
 
 

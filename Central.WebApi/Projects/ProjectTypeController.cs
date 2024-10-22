@@ -7,6 +7,7 @@
 *  Summary  : Web API used to retrive and update project types.                                              *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
+
 using System.Web.Http;
 
 using Empiria.WebApi;
@@ -34,11 +35,11 @@ namespace Empiria.Projects.WebApi {
 
 
     [HttpGet]
-    [Route("v2/budgeting/project-types/{projectTypeUID:guid}/projects")]
+    [Route("v2/projects/project-types/{projectTypeUID:guid}/projects")]
     public CollectionModel GetProjectTypeProjects([FromUri] string projectTypeUID) {
 
-      using (var usecases = ProjectServices.ServiceInteractor()) {
-        FixedList<ProjectDto> projects = usecases.GetProjectTypeProjects(projectTypeUID);
+      using (var service = ProjectTypeServices.ServiceInteractor()) {
+        FixedList<ProjectDto> projects = service.GetProjectTypeProjects(projectTypeUID);
 
         return new CollectionModel(base.Request, projects);
       }
@@ -54,8 +55,36 @@ namespace Empiria.Projects.WebApi {
 
       base.RequireBody(fields);
 
-      using (var usecases = ProjectTypeServices.ServiceInteractor()) {
-        NamedEntityDto projectType = usecases.CreateProjectType(fields);
+      using (var service = ProjectTypeServices.ServiceInteractor()) {
+        NamedEntityDto projectType = service.CreateProjectType(fields);
+
+        return new SingleObjectModel(base.Request, projectType);
+      }
+    }
+
+
+    [HttpDelete]
+    [Route("v2/projects/project-types/{projectTypeUID:guid}")]
+    public NoDataModel DeleteProjectType([FromUri] string projectTypeUID) {
+
+      using (var service = ProjectTypeServices.ServiceInteractor()) {
+        _ = service.DeleteProjectType(projectTypeUID);
+
+        return new NoDataModel(base.Request);
+      }
+    }
+
+
+    [HttpPut, HttpPatch]
+    [Route("v2/projects/project-types/{projectTypeUID:guid}")]
+    public SingleObjectModel UpdateProjectType([FromUri] string projectTypeUID,
+                                               [FromBody] NamedEntityFields fields) {
+
+      base.RequireBody(fields);
+      Assertion.Require(projectTypeUID == fields.UID, "projectTypeUID mismatch.");
+
+      using (var service = ProjectTypeServices.ServiceInteractor()) {
+        NamedEntityDto projectType = service.UpdateProjectType(fields);
 
         return new SingleObjectModel(base.Request, projectType);
       }

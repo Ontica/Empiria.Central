@@ -11,11 +11,35 @@
 using Xunit;
 
 using Empiria.Projects;
+using Empiria.StateEnums;
 
 namespace Empiria.Tests.Projects {
 
   /// <summary>Unit tests for Project type.</summary>
   public class ProjectTypeTests {
+
+    [Fact]
+    public void Should_Create_ProjectType() {
+      var name = " Nombre  del tipo de proyecto ";
+
+      var sut = new ProjectType(name);
+
+      Assert.Equal(EmpiriaString.Clean(name), sut.Name);
+      Assert.Empty(sut.GetProjects());
+    }
+
+
+
+    [Fact]
+    public void Should_Delete_ProjectType() {
+      var sut = ProjectType.Parse(TestingConstants.PROJECT_TYPE_ID);
+
+      sut.Delete();
+
+      Assert.Equal(EntityStatus.Deleted, sut.Status);
+      Assert.Empty(sut.GetProjects());
+    }
+
 
     [Fact]
     public void Should_Get_All_ProjectTypes() {
@@ -44,6 +68,18 @@ namespace Empiria.Tests.Projects {
 
       Assert.NotNull(sut);
       Assert.Empty(sut.GetProjects());
+    }
+
+
+    [Fact]
+    public void Should_Update_ProjectType() {
+      var newName = " Este  es  el nuevo  nombre del proyecto ";
+
+      var sut = ProjectType.Parse(TestingConstants.PROJECT_TYPE_ID);
+
+      sut.Update(newName);
+
+      Assert.Equal(EmpiriaString.Clean(newName), sut.Name);
     }
 
   }  // ProjectTypeTests

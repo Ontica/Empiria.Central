@@ -59,17 +59,6 @@ namespace Empiria.Projects.Services {
     }
 
 
-    public FixedList<ProjectDto> GetProjectTypeProjects(string projectTypeUID) {
-      Assertion.Require(projectTypeUID, nameof(projectTypeUID));
-
-      var projectType = ProjectType.Parse(projectTypeUID);
-
-      FixedList<Project> values = projectType.GetProjects();
-
-      return ProjectMapper.Map(values);
-    }
-
-
     public FixedList<ProjectDto> GetProjectsList() {
 
       FixedList<Project> values = Project.GetList();
