@@ -69,7 +69,11 @@ namespace Empiria.Tests.Products.Services {
 
     [Fact]
     public void Should_Search_Products() {
-      var sut = _services.SearchProducts(string.Empty);
+      var query = new ProductsQuery {
+        Keywords = "Servicio"
+      };
+
+      var sut = _services.SearchProducts(query);
 
       Assert.NotNull(sut);
       Assert.NotEmpty(sut);

@@ -23,7 +23,7 @@ namespace Empiria.Products.WebApi {
 
     [HttpPost]
     [Route("v2/products")]
-    public SingleObjectModel CreateProduct(ProductFields fields) {
+    public SingleObjectModel CreateProduct([FromBody] ProductFields fields) {
 
       base.RequireBody(fields);
 
@@ -59,23 +59,40 @@ namespace Empiria.Products.WebApi {
     }
 
 
-    [HttpGet]
-    [Route("v2/products")]
-    public CollectionModel SearchProducts([FromUri] string keywords) {
+    [HttpPost]
+    [Route("v2/products/search")]
+    public CollectionModel SearchProducts([FromBody] ProductsQuery query) {
+
+      base.RequireBody(query);
 
       using (var services = ProductServices.ServiceInteractor()) {
-        FixedList<ProductDto> products = services.SearchProducts(keywords);
+        FixedList<ProductDto> products = services.SearchProducts(query);
 
         return new CollectionModel(base.Request, products);
       }
     }
 
 
+    [HttpPost]
+    [Route("v2/products/search/short-list")]
+    public CollectionModel SearchProductsAsShortList([FromBody] ProductsQuery query) {
+
+      using (var services = ProductServices.ServiceInteractor()) {
+        FixedList<ProductDto> products = services.SearchProducts(query);
+
+        return new CollectionModel(base.Request, products.MapToNamedEntityList());
+      }
+    }
+
+
     [HttpPut, HttpPatch]
     [Route("v2/products/{productUID:guid}")]
-    public SingleObjectModel UpdateProduct(ProductFields fields) {
+    public SingleObjectModel UpdateProduct([FromUri] string productUID,
+                                           [FromBody] ProductFields fields) {
 
       base.RequireBody(fields);
+
+      Assertion.Require(productUID == fields.UID, "fields.UID mismatch");
 
       using (var services = ProductServices.ServiceInteractor()) {
         ProductDto product = services.UpdateProduct(fields);

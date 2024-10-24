@@ -14,6 +14,20 @@ namespace Empiria.Products {
 
   static internal class ProductDataService {
 
+    static internal FixedList<Product> SearchProducts(string filter, string sort) {
+      Assertion.Require(filter, nameof(filter));
+      Assertion.Require(sort, nameof(sort));
+
+      var sql = "SELECT * FROM PMS_PRODUCTS " +
+               $"WHERE {filter} " +
+               $"ORDER BY {sort}";
+
+      var op = DataOperation.Parse(sql);
+
+      return DataReader.GetFixedList<Product>(op);
+    }
+
+
     static internal void WriteProduct(Product o) {
       var op = DataOperation.Parse("write_PMS_PRODUCT", o.Id, o.UID,
                   o.ProductType.Id, o.ProductCategory.Id, o.Name, o.Description,

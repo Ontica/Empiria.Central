@@ -13,7 +13,7 @@ using System;
 namespace Empiria.Products.Services.Adapters {
 
   /// <summary>Output DTO for Product instances.</summary>
-  public class ProductDto {
+  public class ProductDto : INamedEntity {
 
     public string UID {
       get; internal set;
@@ -62,6 +62,7 @@ namespace Empiria.Products.Services.Adapters {
     public NamedEntityDto Status {
       get; internal set;
     }
+
   }  // class ProductDto
 
 }  // namespace Empiria.Products.Services.Adapters

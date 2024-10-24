@@ -73,13 +73,17 @@ namespace Empiria.Products.Services {
     }
 
 
-    public FixedList<ProductDto> SearchProducts(string keywords) {
-      FixedList<Product> values = Product.GetList<Product>()
-                                         .ToFixedList();
+    public FixedList<ProductDto> SearchProducts(ProductsQuery query) {
+      Assertion.Require(query, nameof(query));
 
-      return ProductMapper.Map(values);
+      string filter = query.MapToFilterString();
+
+      string sort = query.MapToSortString();
+
+      FixedList<Product> products = ProductDataService.SearchProducts(filter, sort);
+
+      return ProductMapper.Map(products);
     }
-
 
     public ProductDto UpdateProduct(ProductFields fields) {
       Assertion.Require(fields, nameof(fields));
