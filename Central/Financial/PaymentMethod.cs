@@ -1,47 +1,34 @@
-﻿/* Empiria Financial *****************************************************************************************
+﻿/* Empiria Central  ******************************************************************************************
 *                                                                                                            *
-*  Module   : Payments Management                        Component : Domain Layer                            *
-*  Assembly : Empiria.Payments.Core.dll                  Pattern   : Information Holder                      *
-*  Type     : Payment Methods                            License   : Please read LICENSE.txt file            *
+*  Module   : Financial                                  Component : Domain Layer                            *
+*  Assembly : Empiria.Central.Core.dll                   Pattern   : Information Holder                      *
+*  Type     : PaymentMethod                              License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Represents a payment method a service order.                                                   *
+*  Summary  : Represents a payment method.                                                                   *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-using System;
-
-
 namespace Empiria.Financial {
 
-  /// <summary>Represents a payment method a service order.</summary>
+  /// <summary>Represents a payment method.</summary>
   public class PaymentMethod : GeneralObject {
 
     #region Constructors and parsers
 
-    static public PaymentMethod Parse(string uid) {
-      return BaseObject.ParseKey<PaymentMethod>(uid);
-    }
+    static public PaymentMethod Parse(int id) => ParseId<PaymentMethod>(id);
 
-
-    static public PaymentMethod Parse(int id) => BaseObject.ParseId<PaymentMethod>(id);
-
-
-    static public PaymentMethod Empty => BaseObject.ParseEmpty<PaymentMethod>();
-
-
-    #endregion Constructors and parsers
-
-
-    #region Public Methods
+    static public PaymentMethod Parse(string uid) => ParseKey<PaymentMethod>(uid);
 
     static public FixedList<PaymentMethod> GetList() {
       return BaseObject.GetList<PaymentMethod>()
                        .ToFixedList();
     }
 
+    static public PaymentMethod Empty => ParseEmpty<PaymentMethod>();
 
-    #endregion Public Methods
 
-  }  // class Contract
+    #endregion Constructors and parsers
 
-}  // namespace Empiria.Payments.Contracts
+  }  // class PaymentMethod
+
+}  // namespace Empiria.Financial

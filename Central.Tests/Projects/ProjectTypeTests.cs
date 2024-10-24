@@ -29,7 +29,6 @@ namespace Empiria.Tests.Projects {
     }
 
 
-
     [Fact]
     public void Should_Delete_ProjectType() {
       var sut = ProjectType.Parse(TestingConstants.PROJECT_TYPE_ID);

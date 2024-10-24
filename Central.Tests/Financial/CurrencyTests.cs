@@ -1,4 +1,4 @@
-﻿/* Empiria Financial *****************************************************************************************
+﻿/* Empiria Central  ******************************************************************************************
 *                                                                                                            *
 *  Module   : Financial                                  Component : Test cases                              *
 *  Assembly : Empiria.Central.Tests.dll                  Pattern   : Unit tests                              *

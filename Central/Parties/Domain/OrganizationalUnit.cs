@@ -24,16 +24,11 @@ namespace Empiria.Parties {
     }
 
 
-    static public new OrganizationalUnit Parse(int id) {
-      return BaseObject.ParseId<OrganizationalUnit>(id);
-    }
+    static public new OrganizationalUnit Parse(int id) => ParseId<OrganizationalUnit>(id);
 
+    static public new OrganizationalUnit Parse(string uid) => ParseKey<OrganizationalUnit>(uid);
 
-    static public new OrganizationalUnit Parse(string uid) {
-      return BaseObject.ParseKey<OrganizationalUnit>(uid);
-    }
-
-    static public new OrganizationalUnit Empty => BaseObject.ParseEmpty<OrganizationalUnit>();
+    static public new OrganizationalUnit Empty => ParseEmpty<OrganizationalUnit>();
 
     #endregion Constructors and parsers
 
@@ -43,7 +38,7 @@ namespace Empiria.Parties {
       get {
         return base.ExtendedData.Get("acronym", string.Empty);
       }
-      set {
+      private set {
         base.ExtendedData.SetIfValue("acronym", value);
       }
     }
@@ -53,7 +48,7 @@ namespace Empiria.Parties {
       get {
         return base.ExtendedData.Get("code", string.Empty);
       }
-      set {
+      private set {
         base.ExtendedData.SetIfValue("code", value);
       }
     }
@@ -61,7 +56,11 @@ namespace Empiria.Parties {
 
     public string FullName {
       get {
-        return $"{Code} - {Name}";
+        if (Code.Length > 0) {
+          return $"{Code} - {Name}";
+        } else {
+          return Name;
+        }
       }
     }
 

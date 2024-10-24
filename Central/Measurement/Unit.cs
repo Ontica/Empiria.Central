@@ -19,13 +19,9 @@ namespace Empiria.Measurement {
       // Required by Empiria Framework.
     }
 
-    static public Unit Parse(int id) {
-      return ParseId<Unit>(id);
-    }
+    static public Unit Parse(int id) => ParseId<Unit>(id);
 
-    static public Unit Parse(string unitNamedKey) {
-      return ParseKey<Unit>(unitNamedKey);
-    }
+    static public Unit Parse(string uid) => ParseKey<Unit>(uid);
 
     static public Unit Empty => ParseEmpty<Unit>();
 
