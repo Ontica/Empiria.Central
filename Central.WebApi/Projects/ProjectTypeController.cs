@@ -24,7 +24,7 @@ namespace Empiria.Projects.WebApi {
 
     [HttpGet]
     [Route("v2/projects/project-types")]
-    public CollectionModel GetProjectTypes() {
+    public CollectionModel GetProjectTypes([FromUri] string keywords = "") {
 
       using (var usecases = ProjectTypeServices.ServiceInteractor()) {
         FixedList<NamedEntityDto> list = usecases.GetProjectTypes();

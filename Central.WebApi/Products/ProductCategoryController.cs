@@ -61,7 +61,7 @@ namespace Empiria.Products.WebApi {
 
     [HttpGet]
     [Route("v2/products/categories")]
-    public CollectionModel SearchProductCategories([FromUri] string keywords) {
+    public CollectionModel SearchProductCategories([FromUri] string keywords = "") {
 
       using (var services = ProductCategoryServices.ServiceInteractor()) {
         FixedList<ProductCategoryDto> categories = services.SearchProductCategories(keywords);
@@ -72,10 +72,13 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpPut, HttpPatch]
-    [Route("v2/products/categories{productUID:guid}")]
-    public SingleObjectModel UpdateProductCategory(ProductCategoryFields fields) {
+    [Route("v2/products/categories/{productUID:guid}")]
+    public SingleObjectModel UpdateProductCategory([FromUri] string productUID,
+                                                   [FromBody] ProductCategoryFields fields) {
 
       base.RequireBody(fields);
+
+      Assertion.Require(productUID == fields.UID, "fields.UID mismatch");
 
       using (var services = ProductCategoryServices.ServiceInteractor()) {
         ProductCategoryDto category = services.UpdateProductCategory(fields);

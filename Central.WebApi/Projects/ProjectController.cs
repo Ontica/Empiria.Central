@@ -23,7 +23,7 @@ namespace Empiria.Projects.WebApi {
 
     [HttpGet]
     [Route("v2/projects")]
-    public CollectionModel GetProjects() {
+    public CollectionModel GetProjects([FromUri] string keywords = "") {
 
       using (var services = ProjectServices.ServiceInteractor()) {
         FixedList<ProjectDto> projects = services.GetProjectsList();
