@@ -22,6 +22,17 @@ namespace Empiria.Tests.Products {
   public class ProductTests {
 
     [Fact]
+    public void Should_Activate_A_Product() {
+      var sut = Product.Parse(TestingConstants.PRODUCT_UID);
+
+      sut.Activate();
+
+      Assert.Equal(EntityStatus.Active, sut.Status);
+      Assert.Equal(ExecutionServer.DateMaxValue, sut.EndDate);
+    }
+
+
+    [Fact]
     public void Should_Create_A_Product() {
       var productCategory = ProductCategory.Parse(TestingConstants.PRODUCT_CATEGORY_UID);
       var name = "   A    new   product  ";
@@ -88,6 +99,17 @@ namespace Empiria.Tests.Products {
         Assert.NotNull(sut.BaseUnit);
         Assert.NotNull(sut.Manager);
       }
+    }
+
+
+    [Fact]
+    public void Should_Suspend_A_Product() {
+      var sut = Product.Parse(TestingConstants.PRODUCT_UID);
+
+      sut.Suspend();
+
+      Assert.Equal(EntityStatus.Suspended, sut.Status);
+      Assert.Equal(ExecutionServer.DateMaxValue, sut.EndDate);
     }
 
 

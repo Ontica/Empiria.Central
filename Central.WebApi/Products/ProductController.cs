@@ -22,6 +22,18 @@ namespace Empiria.Products.WebApi {
     #region Web Apis
 
     [HttpPost]
+    [Route("v2/products/{productUID:guid}/activate")]
+    public SingleObjectModel ActivateProduct([FromUri] string productUID) {
+
+      using (var services = ProductServices.ServiceInteractor()) {
+        ProductDto product = services.ActivateProduct(productUID);
+
+        return new SingleObjectModel(base.Request, product);
+      }
+    }
+
+
+    [HttpPost]
     [Route("v2/products")]
     public SingleObjectModel CreateProduct([FromBody] ProductFields fields) {
 
@@ -81,6 +93,18 @@ namespace Empiria.Products.WebApi {
         FixedList<ProductDto> products = services.SearchProducts(query);
 
         return new CollectionModel(base.Request, products.MapToNamedEntityList());
+      }
+    }
+
+
+    [HttpPost]
+    [Route("v2/products/{productUID:guid}/suspend")]
+    public SingleObjectModel SuspendProduct([FromUri] string productUID) {
+
+      using (var services = ProductServices.ServiceInteractor()) {
+        ProductDto product = services.SuspendProduct(productUID);
+
+        return new SingleObjectModel(base.Request, product);
       }
     }
 

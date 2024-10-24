@@ -31,6 +31,19 @@ namespace Empiria.Products.Services {
 
     #region Services
 
+    public ProductDto ActivateProduct(string productUID) {
+      Assertion.Require(productUID, nameof(productUID));
+
+      var product = Product.Parse(productUID);
+
+      product.Activate();
+
+      product.Save();
+
+      return ProductMapper.Map(product);
+    }
+
+
     public ProductDto CreateProduct(ProductFields fields) {
       Assertion.Require(fields, nameof(fields));
 
@@ -84,6 +97,20 @@ namespace Empiria.Products.Services {
 
       return ProductMapper.Map(products);
     }
+
+
+    public ProductDto SuspendProduct(string productUID) {
+      Assertion.Require(productUID, nameof(productUID));
+
+      var product = Product.Parse(productUID);
+
+      product.Suspend();
+
+      product.Save();
+
+      return ProductMapper.Map(product);
+    }
+
 
     public ProductDto UpdateProduct(ProductFields fields) {
       Assertion.Require(fields, nameof(fields));

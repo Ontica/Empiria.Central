@@ -171,6 +171,12 @@ namespace Empiria.Products {
 
     #region Methods
 
+    internal void Activate() {
+      this.Status = EntityStatus.Active;
+      this.EndDate = ExecutionServer.DateMaxValue;
+    }
+
+
     internal void Delete() {
       this.Status = EntityStatus.Deleted;
       this.EndDate = DateTime.Today;
@@ -183,6 +189,11 @@ namespace Empiria.Products {
         EndDate = ExecutionServer.DateMaxValue;
       }
       ProductDataService.WriteProduct(this);
+    }
+
+
+    internal void Suspend() {
+      this.Status = EntityStatus.Suspended;
     }
 
 
