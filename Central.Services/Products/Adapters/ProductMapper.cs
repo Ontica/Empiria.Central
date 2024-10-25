@@ -38,6 +38,33 @@ namespace Empiria.Products.Services.Adapters {
       };
     }
 
+
+    static internal FixedList<ProductDescriptorDto> MapToDescriptor(FixedList<Product> products) {
+      return products.Select(x => MapToDescriptor(x))
+                     .ToFixedList();
+    }
+
+
+    #region Helpers
+
+    static private ProductDescriptorDto MapToDescriptor(Product product) {
+      return new ProductDescriptorDto {
+        UID = product.UID,
+        Name = product.Name,
+        Description = product.Description,
+        InternalCode = product.InternalCode,
+        BaseUnitName = product.BaseUnit.Name,
+        ManagerName = product.Manager.Name,
+        ProductCategoryName = product.ProductCategory.Name,
+        ProductTypeName = product.ProductType.Name,
+        StartDate = product.StartDate,
+        EndDate = product.EndDate,
+        StatusName = product.Status.GetName()
+      };
+    }
+
+    #endregion Helpers
+
   }  // class ProductMapper
 
 } // namespace Empiria.Products.Services.Adapters

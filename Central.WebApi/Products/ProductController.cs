@@ -78,7 +78,7 @@ namespace Empiria.Products.WebApi {
       base.RequireBody(query);
 
       using (var services = ProductServices.ServiceInteractor()) {
-        FixedList<ProductDto> products = services.SearchProducts(query);
+        FixedList<ProductDescriptorDto> products = services.SearchProducts(query);
 
         return new CollectionModel(base.Request, products);
       }
@@ -90,7 +90,7 @@ namespace Empiria.Products.WebApi {
     public CollectionModel SearchProductsAsShortList([FromBody] ProductsQuery query) {
 
       using (var services = ProductServices.ServiceInteractor()) {
-        FixedList<ProductDto> products = services.SearchProducts(query);
+        FixedList<ProductDescriptorDto> products = services.SearchProducts(query);
 
         return new CollectionModel(base.Request, products.MapToNamedEntityList());
       }

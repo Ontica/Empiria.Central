@@ -86,7 +86,7 @@ namespace Empiria.Products.Services {
     }
 
 
-    public FixedList<ProductDto> SearchProducts(ProductsQuery query) {
+    public FixedList<ProductDescriptorDto> SearchProducts(ProductsQuery query) {
       Assertion.Require(query, nameof(query));
 
       string filter = query.MapToFilterString();
@@ -95,7 +95,7 @@ namespace Empiria.Products.Services {
 
       FixedList<Product> products = ProductDataService.SearchProducts(filter, sort);
 
-      return ProductMapper.Map(products);
+      return ProductMapper.MapToDescriptor(products);
     }
 
 
