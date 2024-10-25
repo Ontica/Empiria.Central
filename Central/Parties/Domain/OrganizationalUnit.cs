@@ -11,7 +11,7 @@
 namespace Empiria.Parties {
 
   /// <summary>Represents an organizational unit that is a part of an organization.</summary>
-  public class OrganizationalUnit : Party {
+  public class OrganizationalUnit : Party, INamedEntity {
 
     #region Constructors and parsers
 
@@ -50,6 +50,13 @@ namespace Empiria.Parties {
       }
       private set {
         base.ExtendedData.SetIfValue("code", value);
+      }
+    }
+
+
+    string INamedEntity.Name {
+      get {
+        return FullName;
       }
     }
 

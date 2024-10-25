@@ -61,8 +61,11 @@ namespace Empiria.Parties {
 
 
     static public FixedList<Party> GetPartiesInRole(string roleName) {
-      return GetList<Party>($"PARTY_TAGS LIKE '%{roleName}%'").ToFixedList();
+      return GetList<Party>($"PARTY_TAGS LIKE '%{roleName}%'")
+            .ToFixedList()
+            .Sort((x, y) => x.Name.CompareTo(y.Name));
     }
+
 
     static public Party Empty => ParseEmpty<Person>();
 
