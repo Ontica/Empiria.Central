@@ -59,6 +59,11 @@ namespace Empiria.Parties {
       return PartyDataService.GetPartiesInDate<T>(date);
     }
 
+
+    static public FixedList<Party> GetPartiesInRole(string roleName) {
+      return GetList<Party>($"PARTY_TAGS LIKE '%{roleName}%'").ToFixedList();
+    }
+
     static public Party Empty => ParseEmpty<Person>();
 
     static public Party Primary => Parse(PRIMARY_PARTY_ID);
@@ -79,6 +84,15 @@ namespace Empiria.Parties {
       get; private set;
     }
 
+
+    [DataField("PARTY_TAGS")]
+    private string _tags = string.Empty;
+
+    public FixedList<string> Tags {
+      get {
+        return _tags.Split(' ').ToFixedList();
+      }
+    }
 
     [DataField("PARTY_EXT_DATA")]
     protected internal JsonObject ExtendedData {

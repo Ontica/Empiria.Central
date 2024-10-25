@@ -72,4 +72,7 @@
     <ProjectReference Include="..\Central\Empiria.Central.csproj" />
     <ProjectReference Include="..\Central.Services\Empiria.Central.Services.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Parties\" />
+  </ItemGroup>
 </Project>

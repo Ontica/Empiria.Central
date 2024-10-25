@@ -119,7 +119,7 @@ namespace Empiria.Parties {
 
     #region Methods
 
-    public void ChangeStatus(EntityStatus status) {
+    protected void ChangeStatus(EntityStatus status) {
       this.Status = status;
     }
 
@@ -136,7 +136,7 @@ namespace Empiria.Parties {
 
 
     internal void SaveHistoric(IHistoricObject historyOf) {
-      Assertion.Require(base.IsNew, "Can't save already living instances as historic.");
+      Assertion.Require(base.IsNew, "Can't save already stored instances as historic.");
 
       this.HistoricId = historyOf.HistoricId;
       PostedById = ExecutionServer.CurrentUserId;
