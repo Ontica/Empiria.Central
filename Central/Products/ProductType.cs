@@ -8,6 +8,8 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using System.Linq;
+
 using Empiria.Ontology;
 
 namespace Empiria.Products {
@@ -27,6 +29,12 @@ namespace Empiria.Products {
     static internal new ProductType Parse(string typeName) => Parse<ProductType>(typeName);
 
     static public ProductType Empty => Parse("ObjectTypeInfo.Product");
+
+    static internal FixedList<ProductType> GetList() {
+      return Empty.GetAllSubclasses()
+                  .Select(x => (ProductType) x)
+                  .ToFixedList();
+    }
 
     #endregion Constructors and parsers
 
