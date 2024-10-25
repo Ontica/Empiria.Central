@@ -23,7 +23,7 @@ namespace Empiria.Projects.WebApi {
     #region Query web apis
 
     [HttpGet]
-    [Route("v2/projects/project-types")]
+    [Route("v8/projects/project-types")]
     public CollectionModel GetProjectTypes([FromUri] string keywords = "") {
 
       using (var usecases = ProjectTypeServices.ServiceInteractor()) {
@@ -35,7 +35,7 @@ namespace Empiria.Projects.WebApi {
 
 
     [HttpGet]
-    [Route("v2/projects/project-types/{projectTypeUID:guid}/projects")]
+    [Route("v8/projects/project-types/{projectTypeUID:guid}/projects")]
     public CollectionModel GetProjectTypeProjects([FromUri] string projectTypeUID) {
 
       using (var service = ProjectTypeServices.ServiceInteractor()) {
@@ -50,7 +50,7 @@ namespace Empiria.Projects.WebApi {
     #region Command web apis
 
     [HttpPost]
-    [Route("v2/projects/project-types")]
+    [Route("v8/projects/project-types")]
     public SingleObjectModel CreateProjectType([FromBody] NamedEntityFields fields) {
 
       base.RequireBody(fields);
@@ -64,7 +64,7 @@ namespace Empiria.Projects.WebApi {
 
 
     [HttpDelete]
-    [Route("v2/projects/project-types/{projectTypeUID:guid}")]
+    [Route("v8/projects/project-types/{projectTypeUID:guid}")]
     public NoDataModel DeleteProjectType([FromUri] string projectTypeUID) {
 
       using (var service = ProjectTypeServices.ServiceInteractor()) {
@@ -76,7 +76,7 @@ namespace Empiria.Projects.WebApi {
 
 
     [HttpPut, HttpPatch]
-    [Route("v2/projects/project-types/{projectTypeUID:guid}")]
+    [Route("v8/projects/project-types/{projectTypeUID:guid}")]
     public SingleObjectModel UpdateProjectType([FromUri] string projectTypeUID,
                                                [FromBody] NamedEntityFields fields) {
 

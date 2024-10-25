@@ -20,9 +20,7 @@ namespace Empiria.Financial.WebApi {
     #region Query web apis
 
     [HttpGet]
-    [Route("v2/payments-management/payment-methods")]
-    [Route("v2/financial/catalogues/payment-methods")]
-    [Route("v2/financial/payment-methods")]
+    [Route("v8/financial/payment-methods")]
     public CollectionModel GetPaymentMethods() {
 
       FixedList<PaymentMethod> paymentMethods = PaymentMethod.GetList();

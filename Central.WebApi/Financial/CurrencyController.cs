@@ -20,8 +20,7 @@ namespace Empiria.Financial.WebApi {
     #region Query web apis
 
     [HttpGet]
-    [Route("v2/financial/catalogues/currencies")]
-    [Route("v2/financial/currencies")]
+    [Route("v8/financial/currencies")]
     public CollectionModel GetCurrencies() {
 
       FixedList<Currency> currencies = Currency.GetList();

@@ -22,7 +22,7 @@ namespace Empiria.Products.WebApi {
     #region Web Apis
 
     [HttpPost]
-    [Route("v2/products/categories")]
+    [Route("v8/products/categories")]
     public SingleObjectModel CreateProductCategory(ProductCategoryFields fields) {
 
       base.RequireBody(fields);
@@ -36,7 +36,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpDelete]
-    [Route("v2/products/categories/{productCategoryUID:guid}")]
+    [Route("v8/products/categories/{productCategoryUID:guid}")]
     public NoDataModel DeleteProductCategory([FromUri] string productCategoryUID) {
 
       using (var services = ProductCategoryServices.ServiceInteractor()) {
@@ -48,7 +48,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpGet]
-    [Route("v2/products/categories/{productCategoryUID:guid}")]
+    [Route("v8/products/categories/{productCategoryUID:guid}")]
     public SingleObjectModel GetProductCategory([FromUri] string productCategoryUID) {
 
       using (var services = ProductCategoryServices.ServiceInteractor()) {
@@ -60,7 +60,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpGet]
-    [Route("v2/products/categories")]
+    [Route("v8/products/categories")]
     public CollectionModel SearchProductCategories([FromUri] string keywords = "") {
 
       using (var services = ProductCategoryServices.ServiceInteractor()) {
@@ -72,7 +72,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpPut, HttpPatch]
-    [Route("v2/products/categories/{productUID:guid}")]
+    [Route("v8/products/categories/{productUID:guid}")]
     public SingleObjectModel UpdateProductCategory([FromUri] string productUID,
                                                    [FromBody] ProductCategoryFields fields) {
 

@@ -22,7 +22,7 @@ namespace Empiria.Products.SATMexico.WebApi {
     #region Query web apis
 
     [HttpGet]
-    [Route("v2/products/sat-mexico/unidades-medida")]
+    [Route("v8/products/sat-mexico/unidades-medida")]
     public CollectionModel SearchSATUnidadesMedida([FromUri] string keywords = "") {
       FixedList<SATUnidadMedida> list = SATUnidadMedida.GetList();
 

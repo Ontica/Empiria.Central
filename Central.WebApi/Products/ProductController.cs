@@ -22,7 +22,7 @@ namespace Empiria.Products.WebApi {
     #region Web Apis
 
     [HttpPost]
-    [Route("v2/products/{productUID:guid}/activate")]
+    [Route("v8/products/{productUID:guid}/activate")]
     public SingleObjectModel ActivateProduct([FromUri] string productUID) {
 
       using (var services = ProductServices.ServiceInteractor()) {
@@ -34,7 +34,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpPost]
-    [Route("v2/products")]
+    [Route("v8/products")]
     public SingleObjectModel CreateProduct([FromBody] ProductFields fields) {
 
       base.RequireBody(fields);
@@ -48,7 +48,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpDelete]
-    [Route("v2/products/{productUID:guid}")]
+    [Route("v8/products/{productUID:guid}")]
     public NoDataModel DeleteProduct([FromUri] string productUID) {
 
       using (var services = ProductServices.ServiceInteractor()) {
@@ -60,7 +60,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpGet]
-    [Route("v2/products/{productUID:guid}")]
+    [Route("v8/products/{productUID:guid}")]
     public SingleObjectModel GetProduct([FromUri] string productUID) {
 
       using (var services = ProductServices.ServiceInteractor()) {
@@ -72,7 +72,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpPost]
-    [Route("v2/products/search")]
+    [Route("v8/products/search")]
     public CollectionModel SearchProducts([FromBody] ProductsQuery query) {
 
       base.RequireBody(query);
@@ -86,7 +86,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpPost]
-    [Route("v2/products/search/short-list")]
+    [Route("v8/products/search/short-list")]
     public CollectionModel SearchProductsAsShortList([FromBody] ProductsQuery query) {
 
       using (var services = ProductServices.ServiceInteractor()) {
@@ -98,7 +98,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpPost]
-    [Route("v2/products/{productUID:guid}/suspend")]
+    [Route("v8/products/{productUID:guid}/suspend")]
     public SingleObjectModel SuspendProduct([FromUri] string productUID) {
 
       using (var services = ProductServices.ServiceInteractor()) {
@@ -110,7 +110,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpPut, HttpPatch]
-    [Route("v2/products/{productUID:guid}")]
+    [Route("v8/products/{productUID:guid}")]
     public SingleObjectModel UpdateProduct([FromUri] string productUID,
                                            [FromBody] ProductFields fields) {
 

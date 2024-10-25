@@ -21,8 +21,8 @@ namespace Empiria.Products.WebApi {
     #region Query web apis
 
     [HttpGet]
-    [Route("v2/parties/primary-party/suppliers-list")]    // ToDo: obsolete
-    [Route("v2/products/primary-party/suppliers/list")]
+    [Route("v8/parties/primary-party/suppliers-list")]    // ToDo: obsolete
+    [Route("v8/products/primary-party/suppliers/list")]
     public CollectionModel GetSuppliers([FromUri] string keywords = "") {
 
       FixedList<Party> suppliers = Party.GetPartiesInRole("supplier");

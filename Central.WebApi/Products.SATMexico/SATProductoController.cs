@@ -22,7 +22,7 @@ namespace Empiria.Products.SATMexico.WebApi {
     #region Query web apis
 
     [HttpGet]
-    [Route("v2/products/sat-mexico/productos")]
+    [Route("v8/products/sat-mexico/productos")]
     public CollectionModel SearchSATProductos([FromUri] string keywords = "") {
       FixedList<SATProducto> list = SATProducto.GetList();
 

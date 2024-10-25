@@ -22,7 +22,7 @@ namespace Empiria.Projects.WebApi {
     #region Web Apis
 
     [HttpGet]
-    [Route("v2/projects")]
+    [Route("v8/projects")]
     public CollectionModel GetProjects([FromUri] string keywords = "") {
 
       using (var services = ProjectServices.ServiceInteractor()) {
@@ -38,7 +38,7 @@ namespace Empiria.Projects.WebApi {
     #region Command web apis
 
     [HttpPost]
-    [Route("v2/projects")]
+    [Route("v8/projects")]
     public SingleObjectModel CreateProject([FromBody] ProjectFields fields) {
 
       base.RequireBody(fields);
@@ -52,7 +52,7 @@ namespace Empiria.Projects.WebApi {
 
 
     [HttpDelete]
-    [Route("v2/projects/{projectUID:guid}")]
+    [Route("v8/projects/{projectUID:guid}")]
     public NoDataModel DeleteProject([FromUri] string projectUID) {
 
       using (var service = ProjectServices.ServiceInteractor()) {
@@ -64,7 +64,7 @@ namespace Empiria.Projects.WebApi {
 
 
     [HttpPut, HttpPatch]
-    [Route("v2/projects/{projectUID:guid}")]
+    [Route("v8/projects/{projectUID:guid}")]
     public SingleObjectModel UpdateProject([FromUri] string projectUID,
                                            [FromBody] ProjectFields fields) {
 
