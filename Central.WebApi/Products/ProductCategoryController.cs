@@ -19,7 +19,34 @@ namespace Empiria.Products.WebApi {
   /// <summary>Web API used to retrive and update product categories.</summary>
   public class ProductCategoryController : WebApiController {
 
-    #region Web Apis
+    #region Query Web Apis
+
+    [HttpGet]
+    [Route("v8/products/categories/{productCategoryUID:guid}")]
+    public SingleObjectModel GetProductCategory([FromUri] string productCategoryUID) {
+
+      using (var services = ProductCategoryServices.ServiceInteractor()) {
+        ProductCategoryDto category = services.GetProductCategory(productCategoryUID);
+
+        return new SingleObjectModel(base.Request, category);
+      }
+    }
+
+
+    [HttpGet]
+    [Route("v8/products/categories")]
+    public CollectionModel SearchProductCategories([FromUri] string keywords = "") {
+
+      using (var services = ProductCategoryServices.ServiceInteractor()) {
+        FixedList<ProductCategoryDto> categories = services.SearchProductCategories(keywords);
+
+        return new CollectionModel(base.Request, categories);
+      }
+    }
+
+    #endregion Query Web Apis
+
+    #region Command Web Apis
 
     [HttpPost]
     [Route("v8/products/categories")]
@@ -47,30 +74,6 @@ namespace Empiria.Products.WebApi {
     }
 
 
-    [HttpGet]
-    [Route("v8/products/categories/{productCategoryUID:guid}")]
-    public SingleObjectModel GetProductCategory([FromUri] string productCategoryUID) {
-
-      using (var services = ProductCategoryServices.ServiceInteractor()) {
-        ProductCategoryDto category = services.GetProductCategory(productCategoryUID);
-
-        return new SingleObjectModel(base.Request, category);
-      }
-    }
-
-
-    [HttpGet]
-    [Route("v8/products/categories")]
-    public CollectionModel SearchProductCategories([FromUri] string keywords = "") {
-
-      using (var services = ProductCategoryServices.ServiceInteractor()) {
-        FixedList<ProductCategoryDto> categories = services.SearchProductCategories(keywords);
-
-        return new CollectionModel(base.Request, categories);
-      }
-    }
-
-
     [HttpPut, HttpPatch]
     [Route("v8/products/categories/{productUID:guid}")]
     public SingleObjectModel UpdateProductCategory([FromUri] string productUID,
@@ -87,7 +90,7 @@ namespace Empiria.Products.WebApi {
       }
     }
 
-    #endregion Web Apis
+    #endregion Command Web Apis
 
   }  // class ProductCategoryController
 

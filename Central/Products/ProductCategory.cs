@@ -101,6 +101,9 @@ namespace Empiria.Products {
 
     public override string Keywords {
       get {
+        if (this.IsEmptyInstance) {
+          return string.Empty;
+        }
         return EmpiriaString.BuildKeywords(Name, Parent.Keywords, ProductType.DisplayName);
       }
     }

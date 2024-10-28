@@ -1,10 +1,10 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : Products                                   Component : Adapters Layer                          *
-*  Assembly : Empiria.Payments.Core.dll                  Pattern   : Query Data Transfer Object              *
+*  Assembly : Empiria.Payments.Core.dll                  Pattern   : Extension methods                       *
 *  Type     : ProductsQuery                              License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Query DTO used to search Product objects.                                                      *
+*  Summary  : Extension methods for ProductsQuery interface adapter.                                         *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
@@ -102,7 +102,7 @@ namespace Empiria.Products.Services.Adapters {
         return string.Empty;
       }
 
-      var productType = ProductCategory.Parse(productTypeUID);
+      var productType = ProductType.Parse(productTypeUID);
 
       return $"PRODUCT_TYPE_ID = {productType.Id}";
     }
