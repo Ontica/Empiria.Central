@@ -89,7 +89,10 @@ namespace Empiria.Documents {
 
     public override string Keywords {
       get {
-        return EmpiriaString.BuildKeywords(Name, Parent.Keywords, DocumentType.DisplayName);
+        if (IsEmptyInstance) {
+          return string.Empty;
+        }
+        return EmpiriaString.BuildKeywords(Name, DocumentType.DisplayName, Parent.Keywords);
       }
     }
 
