@@ -64,6 +64,13 @@ namespace Empiria.Documents {
     }
 
 
+    [DataField("DOCUMENT_PRODUCT_ID")]
+    public Product DocumentProduct {
+      get;
+      private set;
+    }
+
+
     [DataField("DOCUMENT_NO")]
     public string DocumentNo {
       get;
@@ -147,11 +154,11 @@ namespace Empiria.Documents {
     }
 
 
-    //[DataField("DOCUMENT_FILE_LOCATION_ID")]
-    //public FileLocation FileLocation {
-    //  get;
-    //  private set;
-    //}
+    [DataField("DOCUMENT_FILE_LOCATION_ID")]
+    public FileLocation FileLocation {
+      get;
+      private set;
+    }
 
 
     [DataField("DOCUMENT_FILE_DATA")]
@@ -167,6 +174,12 @@ namespace Empiria.Documents {
       private set;
     }
 
+
+    internal int HistoricId {
+      get {
+        return this.Id;
+      }
+    }
 
     [DataField("DOCUMENT_LAST_UPDATE_TIME")]
     public DateTime LastUpdateTime {
@@ -210,8 +223,8 @@ namespace Empiria.Documents {
 
 
     internal void Delete() {
-      this.Status = EntityStatus.Deleted;
-      this.LastUpdateTime = DateTime.Today;
+      Status = EntityStatus.Deleted;
+      LastUpdateTime = DateTime.Now;
     }
 
 
@@ -220,7 +233,7 @@ namespace Empiria.Documents {
         PostedBy = Party.ParseWithContact(ExecutionServer.CurrentContact);
         PostingTime = DateTime.Today;
       }
-      // this.LastUpdateTime = Empiria. DateTime.Now;
+      LastUpdateTime = DateTime.Now;
       DocumentDataService.WriteDocument(this);
     }
 

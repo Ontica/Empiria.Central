@@ -30,14 +30,15 @@ namespace Empiria.Documents {
 
 
     static internal void WriteDocument(Document o) {
-      //var op = DataOperation.Parse("write_Document", o.Id, o.UID,
-      //            o.DocumentType.Id, o.DocumentCategory.Id, o.Name, o.Description,
-      //            o.DocumentNo, string.Join(" ", o.Tags), o.Attributes.ToString(),
-      //            o.BillingData.ToString(), o.BudgetingData.ToString(),
-      //            o.BaseUnit.Id, o.Manager.Id, o.ExtensionData.ToString(),
-      //            o.Keywords, o.StartDate, o.EndDate, (char) o.Status);
+      var op = DataOperation.Parse("write_Document", o.Id, o.UID,
+                  o.DocumentType.Id, o.DocumentCategory.Id, o.DocumentProduct.Id,
+                  o.DocumentNo, o.Name, o.Description, string.Join(" ", o.Tags),
+                  string.Join(" ", o.Identifiers), o.SourceParty.Id, o.TargetParty.Id,
+                  o.SignedBy.Id, o.DocumentDate, o.BaseEntityType.Id, o.BaseEntity.Id,
+                  o.FileLocation.Id, o.FileData.ToString(), o.ExtensionData.ToString(), o.Keywords,
+                  o.HistoricId, o.LastUpdateTime, o.PostedBy.Id, o.PostingTime, (char) o.Status);
 
-      //DataWriter.Execute(op);
+      DataWriter.Execute(op);
     }
 
   }  // class DocumentDataService
