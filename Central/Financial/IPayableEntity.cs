@@ -9,6 +9,8 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using System.Collections.Generic;
+
 namespace Empiria.Financial {
 
   /// <summary>Defines a payable entity. Payable entities are purchase orders,
@@ -20,10 +22,83 @@ namespace Empiria.Financial {
       get;
     }
 
+    string UID {
+      get;
+    }
+
+    INamedEntity Type {
+      get;
+    }
+
     string EntityNo {
       get;
     }
 
+    string Name {
+      get;
+    }
+
+    string Description {
+      get;
+    }
+
+    INamedEntity Supplier {
+      get;
+    }
+
+    IEnumerable<IPayableEntityItem> Items {
+      get;
+    }
+
   }  // interface IPayableEntity
+
+
+  public interface IPayableEntityItem {
+
+    int Id {
+      get;
+    }
+
+
+    string UID {
+      get;
+    }
+
+
+    decimal Quantity {
+      get;
+    }
+
+
+    INamedEntity Unit {
+      get;
+    }
+
+
+    decimal UnitPrice {
+      get;
+    }
+
+
+    INamedEntity Product {
+      get;
+    }
+
+
+    string Description {
+      get;
+    }
+
+
+    INamedEntity BudgetAccount {
+      get;
+    }
+
+
+    decimal Total {
+      get;
+    }
+
+  }  // interface IPayableEntityItem
 
 }  // namespace Empiria.Financial
