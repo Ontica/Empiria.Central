@@ -27,10 +27,10 @@ namespace Empiria.Parties {
 
       fields.EnsureValid();
 
-      this.TaxCode = fields.TaxCode.ToUpperInvariant();
-      this.TaxEntityName = fields.TaxEntityName.ToUpperInvariant();
-      this.TaxRegimeCode = fields.TaxRegimeCode.ToUpperInvariant();
-      this.TaxZipCode = fields.TaxZipCode.ToUpperInvariant();
+      TaxCode = fields.TaxCode.ToUpperInvariant();
+      TaxEntityName = fields.TaxEntityName.ToUpperInvariant();
+      TaxRegimeCode = fields.TaxRegimeCode.ToUpperInvariant();
+      TaxZipCode = fields.TaxZipCode.ToUpperInvariant();
     }
 
 
@@ -48,22 +48,22 @@ namespace Empiria.Parties {
     #region Properties
 
     public string TaxCode {
-      get; private set;
+      get;
     } = string.Empty;
 
 
     public string TaxEntityName {
-      get; private set;
+      get;
     } = string.Empty;
 
 
     public string TaxRegimeCode {
-      get; private set;
+      get;
     } = string.Empty;
 
 
     public string TaxZipCode {
-      get; private set;
+      get;
     } = string.Empty;
 
     #endregion Properties
