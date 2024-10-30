@@ -34,7 +34,7 @@ namespace Empiria.Documents {
                   o.DocumentType.Id, o.DocumentCategory.Id, o.DocumentProduct.Id,
                   o.DocumentNo, o.Name, o.Description, string.Join(" ", o.Tags),
                   string.Join(" ", o.Identifiers), o.SourceParty.Id, o.TargetParty.Id,
-                  o.SignedBy.Id, o.DocumentDate, o.BaseEntityType.Id, o.BaseEntity.Id,
+                  o.SignedBy.Id, o.DocumentDate, o.BaseEntityTypeId, o.BaseEntityId,
                   o.FileLocation.Id, o.FileData.ToString(), o.ExtensionData.ToString(), o.Keywords,
                   o.HistoricId, o.LastUpdateTime, o.PostedBy.Id, o.PostingTime, (char) o.Status);
 

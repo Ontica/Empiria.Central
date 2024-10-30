@@ -14,6 +14,7 @@ using Empiria.Json;
 using Empiria.Ontology;
 using Empiria.Parties;
 using Empiria.Products;
+using Empiria.Reflection;
 using Empiria.StateEnums;
 
 namespace Empiria.Documents {
@@ -28,8 +29,9 @@ namespace Empiria.Documents {
       // Required by Empiria Framework for all partitioned types.
     }
 
-    internal protected Document(DocumentCategory documentCategory, string name) :
-                                                       base(documentCategory.DocumentType) {
+    internal protected Document(DocumentCategory documentCategory,
+                                BaseObject baseEntity, string name) : base(documentCategory.DocumentType) {
+
       DocumentCategory = documentCategory;
 
       name = EmpiriaString.Clean(name);
@@ -37,12 +39,23 @@ namespace Empiria.Documents {
       Assertion.Require(name, nameof(name));
 
       Name = name;
-
+      BaseEntityTypeId = baseEntity.GetEmpiriaType().Id;
+      BaseEntityId = baseEntity.Id;
+      FileLocation = DocumentCategory.FileLocation;
     }
 
     static public Document Parse(int id) => ParseId<Document>(id);
 
     static public Document Parse(string uid) => ParseKey<Document>(uid);
+
+    static internal FixedList<Document> GetListFor(BaseObject entity) {
+      Assertion.Require(entity, nameof(entity));
+
+      return BaseObject.GetFullList<Document>()
+                       .ToFixedList()
+                       .FindAll(x => x.BaseEntityId == entity.Id &&
+                                     x.BaseEntityTypeId == entity.GetEmpiriaType().Id);
+    }
 
     static public Document Empty => ParseEmpty<Document>();
 
@@ -91,6 +104,15 @@ namespace Empiria.Documents {
       private set;
     }
 
+    [DataField("DOCUMENT_IDENTIFIERS")]
+    private string _identifiers = string.Empty;
+
+    public FixedList<string> Identifiers {
+      get {
+        return _identifiers.Split(' ').ToFixedList();
+      }
+    }
+
 
     [DataField("DOCUMENT_TAGS")]
     private string _tags = string.Empty;
@@ -98,16 +120,6 @@ namespace Empiria.Documents {
     public FixedList<string> Tags {
       get {
         return _tags.Split(' ').ToFixedList();
-      }
-    }
-
-
-    [DataField("DOCUMENT_IDENTIFIERS")]
-    private string _identifiers = string.Empty;
-
-    public FixedList<string> Identifiers {
-      get {
-        return _identifiers.Split(' ').ToFixedList();
       }
     }
 
@@ -141,14 +153,14 @@ namespace Empiria.Documents {
 
 
     [DataField("DOCUMENT_BASE_ENTITY_TYPE_ID")]
-    public ObjectTypeInfo BaseEntityType {
+    internal int BaseEntityTypeId {
       get;
       private set;
     }
 
 
     [DataField("DOCUMENT_BASE_ENTITY_ID")]
-    public BaseObject BaseEntity {
+    internal int BaseEntityId {
       get;
       private set;
     }
@@ -228,26 +240,47 @@ namespace Empiria.Documents {
     }
 
 
+    internal BaseObject GetBaseEntity() {
+      ObjectTypeInfo typeInfo = ObjectTypeInfo.Parse(BaseEntityTypeId);
+
+      return (BaseObject) ObjectFactory.InvokeParseMethod(typeInfo.UnderlyingSystemType,
+                                                          BaseEntityId);
+    }
+
+
+    internal T GetBaseEntity<T>() where T : BaseObject {
+      return (T) GetBaseEntity();
+    }
+
+
     protected override void OnSave() {
       if (this.IsNew) {
         PostedBy = Party.ParseWithContact(ExecutionServer.CurrentContact);
         PostingTime = DateTime.Today;
       }
       LastUpdateTime = DateTime.Now;
+
       DocumentDataService.WriteDocument(this);
     }
 
 
-    internal void Update(ProductFields fields) {
+    internal void Update(DocumentFields fields) {
       Assertion.Require(fields, nameof(fields));
 
       fields.EnsureValid();
 
+      DocumentCategory = PatchField(fields.DocumentCategoryUID, DocumentCategory);
+      DocumentProduct = PatchField(fields.DocumentProductUID, DocumentProduct);
+      DocumentNo = PatchCleanField(fields.DocumentNo, DocumentNo);
       Name = PatchCleanField(fields.Name, Name);
       Description = PatchCleanField(fields.Description, Description);
-      DocumentNo = PatchCleanField(fields.InternalCode, DocumentNo);
-      _tags = PatchField(string.Join(" ", fields.Tags), _tags);
+      DocumentDate = PatchField(fields.DocumentDate, DocumentDate);
 
+      _identifiers = PatchField(string.Join(" ", fields.Identifiers), _identifiers);
+      _tags = PatchField(string.Join(" ", fields.Tags), _tags);
+      SourceParty = PatchField(fields.SourcePartyUID, SourceParty);
+      TargetParty = PatchField(fields.TargetPartyUID, TargetParty);
+      SignedBy = PatchField(fields.SignedByUID, SignedBy);
     }
 
     #endregion Methods
