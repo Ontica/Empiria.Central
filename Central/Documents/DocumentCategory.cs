@@ -67,6 +67,16 @@ namespace Empiria.Documents {
     }
 
 
+    public FileLocation FileLocation {
+      get {
+        return base.ExtendedDataField.Get<FileLocation>("fileLocationId");
+      }
+      private set {
+        base.ExtendedDataField.Set("fileLocationId", value.Id);
+      }
+    }
+
+
     public bool IsAssignable {
       get {
         return base.ExtendedDataField.Get("isAssignable", IsEmptyInstance ? false : true);
