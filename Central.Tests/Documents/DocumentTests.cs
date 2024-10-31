@@ -13,9 +13,9 @@ using System;
 using Xunit;
 
 using Empiria.StateEnums;
+using Empiria.Storage;
 
 using Empiria.Documents;
-using Empiria.Services;
 
 namespace Empiria.Tests.Documents {
 
@@ -28,7 +28,12 @@ namespace Empiria.Tests.Documents {
       var documentCategory = DocumentCategory.Parse(TestingConstants.DOCUMENT_CATEGORY_UID);
       var name = "   A    new   document  ";
 
-      var sut = new Document(documentCategory, TestingConstants.DOCUMENT_ENTITY, name);
+      var documentFile = FileData.Parse(TestingConstants.INPUT_FILE);
+
+      var sut = new Document(documentCategory,
+                             TestingConstants.DOCUMENT_ENTITY,
+                             documentFile,
+                             name);
 
       Assert.Equal(documentCategory, sut.DocumentCategory);
       Assert.Equal(documentCategory.DocumentType, sut.DocumentType);

@@ -45,7 +45,9 @@ namespace Empiria.Tests.Documents.Services {
         Name = "Servicios de desarrollo de software"
       };
 
-      DocumentDto sut = _services.CreateDocument(TestingConstants.DOCUMENT_ENTITY, fields);
+      DocumentDto sut = _services.CreateDocument(TestingConstants.INPUT_FILE,
+                                                 TestingConstants.DOCUMENT_ENTITY,
+                                                 fields);
 
       Assert.NotNull(sut);
     }

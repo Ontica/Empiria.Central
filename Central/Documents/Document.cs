@@ -16,6 +16,7 @@ using Empiria.Parties;
 using Empiria.Products;
 using Empiria.Reflection;
 using Empiria.StateEnums;
+using Empiria.Storage;
 
 namespace Empiria.Documents {
 
@@ -30,18 +31,22 @@ namespace Empiria.Documents {
     }
 
     internal protected Document(DocumentCategory documentCategory,
-                                BaseObject baseEntity, string name) : base(documentCategory.DocumentType) {
+                                BaseObject baseEntity,
+                                FileData fileData,
+                                string name) : base(documentCategory.DocumentType) {
 
-      DocumentCategory = documentCategory;
-
+      Assertion.Require(documentCategory, nameof(documentCategory));
+      Assertion.Require(baseEntity, nameof(baseEntity));
+      Assertion.Require(fileData, nameof(fileData));
       name = EmpiriaString.Clean(name);
-
       Assertion.Require(name, nameof(name));
 
+      DocumentCategory = documentCategory;
       Name = name;
       BaseEntityTypeId = baseEntity.GetEmpiriaType().Id;
       BaseEntityId = baseEntity.Id;
       FileLocation = DocumentCategory.FileLocation;
+      _documentFileData = fileData.ToString();
     }
 
     static public Document Parse(int id) => ParseId<Document>(id);
@@ -174,9 +179,12 @@ namespace Empiria.Documents {
 
 
     [DataField("DOCUMENT_FILE_DATA")]
-    public JsonObject FileData {
-      get;
-      private set;
+    private string _documentFileData = string.Empty;
+
+    public FileData FileData {
+      get {
+        return FileData.Parse(_documentFileData);
+      }
     }
 
 

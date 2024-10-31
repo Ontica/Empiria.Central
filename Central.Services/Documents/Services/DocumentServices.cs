@@ -8,10 +8,12 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using System;
+
 using Empiria.Services;
+using Empiria.Storage;
 
 using Empiria.Documents.Services.Adapters;
-using System;
 
 namespace Empiria.Documents.Services {
 
@@ -32,7 +34,11 @@ namespace Empiria.Documents.Services {
 
     #region Services
 
-    public DocumentDto CreateDocument(BaseObject baseEntity, DocumentFields fields) {
+    public DocumentDto CreateDocument(InputFile inputFile,
+                                      BaseObject baseEntity,
+                                      DocumentFields fields) {
+
+      Assertion.Require(inputFile, nameof(inputFile));
       Assertion.Require(baseEntity, nameof(baseEntity));
       Assertion.Require(fields, nameof(fields));
 
@@ -41,9 +47,11 @@ namespace Empiria.Documents.Services {
       Assertion.Require(fields.DocumentCategoryUID, nameof(fields.DocumentCategoryUID));
       Assertion.Require(fields.Name, nameof(fields.Name));
 
-      var documentCategory = DocumentCategory.Parse(fields.DocumentCategoryUID);
+      var category = DocumentCategory.Parse(fields.DocumentCategoryUID);
 
-      var document = new Document(documentCategory, baseEntity, fields.Name);
+      FileData fileData = category.FileLocation.Store(inputFile);
+
+      var document = new Document(category, baseEntity, fileData, fields.Name);
 
       document.Update(fields);
 

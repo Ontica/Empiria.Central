@@ -45,9 +45,9 @@ namespace Empiria.Tests {
 
     static internal readonly string PROJECT_TYPE_ID = "fbc0f83d-ab5e-4596-a6dc-9d94ccdacf9a";
 
-    static internal readonly InputFile INPUT_FILE = new InputFile(new FileInfo(INPUT_FILE_NAME));
+    static internal InputFile INPUT_FILE => new InputFile(new FileInfo(INPUT_FILE_NAME));
 
-    static internal readonly string INPUT_FILE_NAME = "D:\\Desktop\\AnalysisPatterns.Fowler.pdf";
+    static internal readonly string INPUT_FILE_NAME = @"D:\\Desktop\\AnalysisPatterns.Fowler.pdf";
 
   }  // class TestingConstants
 

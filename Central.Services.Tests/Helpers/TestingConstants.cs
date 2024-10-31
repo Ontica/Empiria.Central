@@ -11,6 +11,8 @@
 using Empiria.Parties;
 
 using Empiria.Documents;
+using Empiria.Storage;
+using System.IO;
 
 namespace Empiria.Tests {
 
@@ -30,6 +32,10 @@ namespace Empiria.Tests {
     static internal readonly BaseObject DOCUMENT_LINKED_ENTITY = DOCUMENT_ENTITY;
 
     static internal readonly string DOCUMENT_LINK_UID = "ed3b5dd9-3e0d-472e-be64-f453792365ea";
+
+    static internal InputFile INPUT_FILE => new InputFile(new FileInfo(INPUT_FILE_NAME));
+
+    static internal readonly string INPUT_FILE_NAME = @"D:\\Desktop\\AnalysisPatterns.Fowler.pdf";
 
     static internal readonly string PRODUCT_CATEGORY_UID = "e5a8e60e-2a07-4817-b2f4-9b42083d5986";
 
