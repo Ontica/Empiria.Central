@@ -29,6 +29,16 @@ namespace Empiria.Financial {
 
     #endregion Constructors and parsers
 
+    #region Properties
+
+    public bool LinkedToAccount {
+      get {
+        return ExtendedDataField.Get("linkedToAccount", false);
+      }
+    }
+
+    #endregion Properties
+
   }  // class PaymentMethod
 
 }  // namespace Empiria.Financial
