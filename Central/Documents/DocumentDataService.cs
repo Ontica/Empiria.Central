@@ -8,6 +8,7 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using System;
 using Empiria.Data;
 
 namespace Empiria.Documents {
@@ -37,6 +38,16 @@ namespace Empiria.Documents {
                   o.SignedBy.Id, o.DocumentDate, o.BaseEntityTypeId, o.BaseEntityId,
                   o.FileLocation.Id, o.FileData.ToString(), o.ExtensionData.ToString(), o.Keywords,
                   o.HistoricId, o.LastUpdateTime, o.PostedBy.Id, o.PostingTime, (char) o.Status);
+
+      DataWriter.Execute(op);
+    }
+
+
+    static internal void WriteDocumentLink(DocumentLink o) {
+      var op = DataOperation.Parse("write_Document_Link", o.Id, o.UID,
+          o.DocumentLinkType.Id, o.Document.Id, o.LinkedEntityTypeId, o.LinkedEntityId,
+          o.LinkedEntityRole, o.Identificators, o.Tags, o.ExtensionData.ToString(),
+          o.Keywords, o.PostedBy.Id, o.PostingTime, (char) o.Status);
 
       DataWriter.Execute(op);
     }
