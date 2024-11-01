@@ -77,7 +77,8 @@ namespace Empiria.Documents {
     static public FixedList<BaseObject> GetEntitiesFor(Document document) {
       return BaseObject.GetFullList<DocumentLink>()
                        .ToFixedList()
-                       .FindAll(x => x.Document.Equals(document))
+                       .FindAll(x => x.Document.Equals(document) &&
+                                     x.Status != EntityStatus.Deleted)
                        .Select(x => x.GetLinkedEntity())
                        .Distinct()
                        .ToFixedList();
@@ -87,7 +88,8 @@ namespace Empiria.Documents {
     static public FixedList<Document> GetDocumentsFor(BaseObject linkedEntity) {
       return BaseObject.GetFullList<DocumentLink>()
                        .ToFixedList()
-                       .FindAll(x => x.GetLinkedEntity().Equals(linkedEntity))
+                       .FindAll(x => x.GetLinkedEntity().Equals(linkedEntity) &&
+                                     x.Status != EntityStatus.Deleted)
                        .Select(x => x.Document)
                        .Distinct()
                        .ToFixedList();

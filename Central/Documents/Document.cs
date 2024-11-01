@@ -59,7 +59,8 @@ namespace Empiria.Documents {
       return BaseObject.GetFullList<Document>()
                        .ToFixedList()
                        .FindAll(x => x.BaseEntityId == entity.Id &&
-                                     x.BaseEntityTypeId == entity.GetEmpiriaType().Id);
+                                     x.BaseEntityTypeId == entity.GetEmpiriaType().Id &&
+                                     x.Status != EntityStatus.Deleted);
     }
 
     static public Document Empty => ParseEmpty<Document>();
@@ -237,6 +238,12 @@ namespace Empiria.Documents {
       }
     }
 
+    public string FullLocalName {
+      get {
+        return FileLocation.GetFileFullLocalName(this.FileData);
+      }
+    }
+
     #endregion Properties
 
     #region Methods
@@ -270,9 +277,11 @@ namespace Empiria.Documents {
     protected override void OnSave() {
       if (this.IsNew) {
         PostedBy = Party.ParseWithContact(ExecutionServer.CurrentContact);
-        PostingTime = DateTime.Today;
+        PostingTime = DateTime.Now;
+        LastUpdateTime = PostingTime;
+      } else {
+        LastUpdateTime = DateTime.Now;
       }
-      LastUpdateTime = DateTime.Now;
 
       DocumentDataService.WriteDocument(this);
     }

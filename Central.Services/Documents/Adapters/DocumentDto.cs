@@ -8,6 +8,7 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using System;
 using Empiria.Storage;
 
 namespace Empiria.Documents.Services.Adapters {
@@ -23,12 +24,31 @@ namespace Empiria.Documents.Services.Adapters {
       get; internal set;
     }
 
+    public string DocumentNo {
+      get; internal set;
+    }
+
+    public DateTime DocumentDate {
+      get; internal set;
+    }
+
+    public string DocumentCategoryName {
+      get; internal set;
+    }
+
     public string Description {
       get; internal set;
     }
 
-
     public FixedList<string> Tags {
+      get; internal set;
+    }
+
+    public DateTime PostingTime {
+      get; internal set;
+    }
+
+    public DateTime LastUpdateTime {
       get; internal set;
     }
 
@@ -41,7 +61,6 @@ namespace Empiria.Documents.Services.Adapters {
     }
 
   }  // class DocumentDto
-
 
 
   /// <summary>Output DTO for Document instances to be used in lists.</summary>

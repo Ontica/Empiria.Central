@@ -25,8 +25,13 @@ namespace Empiria.Documents.Services.Adapters {
       return new DocumentDto {
         UID = document.UID,
         Name = document.Name,
+        DocumentNo = document.DocumentNo,
+        DocumentDate = document.DocumentDate,
+        DocumentCategoryName = document.DocumentCategory.Name,
         Description = document.Description,
         Tags = document.Tags,
+        PostingTime = document.PostingTime,
+        LastUpdateTime = document.LastUpdateTime,
         Status = document.Status.MapToDto(),
         FileDto = document.FileDto()
       };
