@@ -12,6 +12,7 @@ using Empiria.Data;
 
 namespace Empiria.Products {
 
+  /// <summary>Provides products data persistence services.</summary>
   static internal class ProductDataService {
 
     static internal FixedList<Product> SearchProducts(string filter, string sort) {

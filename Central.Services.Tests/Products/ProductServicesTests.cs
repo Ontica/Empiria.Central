@@ -1,6 +1,6 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
-*  Module   : Project                                    Component : Test cases                              *
+*  Module   : Products                                   Component : Test cases                              *
 *  Assembly : Empiria.Central.Services.Tests.dll         Pattern   : Services tests                          *
 *  Type     : ProductServicesTests                       License   : Please read LICENSE.txt file            *
 *                                                                                                            *

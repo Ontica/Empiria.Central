@@ -2,7 +2,7 @@
 *                                                                                                            *
 *  Module   : Documents                                    Component : Web Api                               *
 *  Assembly : Empiria.Central.WebApi.dll                   Pattern   : Web Api Controller                    *
-*  Type     : DocumentsController                          License   : Please read LICENSE.txt file          *
+*  Type     : DocumentController                           License   : Please read LICENSE.txt file          *
 *                                                                                                            *
 *  Summary  : Web API used to retrive and update documents.                                                  *
 *                                                                                                            *
@@ -15,11 +15,10 @@ using Empiria.WebApi;
 using Empiria.Documents.Services;
 using Empiria.Documents.Services.Adapters;
 
-namespace Empiria.Documents.WebApi
-{
+namespace Empiria.Documents.WebApi {
 
-    /// <summary>Web API used to retrive and update documents.</summary>
-    public class DocumentsController : WebApiController {
+  /// <summary>Web API used to retrive and update documents.</summary>
+  public class DocumentController : WebApiController {
 
     #region Web Apis
 
@@ -67,6 +66,6 @@ namespace Empiria.Documents.WebApi
 
     #endregion Web Apis
 
-  }  // class DocumentsController
+  }  // class DocumentController
 
 }  // namespace Empiria.Documents.WebApi

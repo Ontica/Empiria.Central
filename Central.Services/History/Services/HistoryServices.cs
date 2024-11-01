@@ -27,13 +27,15 @@ namespace Empiria.History.Services {
       return Service.CreateInstance<HistoryServices>();
     }
 
-    public FixedList<HistoryDto> GetEntityHistory(BaseObject entity) {
-      return new FixedList<HistoryDto>();
-    }
-
     #endregion Constructors and parsers
 
     #region Services
+
+    public FixedList<HistoryDto> GetEntityHistory(BaseObject entity) {
+      Assertion.Require(entity, nameof(entity));
+
+      return new FixedList<HistoryDto>();
+    }
 
     #endregion Services
 

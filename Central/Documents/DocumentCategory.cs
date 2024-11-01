@@ -90,7 +90,7 @@ namespace Empiria.Documents {
 
     public DocumentCategory Parent {
       get {
-        return base.ExtendedDataField.Get("parentCategoryId", DocumentCategory.Empty);
+        return base.ExtendedDataField.Get("parentCategoryId", Empty);
       }
       private set {
         base.ExtendedDataField.SetIf("parentCategoryId", value.Id, value.Id != -1);

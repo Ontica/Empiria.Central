@@ -56,7 +56,7 @@ namespace Empiria.Products.Services.Adapters {
         BaseUnitName = product.BaseUnit.Name,
         ManagerName = product.Manager.Name,
         ProductCategoryName = product.ProductCategory.Name,
-        ProductTypeName = product.ProductType.Name,
+        ProductTypeName = product.ProductType.DisplayName,
         StartDate = product.StartDate,
         EndDate = product.EndDate,
         StatusName = product.Status.GetName()

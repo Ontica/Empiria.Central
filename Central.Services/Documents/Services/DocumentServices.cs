@@ -91,9 +91,13 @@ namespace Empiria.Documents.Services {
       return DocumentMapper.Map(documents);
     }
 
+
     public FixedList<DocumentDescriptorDto> SearchDocuments(DocumentsQuery query) {
-      throw new NotImplementedException();
+      Assertion.Require(query, nameof(query));
+
+      return new FixedList<DocumentDescriptorDto>();
     }
+
 
     public DocumentDto UpdateDocument(DocumentFields fields) {
       Assertion.Require(fields, nameof(fields));

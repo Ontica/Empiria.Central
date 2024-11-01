@@ -1,7 +1,7 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : Products                                   Component : Adapters Layer                          *
-*  Assembly : Empiria.Central.Services.dll               Pattern   : Input Fields DTO                        *
+*  Assembly : Empiria.Central.dll                        Pattern   : Input Fields DTO                        *
 *  Type     : ProductCategoryFields                      License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Input fields DTO used to create and update ProductCategory instances.                          *
