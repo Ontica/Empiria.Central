@@ -70,8 +70,8 @@ namespace Empiria.Tests.Documents.Services {
 
 
     [Fact]
-    public void Should_Get_Documents_For_An_Entity() {
-      var sut = _services.GetDocumentsForEntity(TestingConstants.DOCUMENT_ENTITY);
+    public void Should_Get_Entity_Documents() {
+      var sut = _services.GetEntityDocuments(TestingConstants.DOCUMENT_ENTITY);
 
       Assert.NotNull(sut);
       Assert.NotEmpty(sut);

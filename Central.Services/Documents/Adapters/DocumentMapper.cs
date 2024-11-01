@@ -27,7 +27,8 @@ namespace Empiria.Documents.Services.Adapters {
         Name = document.Name,
         Description = document.Description,
         Tags = document.Tags,
-        Status = document.Status.MapToDto()
+        Status = document.Status.MapToDto(),
+        FileDto = document.FileDto()
       };
     }
 
@@ -45,7 +46,8 @@ namespace Empiria.Documents.Services.Adapters {
         UID = document.UID,
         Name = document.Name,
         Description = document.Description,
-        StatusName = document.Status.GetName()
+        StatusName = document.Status.GetName(),
+        FileDto = document.FileDto()
       };
     }
 

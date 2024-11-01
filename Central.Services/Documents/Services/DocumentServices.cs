@@ -83,7 +83,7 @@ namespace Empiria.Documents.Services {
     }
 
 
-    public FixedList<DocumentDto> GetDocumentsForEntity(BaseObject entity) {
+    public FixedList<DocumentDto> GetEntityDocuments(BaseObject entity) {
       Assertion.Require(entity, nameof(entity));
 
       FixedList<Document> documents = Document.GetListFor(entity);
@@ -91,6 +91,9 @@ namespace Empiria.Documents.Services {
       return DocumentMapper.Map(documents);
     }
 
+    public FixedList<DocumentDescriptorDto> SearchDocuments(DocumentsQuery query) {
+      throw new NotImplementedException();
+    }
 
     public DocumentDto UpdateDocument(DocumentFields fields) {
       Assertion.Require(fields, nameof(fields));
@@ -104,10 +107,6 @@ namespace Empiria.Documents.Services {
       document.Save();
 
       return DocumentMapper.Map(document);
-    }
-
-    internal object GetDocumentsForEntity(object dOCUMENT_ENTITY) {
-      throw new NotImplementedException();
     }
 
     #endregion Services

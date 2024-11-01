@@ -8,7 +8,7 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-using System;
+using Empiria.Storage;
 
 namespace Empiria.Documents.Services.Adapters {
 
@@ -36,6 +36,10 @@ namespace Empiria.Documents.Services.Adapters {
       get; internal set;
     }
 
+    public FileDto FileDto {
+      get; internal set;
+    }
+
   }  // class DocumentDto
 
 
@@ -56,6 +60,10 @@ namespace Empiria.Documents.Services.Adapters {
     }
 
     public string StatusName {
+      get; internal set;
+    }
+
+    public FileDto FileDto {
       get; internal set;
     }
 

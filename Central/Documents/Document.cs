@@ -241,10 +241,16 @@ namespace Empiria.Documents {
 
     #region Methods
 
-
     internal void Delete() {
       Status = EntityStatus.Deleted;
       LastUpdateTime = DateTime.Now;
+    }
+
+
+    internal FileDto FileDto() {
+      var url = $"{FileLocation.BaseUrl}/{FileData.FileName}";
+
+      return new FileDto(FileData.FileType, url);
     }
 
 
