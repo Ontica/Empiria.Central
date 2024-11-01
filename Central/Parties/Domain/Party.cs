@@ -67,6 +67,10 @@ namespace Empiria.Parties {
     }
 
 
+    public static Party TryParseWithID(string partyID) {
+      return TryParse<Party>($"PARTY_TAGS LIKE '%{partyID}%'");
+    }
+
     static public Party Empty => ParseEmpty<Person>();
 
     static public Party Primary => Parse(PRIMARY_PARTY_ID);
