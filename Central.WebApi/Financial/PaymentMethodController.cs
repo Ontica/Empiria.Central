@@ -12,6 +12,9 @@ using System.Web.Http;
 
 using Empiria.WebApi;
 
+using Empiria.Financial.Services;
+using Empiria.Financial.Adapters;
+
 namespace Empiria.Financial.WebApi {
 
   /// <summary>Query web API used to retrive payment methods.</summary>
@@ -23,9 +26,11 @@ namespace Empiria.Financial.WebApi {
     [Route("v8/financial/payment-methods")]
     public CollectionModel GetPaymentMethods() {
 
-      FixedList<PaymentMethod> paymentMethods = PaymentMethod.GetList();
+      using (var services = PaymentMethodServices.ServiceInteractor()) {
+        FixedList<PaymentMethodDto> paymentMethods = services.GetPaymentMethods();
 
-      return new CollectionModel(Request, paymentMethods.MapToNamedEntityList());
+        return new CollectionModel(Request, paymentMethods);
+      }
     }
 
     #endregion Query web apis
