@@ -34,6 +34,22 @@ namespace Empiria.Documents.WebApi {
     }
 
 
+
+    [HttpGet]
+    [Route("v8/documents/entities/{entityType}/{entityUID:guid}")]
+    public CollectionModel GetEntityDocument([FromUri] string entityType,
+                                             [FromUri] string entityUID) {
+
+      using (var services = DocumentServices.ServiceInteractor()) {
+        BaseObject entity = BaseObject.Parse(entityType, entityUID);
+
+        FixedList<DocumentDto> documents = services.GetEntityDocuments(entity);
+
+        return new CollectionModel(base.Request, documents);
+      }
+    }
+
+
     [HttpPost]
     [Route("v8/documents/search")]
     public CollectionModel SearchDocuments([FromBody] DocumentsQuery query) {

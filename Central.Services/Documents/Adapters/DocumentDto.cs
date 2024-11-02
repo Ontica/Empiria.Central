@@ -32,6 +32,10 @@ namespace Empiria.Documents.Services.Adapters {
       get; internal set;
     }
 
+    public string DocumentProductName {
+      get; internal set;
+    }
+
     public string DocumentCategoryName {
       get; internal set;
     }

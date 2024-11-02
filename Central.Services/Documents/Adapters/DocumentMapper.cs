@@ -27,6 +27,7 @@ namespace Empiria.Documents.Services.Adapters {
         Name = document.Name,
         DocumentNo = document.DocumentNo,
         DocumentDate = document.DocumentDate,
+        DocumentProductName = document.DocumentProduct.Name,
         DocumentCategoryName = document.DocumentCategory.Name,
         Description = document.Description,
         Tags = document.Tags,
