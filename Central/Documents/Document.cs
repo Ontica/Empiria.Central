@@ -32,7 +32,7 @@ namespace Empiria.Documents {
     internal protected Document(DocumentCategory documentCategory,
                                 BaseObject baseEntity,
                                 FileData fileData,
-                                string name) : base(documentCategory.DocumentType) {
+                                string name) : base(documentCategory.ProductType) {
 
       Assertion.Require(documentCategory, nameof(documentCategory));
       Assertion.Require(baseEntity, nameof(baseEntity));

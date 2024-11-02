@@ -19,7 +19,7 @@ namespace Empiria.Products {
 
     #region Constructors and parsers
 
-    private ProductCategory() {
+    protected ProductCategory() {
       // Required by Empiria Framework
     }
 
@@ -53,7 +53,7 @@ namespace Empiria.Products {
       get {
         return base.ExtendedDataField.Get("productTypeId", ProductType.Empty);
       }
-      private set {
+      protected set {
         base.ExtendedDataField.SetIf("productTypeId", value.Id, value.Id != -1);
       }
     }
@@ -63,7 +63,7 @@ namespace Empiria.Products {
       get {
         return base.ExtendedDataField.Get("description", string.Empty);
       }
-      private set {
+      protected set {
         base.ExtendedDataField.SetIfValue("description", EmpiriaString.TrimAll(value));
       }
     }
@@ -83,7 +83,7 @@ namespace Empiria.Products {
       get {
         return base.ExtendedDataField.Get("isAssignable", IsEmptyInstance ? false : true);
       }
-      private set {
+      protected set {
         base.ExtendedDataField.SetIf("isAssignable", value, value == false);
       }
     }
@@ -93,7 +93,7 @@ namespace Empiria.Products {
       get {
         return base.ExtendedDataField.Get("parentCategoryId", ProductCategory.Empty);
       }
-      private set {
+      protected set {
         base.ExtendedDataField.SetIf("parentCategoryId", value.Id, value.Id != -1);
       }
     }
@@ -104,7 +104,7 @@ namespace Empiria.Products {
         if (this.IsEmptyInstance) {
           return string.Empty;
         }
-        return EmpiriaString.BuildKeywords(Name, Parent.Keywords, ProductType.DisplayName);
+        return EmpiriaString.BuildKeywords(Name, ProductType.DisplayName, Parent.Keywords);
       }
     }
 

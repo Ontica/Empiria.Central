@@ -36,7 +36,7 @@ namespace Empiria.Tests.Documents {
                              name);
 
       Assert.Equal(documentCategory, sut.DocumentCategory);
-      Assert.Equal(documentCategory.DocumentType, sut.DocumentType);
+      Assert.Equal(documentCategory.ProductType, sut.DocumentType);
       Assert.Equal(EmpiriaString.Clean(name), sut.Name);
     }
 

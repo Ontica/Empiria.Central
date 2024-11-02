@@ -42,7 +42,7 @@ namespace Empiria.Tests.Documents {
 
       foreach (var sut in categories) {
         Assert.NotEmpty(sut.Name);
-        Assert.NotNull(sut.DocumentType);
+        Assert.NotNull(sut.ProductType);
         Assert.NotNull(sut.FileLocation);
         Assert.NotNull(sut.Parent);
         Assert.NotEmpty(sut.Keywords);
