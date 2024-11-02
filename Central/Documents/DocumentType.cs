@@ -12,11 +12,13 @@ using System.Linq;
 
 using Empiria.Ontology;
 
+using Empiria.Products;
+
 namespace Empiria.Documents {
 
   /// <summary>Power type that describes a document.</summary>
   [Powertype(typeof(Document))]
-  public class DocumentType : Powertype {
+  public class DocumentType : ProductType {
 
     #region Constructors and parsers
 
@@ -28,9 +30,9 @@ namespace Empiria.Documents {
 
     static internal new DocumentType Parse(string typeName) => Parse<DocumentType>(typeName);
 
-    static public DocumentType Empty => Parse("ObjectTypeInfo.Document");
+    static public new DocumentType Empty => Parse("ObjectTypeInfo.Document");
 
-    static internal FixedList<DocumentType> GetList() {
+    static internal new FixedList<DocumentType> GetList() {
       return Empty.GetAllSubclasses()
                   .Select(x => (DocumentType) x)
                   .ToFixedList();
