@@ -14,7 +14,6 @@ using Empiria.Json;
 using Empiria.Ontology;
 using Empiria.Parties;
 using Empiria.Products;
-using Empiria.Reflection;
 using Empiria.StateEnums;
 using Empiria.Storage;
 
@@ -262,10 +261,7 @@ namespace Empiria.Documents {
 
 
     internal BaseObject GetBaseEntity() {
-      ObjectTypeInfo typeInfo = ObjectTypeInfo.Parse(BaseEntityTypeId);
-
-      return (BaseObject) ObjectFactory.InvokeParseMethod(typeInfo.UnderlyingSystemType,
-                                                          BaseEntityId);
+      return Parse(BaseEntityTypeId, BaseEntityId);
     }
 
 

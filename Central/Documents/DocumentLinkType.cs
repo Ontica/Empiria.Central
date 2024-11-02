@@ -8,10 +8,7 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-using System;
-
 using Empiria.Ontology;
-using Empiria.Reflection;
 
 namespace Empiria.Documents {
 
@@ -37,7 +34,7 @@ namespace Empiria.Documents {
 
     public ObjectTypeInfo LinkedObjectType {
       get {
-        int id  = ExtendedDataField.Get<int>("linkedObjectTypeId");
+        int id = ExtendedDataField.Get<int>("linkedObjectTypeId");
 
         return ObjectTypeInfo.Parse(id);
       }
@@ -48,23 +45,14 @@ namespace Empiria.Documents {
     #region Methods
 
     internal BaseObject ParseLinkedObject(int linkedObjectId) {
-
-      Type type = LinkedObjectType.UnderlyingSystemType;
-
-      object instance = ObjectFactory.InvokeParseMethod(type, linkedObjectId);
-
-      return (BaseObject) instance;
+      return LinkedObjectType.ParseObject(linkedObjectId);
     }
 
 
     internal BaseObject ParseLinkedObject(string linkedObjectUID) {
       Assertion.Require(linkedObjectUID, nameof(linkedObjectUID));
 
-      Type type = LinkedObjectType.UnderlyingSystemType;
-
-      object instance = ObjectFactory.InvokeParseMethod(type, linkedObjectUID);
-
-      return (BaseObject) instance;
+      return LinkedObjectType.ParseObject(linkedObjectUID);
     }
 
     #endregion Methods

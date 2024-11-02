@@ -12,9 +12,7 @@ using System;
 using System.Linq;
 
 using Empiria.Json;
-using Empiria.Ontology;
 using Empiria.Parties;
-using Empiria.Reflection;
 using Empiria.StateEnums;
 
 namespace Empiria.Documents {
@@ -197,10 +195,7 @@ namespace Empiria.Documents {
 
 
     internal BaseObject GetLinkedEntity() {
-      ObjectTypeInfo typeInfo = ObjectTypeInfo.Parse(LinkedEntityTypeId);
-
-      return (BaseObject) ObjectFactory.InvokeParseMethod(typeInfo.UnderlyingSystemType,
-                                                          LinkedEntityId);
+      return Parse(LinkedEntityTypeId, LinkedEntityId);
     }
 
 
