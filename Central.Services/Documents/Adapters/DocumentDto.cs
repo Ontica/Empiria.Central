@@ -60,7 +60,7 @@ namespace Empiria.Documents.Services.Adapters {
       get; internal set;
     }
 
-    public FileDto FileDto {
+    public FileDto File {
       get; internal set;
     }
 

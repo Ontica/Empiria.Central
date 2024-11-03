@@ -34,7 +34,7 @@ namespace Empiria.Documents.Services.Adapters {
         PostingTime = document.PostingTime,
         LastUpdateTime = document.LastUpdateTime,
         Status = document.Status.MapToDto(),
-        FileDto = document.FileDto(),
+        File = document.FileDto(),
         ApplicationContentType = document.DocumentProduct.ApplicationContentType
       };
     }

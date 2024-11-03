@@ -42,7 +42,7 @@ namespace Empiria.Financial {
       get;
     }
 
-    INamedEntity Supplier {
+    INamedEntity PayTo {
       get;
     }
 
@@ -76,6 +76,10 @@ namespace Empiria.Financial {
 
 
     decimal UnitPrice {
+      get;
+    }
+
+    INamedEntity Currency {
       get;
     }
 
