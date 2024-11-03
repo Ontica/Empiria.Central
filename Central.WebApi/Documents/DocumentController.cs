@@ -26,11 +26,9 @@ namespace Empiria.Documents.WebApi {
     [Route("v8/documents/{documentUID:guid}")]
     public SingleObjectModel GetDocument([FromUri] string documentUID) {
 
-      using (var services = DocumentServices.ServiceInteractor()) {
-        DocumentDto document = services.GetDocument(documentUID);
+      DocumentDto document = DocumentServices.GetDocument(documentUID);
 
-        return new SingleObjectModel(base.Request, document);
-      }
+      return new SingleObjectModel(base.Request, document);
     }
 
 
@@ -40,13 +38,11 @@ namespace Empiria.Documents.WebApi {
     public CollectionModel GetEntityDocument([FromUri] string entityType,
                                              [FromUri] string entityUID) {
 
-      using (var services = DocumentServices.ServiceInteractor()) {
-        BaseObject entity = BaseObject.Parse(entityType, entityUID);
+      BaseObject entity = BaseObject.Parse(entityType, entityUID);
 
-        FixedList<DocumentDto> documents = services.GetEntityDocuments(entity);
+      FixedList<DocumentDto> documents = DocumentServices.GetEntityDocuments(entity);
 
-        return new CollectionModel(base.Request, documents);
-      }
+      return new CollectionModel(base.Request, documents);
     }
 
 
@@ -56,29 +52,25 @@ namespace Empiria.Documents.WebApi {
 
       base.RequireBody(query);
 
-      using (var services = DocumentServices.ServiceInteractor()) {
-        FixedList<DocumentDescriptorDto> documents = services.SearchDocuments(query);
+      FixedList<DocumentDescriptorDto> documents = DocumentServices.SearchDocuments(query);
 
-        return new CollectionModel(base.Request, documents);
-      }
+      return new CollectionModel(base.Request, documents);
     }
 
 
-    [HttpPut, HttpPatch]
-    [Route("v8/documents/{documentUID:guid}")]
-    public SingleObjectModel UpdateDocument([FromUri] string documentUID,
-                                            [FromBody] DocumentFields fields) {
+    //[HttpPut, HttpPatch]
+    //[Route("v8/documents/{documentUID:guid}")]
+    //public SingleObjectModel UpdateDocument([FromUri] string documentUID,
+    //                                        [FromBody] DocumentFields fields) {
 
-      base.RequireBody(fields);
+    //  base.RequireBody(fields);
 
-      Assertion.Require(documentUID == fields.UID, "fields.UID mismatch");
+    //  Assertion.Require(documentUID == fields.UID, "fields.UID mismatch");
 
-      using (var services = DocumentServices.ServiceInteractor()) {
-        DocumentDto document = services.UpdateDocument(fields);
+    //  DocumentDto document = DocumentServices.UpdateDocument(fields);
 
-        return new SingleObjectModel(base.Request, document);
-      }
-    }
+    //  return new SingleObjectModel(base.Request, document);
+    //}
 
     #endregion Web Apis
 

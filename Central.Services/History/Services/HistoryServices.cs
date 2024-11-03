@@ -1,37 +1,23 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
-*  Module   : Documents                                  Component : Services Layer                          *
-*  Assembly : Empiria.Central.Services.dll               Pattern   : Services interactor class               *
-*  Type     : DocumentServices                           License   : Please read LICENSE.txt file            *
+*  Module   : History                                   Component : Services Layer                           *
+*  Assembly : Empiria.Central.Services.dll              Pattern   : Services provider                        *
+*  Type     : HistoryServices                           License   : Please read LICENSE.txt file             *
 *                                                                                                            *
-*  Summary  : Services for Document instances.                                                               *
+*  Summary  : Services for History instances.                                                                *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-using System;
 using Empiria.History.Services.Adapters;
-using Empiria.Services;
 
 namespace Empiria.History.Services {
 
-  /// <summary>Services for Document instances.</summary>
-  public class HistoryServices : Service {
-
-    #region Constructors and parsers
-
-    protected HistoryServices() {
-      // no-op
-    }
-
-    static public HistoryServices ServiceInteractor() {
-      return Service.CreateInstance<HistoryServices>();
-    }
-
-    #endregion Constructors and parsers
+  /// <summary>Services for History instances.</summary>
+  static public class HistoryServices {
 
     #region Services
 
-    public FixedList<HistoryDto> GetEntityHistory(BaseObject entity) {
+    static public FixedList<HistoryDto> GetEntityHistory(BaseObject entity) {
       Assertion.Require(entity, nameof(entity));
 
       return new FixedList<HistoryDto>();
@@ -41,4 +27,4 @@ namespace Empiria.History.Services {
 
   }  // class HistoryServices
 
-}  // namespace Empiria.Documents.Services
+}  // namespace Empiria.History.Services

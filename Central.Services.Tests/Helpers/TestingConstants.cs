@@ -35,6 +35,11 @@ namespace Empiria.Tests {
 
     static internal InputFile INPUT_FILE => new InputFile(new FileInfo(INPUT_FILE_NAME));
 
+    public static string DOCUMENT_PRODUCT_UID {
+      get;
+      internal set;
+    }
+
     static internal readonly string INPUT_FILE_NAME = @"D:\\Desktop\\AnalysisPatterns.Fowler.pdf";
 
     static internal readonly string PRODUCT_CATEGORY_UID = "e5a8e60e-2a07-4817-b2f4-9b42083d5986";

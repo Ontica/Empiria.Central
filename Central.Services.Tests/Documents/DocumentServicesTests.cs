@@ -19,51 +19,35 @@ namespace Empiria.Tests.Documents.Services {
   /// <summary>Test cases for document services.</summary>
   public class DocumentServicesTests {
 
-    #region Initialization
-
-    private readonly DocumentServices _services;
-
-    public DocumentServicesTests() {
-      TestsCommonMethods.Authenticate();
-
-      _services = DocumentServices.ServiceInteractor();
-    }
-
-    ~DocumentServicesTests() {
-      _services.Dispose();
-    }
-
-    #endregion Initialization
-
     #region Facts
 
     [Fact]
     public void Should_Create_A_Document() {
 
       var fields = new DocumentFields {
-        DocumentCategoryUID = TestingConstants.DOCUMENT_CATEGORY_UID,
+        DocumentProductUID = TestingConstants.DOCUMENT_PRODUCT_UID,
         Name = "Servicios de desarrollo de software"
       };
 
-      DocumentDto sut = _services.CreateDocument(TestingConstants.INPUT_FILE,
-                                                 TestingConstants.DOCUMENT_ENTITY,
-                                                 fields);
+      DocumentDto sut = DocumentServices.StoreDocument(TestingConstants.INPUT_FILE,
+                                                       TestingConstants.DOCUMENT_ENTITY,
+                                                       fields);
 
       Assert.NotNull(sut);
     }
 
 
-    [Fact]
-    public void Should_Delete_A_Document() {
-      var sut = _services.DeleteDocument(TestingConstants.DOCUMENT_UID);
+    //[Fact]
+    //public void Should_Remove_A_Document() {
+    //  var sut = DocumentServices.RemoveDocument(TestingConstants.DOCUMENT_UID);
 
-      Assert.NotNull(sut);
-    }
+    //  Assert.NotNull(sut);
+    //}
 
 
     [Fact]
     public void Should_Get_A_Document() {
-      var sut = _services.GetDocument(TestingConstants.DOCUMENT_UID);
+      var sut = DocumentServices.GetDocument(TestingConstants.DOCUMENT_UID);
 
       Assert.NotNull(sut);
     }
@@ -71,25 +55,25 @@ namespace Empiria.Tests.Documents.Services {
 
     [Fact]
     public void Should_Get_Entity_Documents() {
-      var sut = _services.GetEntityDocuments(TestingConstants.DOCUMENT_ENTITY);
+      var sut = DocumentServices.GetEntityDocuments(TestingConstants.DOCUMENT_ENTITY);
 
       Assert.NotNull(sut);
       Assert.NotEmpty(sut);
     }
 
 
-    [Fact]
-    public void Should_Update_A_Document() {
-      var fields = new DocumentFields {
-        UID = TestingConstants.DOCUMENT_UID,
-        Name = "Carta compromiso de entrega del proveedor",
-        Description = "Entregar antes del 23 de octubre de 2024"
-      };
+    //[Fact]
+    //public void Should_Update_A_Document() {
+    //  var fields = new DocumentFields {
+    //    UID = TestingConstants.DOCUMENT_UID,
+    //    Name = "Carta compromiso de entrega del proveedor",
+    //    Description = "Entregar antes del 23 de octubre de 2024"
+    //  };
 
-      var sut = _services.UpdateDocument(fields);
+    //  var sut = DocumentServices.UpdateDocument(fields);
 
-      Assert.NotNull(sut);
-    }
+    //  Assert.NotNull(sut);
+    //}
 
     #endregion Facts
 
