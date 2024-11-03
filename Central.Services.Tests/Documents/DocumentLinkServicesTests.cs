@@ -19,22 +19,6 @@ namespace Empiria.Tests.Documents.Services {
   /// <summary>Test cases for document link services.</summary>
   public class DocumentLinkServicesTests {
 
-    #region Initialization
-
-    private readonly DocumentLinkServices _services;
-
-    public DocumentLinkServicesTests() {
-      TestsCommonMethods.Authenticate();
-
-      _services = DocumentLinkServices.ServiceInteractor();
-    }
-
-    ~DocumentLinkServicesTests() {
-      _services.Dispose();
-    }
-
-    #endregion Initialization
-
     #region Facts
 
 
@@ -45,10 +29,10 @@ namespace Empiria.Tests.Documents.Services {
         LinkedEntityRole = "Responsable"
       };
 
-      DocumentLinkDto sut = _services.CreateLink(TestingConstants.DOCUMENT_LINK_TYPE,
-                                                 TestingConstants.DOCUMENT,
-                                                 TestingConstants.DOCUMENT_LINKED_ENTITY,
-                                                 fields);
+      DocumentLinkDto sut = DocumentLinkServices.CreateLink(TestingConstants.DOCUMENT_LINK_TYPE,
+                                                            TestingConstants.DOCUMENT,
+                                                            TestingConstants.DOCUMENT_LINKED_ENTITY,
+                                                            fields);
       Assert.NotNull(sut);
     }
 
@@ -56,15 +40,15 @@ namespace Empiria.Tests.Documents.Services {
     [Fact]
     public void Should_Create_A_Document_Link_Simple() {
 
-      DocumentLinkDto sut = _services.CreateLink(TestingConstants.DOCUMENT,
-                                                 TestingConstants.DOCUMENT_LINKED_ENTITY);
+      DocumentLinkDto sut = DocumentLinkServices.CreateLink(TestingConstants.DOCUMENT,
+                                                            TestingConstants.DOCUMENT_LINKED_ENTITY);
 
       Assert.NotNull(sut);
     }
 
     [Fact]
     public void Should_Delete_A_DocumentLink() {
-      var sut = _services.DeleteLink(TestingConstants.DOCUMENT_LINK_UID);
+      var sut = DocumentLinkServices.RemoveLink(TestingConstants.DOCUMENT_LINK_UID);
 
       Assert.NotNull(sut);
     }
@@ -72,7 +56,7 @@ namespace Empiria.Tests.Documents.Services {
 
     [Fact]
     public void Should_Get_A_DocumentLink() {
-      var sut = _services.GetLink(TestingConstants.DOCUMENT_LINK_UID);
+      var sut = DocumentLinkServices.GetLink(TestingConstants.DOCUMENT_LINK_UID);
 
       Assert.NotNull(sut);
     }
@@ -80,7 +64,7 @@ namespace Empiria.Tests.Documents.Services {
 
     [Fact]
     public void Should_Get_A_Document_Links() {
-      var sut = _services.GetDocumentLinks(TestingConstants.DOCUMENT);
+      var sut = DocumentLinkServices.GetDocumentLinks(TestingConstants.DOCUMENT);
 
       Assert.NotNull(sut);
       Assert.NotEmpty(sut);
@@ -94,7 +78,7 @@ namespace Empiria.Tests.Documents.Services {
         LinkedEntityRole = "Firmado por"
       };
 
-      var sut = _services.UpdateLink(fields);
+      var sut = DocumentLinkServices.UpdateLink(fields);
 
       Assert.NotNull(sut);
     }

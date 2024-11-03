@@ -39,8 +39,8 @@ namespace Empiria.Documents {
       Assertion.Require(!linkedEntity.IsEmptyInstance,
                         "linkedObject can not be the empty instance.");
 
-      Assertion.Require(linkedEntity.GetEmpiriaType().Equals(linkType.LinkedObjectType),
-                       "linkedObject mismatch.");
+      //Assertion.Require(linkedEntity.GetEmpiriaType().Equals(linkType.LinkedObjectType),
+      //                 "linkedObject mismatch.");
 
       this.DocumentLinkType = linkType;
       this.Document = document;

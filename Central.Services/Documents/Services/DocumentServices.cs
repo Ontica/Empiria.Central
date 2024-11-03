@@ -8,6 +8,9 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using System.Collections.Generic;
+using System.Linq;
+
 using Empiria.Storage;
 
 using Empiria.Documents.Services.Adapters;
@@ -31,9 +34,26 @@ namespace Empiria.Documents.Services {
     static public FixedList<DocumentDto> GetEntityDocuments(BaseObject entity) {
       Assertion.Require(entity, nameof(entity));
 
-      FixedList<Document> documents = Document.GetListFor(entity);
+      FixedList<Document> baseDocuments = Document.GetListFor(entity);
+      FixedList<Document> relatedDocuments = DocumentLink.GetDocumentsFor(entity);
 
-      return DocumentMapper.Map(documents);
+      var allDocuments = new List<Document>(baseDocuments);
+
+      allDocuments.AddRange(relatedDocuments);
+
+      foreach (var relatedDocument in relatedDocuments) {
+        BaseObject relatedEntity = relatedDocument.GetBaseEntity();
+
+        var relatedEntityDocuments = Document.GetListFor(relatedEntity);
+
+        allDocuments.AddRange(relatedEntityDocuments);
+
+        FixedList<Document> moreDocuments = DocumentLink.GetDocumentsFor(relatedEntity);
+
+        allDocuments.AddRange(moreDocuments);
+      }
+
+      return DocumentMapper.Map(allDocuments.Distinct().ToFixedList());
     }
 
 
@@ -42,6 +62,11 @@ namespace Empiria.Documents.Services {
       Assertion.Require(document, nameof(document));
 
       Assertion.Require(document.BaseEntityId == entity.Id, "Document entity mismatch.");
+
+      foreach (var link in DocumentLink.GetListFor(document)) {
+        link.Delete();
+        link.Save();
+      }
 
       document.Delete();
 
