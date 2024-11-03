@@ -32,11 +32,11 @@ namespace Empiria.Documents.Services.Adapters {
       get; internal set;
     }
 
-    public string DocumentProductName {
+    public NamedEntityDto DocumentProduct {
       get; internal set;
     }
 
-    public string DocumentCategoryName {
+    public NamedEntityDto DocumentCategory {
       get; internal set;
     }
 
@@ -61,6 +61,10 @@ namespace Empiria.Documents.Services.Adapters {
     }
 
     public FileDto FileDto {
+      get; internal set;
+    }
+
+    public string ApplicationContentType {
       get; internal set;
     }
 

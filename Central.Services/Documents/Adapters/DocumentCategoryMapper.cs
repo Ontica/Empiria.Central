@@ -8,9 +8,6 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-using Empiria.Products;
-using Empiria.Storage;
-
 namespace Empiria.Documents.Services.Adapters {
 
   /// <summary>Provides mapping services for DocumentCategory instances.</summary>
@@ -26,21 +23,21 @@ namespace Empiria.Documents.Services.Adapters {
       return new DocumentCategoryDto {
         UID = category.UID,
         Name = category.Name,
-        Products = Map(category.Products)
+        Products = Map(category.GetProducts())
       };
     }
 
-    static private FixedList<DocumentProductDto> Map(FixedList<Product> products) {
+    static private FixedList<DocumentProductDto> Map(FixedList<DocumentProduct> products) {
       return products.Select(x => Map(x))
                      .ToFixedList();
     }
 
-    static private DocumentProductDto Map(Product product) {
+    static private DocumentProductDto Map(DocumentProduct product) {
       return new DocumentProductDto {
         UID = product.UID,
         Name = product.Name,
-        FileType = product.ExtensionData.Get<FileType>("fileType"),
-        AppplicationContentType = product.ExtensionData.Get("applicationContentType", string.Empty)
+        FileType = product.FileType,
+        AppplicationContentType = product.ApplicationContentType
       };
     }
   }  // class DocumentCategoryMapper

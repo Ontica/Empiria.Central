@@ -18,11 +18,6 @@ namespace Empiria.Documents {
   /// <summary>Input fields DTO used to create and update Document instances.</summary>
   public class DocumentFields : NamedEntityFields {
 
-    public string DocumentCategoryUID {
-      get; set;
-    } = string.Empty;
-
-
     public string DocumentProductUID {
       get; set;
     } = string.Empty;
@@ -71,17 +66,14 @@ namespace Empiria.Documents {
   }  // class DocumentFields
 
 
-  /// <summary>Extension methods for ProductFields.</summary>
-  public static class ProductFieldsExtensions {
+  /// <summary>Extension methods for DocumentFields.</summary>
+  public static class DocumentFieldsExtensions {
 
     static internal void EnsureValid(this DocumentFields fields) {
       fields.Name = EmpiriaString.Clean(fields.Name);
       fields.DocumentNo = EmpiriaString.Clean(fields.DocumentNo);
       fields.Description = EmpiriaString.Clean(fields.Description);
 
-      if (fields.DocumentCategoryUID.Length != 0) {
-        _ = DocumentCategory.Parse(fields.DocumentCategoryUID);
-      }
       if (fields.DocumentProductUID.Length != 0) {
         _ = Product.Parse(fields.DocumentProductUID);
       }

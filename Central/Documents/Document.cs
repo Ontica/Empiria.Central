@@ -29,18 +29,17 @@ namespace Empiria.Documents {
       // Required by Empiria Framework for all partitioned types.
     }
 
-    internal protected Document(DocumentCategory documentCategory,
+    internal protected Document(DocumentProduct documentProduct,
                                 BaseObject baseEntity,
                                 FileData fileData,
-                                string name) : base(documentCategory.ProductType) {
+                                string name) : base(DocumentType.Empty) {
 
-      Assertion.Require(documentCategory, nameof(documentCategory));
       Assertion.Require(baseEntity, nameof(baseEntity));
       Assertion.Require(fileData, nameof(fileData));
       name = EmpiriaString.Clean(name);
       Assertion.Require(name, nameof(name));
 
-      DocumentCategory = documentCategory;
+      DocumentCategory = documentProduct.ProductCategory;
       Name = name;
       BaseEntityTypeId = baseEntity.GetEmpiriaType().Id;
       BaseEntityId = baseEntity.Id;
@@ -83,7 +82,7 @@ namespace Empiria.Documents {
 
 
     [DataField("DOCUMENT_PRODUCT_ID")]
-    public Product DocumentProduct {
+    public DocumentProduct DocumentProduct {
       get;
       private set;
     }
@@ -288,7 +287,6 @@ namespace Empiria.Documents {
 
       fields.EnsureValid();
 
-      DocumentCategory = PatchField(fields.DocumentCategoryUID, DocumentCategory);
       DocumentProduct = PatchField(fields.DocumentProductUID, DocumentProduct);
       DocumentNo = PatchCleanField(fields.DocumentNo, DocumentNo);
       Name = PatchCleanField(fields.Name, Name);

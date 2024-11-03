@@ -11,8 +11,6 @@
 using Empiria.Storage;
 
 using Empiria.Documents.Services.Adapters;
-using Empiria.Products;
-using System;
 
 namespace Empiria.Documents.Services {
 
@@ -73,10 +71,9 @@ namespace Empiria.Documents.Services {
       Assertion.Require(fields.DocumentProductUID, nameof(fields.DocumentProductUID));
       Assertion.Require(fields.Name, nameof(fields.Name));
 
-      var product = Product.Parse(fields.DocumentProductUID);
-      var category = (DocumentCategory) product.ProductCategory;
+      var product = DocumentProduct.Parse(fields.DocumentProductUID);
 
-      FileData fileData = category.FileLocation.Store(inputFile);
+      FileData fileData = product.ProductCategory.FileLocation.Store(inputFile);
 
       var document = new Document(product, baseEntity, fileData, fields.Name);
 

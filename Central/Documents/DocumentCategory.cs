@@ -81,10 +81,8 @@ namespace Empiria.Documents {
     }
 
 
-    public FixedList<Product> Products {
-      get {
-        return ExtendedDataField.GetFixedList<Product>("products", false);
-      }
+    public FixedList<DocumentProduct> GetProducts() {
+      return ProductDataService.GetProductsInCategory<DocumentProduct>(this);
     }
 
     #endregion Properties

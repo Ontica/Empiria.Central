@@ -27,14 +27,15 @@ namespace Empiria.Documents.Services.Adapters {
         Name = document.Name,
         DocumentNo = document.DocumentNo,
         DocumentDate = document.DocumentDate,
-        DocumentProductName = document.DocumentProduct.Name,
-        DocumentCategoryName = document.DocumentCategory.Name,
+        DocumentProduct = document.DocumentProduct.MapToNamedEntity(),
+        DocumentCategory = document.DocumentCategory.MapToNamedEntity(),
         Description = document.Description,
         Tags = document.Tags,
         PostingTime = document.PostingTime,
         LastUpdateTime = document.LastUpdateTime,
         Status = document.Status.MapToDto(),
-        FileDto = document.FileDto()
+        FileDto = document.FileDto(),
+        ApplicationContentType = document.DocumentProduct.ApplicationContentType
       };
     }
 

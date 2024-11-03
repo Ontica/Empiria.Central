@@ -30,7 +30,7 @@ namespace Empiria.Tests.Documents {
 
       var documentFile = FileData.Parse(TestingConstants.INPUT_FILE);
 
-      var sut = new Document(documentCategory,
+      var sut = new Document(DocumentProduct.Empty,
                              TestingConstants.DOCUMENT_ENTITY,
                              documentFile,
                              name);
