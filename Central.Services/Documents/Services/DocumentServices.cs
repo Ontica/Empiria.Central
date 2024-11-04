@@ -41,19 +41,16 @@ namespace Empiria.Documents.Services {
 
       allDocuments.AddRange(relatedDocuments);
 
-      foreach (var relatedDocument in relatedDocuments) {
-        BaseObject relatedEntity = relatedDocument.GetBaseEntity();
-
-        var relatedEntityDocuments = Document.GetListFor(relatedEntity);
-
-        allDocuments.AddRange(relatedEntityDocuments);
-
-        FixedList<Document> moreDocuments = DocumentLink.GetDocumentsFor(relatedEntity);
-
-        allDocuments.AddRange(moreDocuments);
-      }
-
       return DocumentMapper.Map(allDocuments.Distinct().ToFixedList());
+    }
+
+
+    static public FixedList<DocumentDto> GetEntityBaseDocuments(BaseObject entity) {
+      Assertion.Require(entity, nameof(entity));
+
+      FixedList<Document> baseDocuments = Document.GetListFor(entity);
+
+      return DocumentMapper.Map(baseDocuments);
     }
 
 
@@ -127,6 +124,27 @@ namespace Empiria.Documents.Services {
     }
 
     #endregion Services
+
+    #region Helpers
+
+    static private FixedList<Document> GetRelatedDocuments(FixedList<Document> documents) {
+      var relatedDocuments = new List<Document>();
+
+      foreach (var relatedDocument in documents) {
+        BaseObject relatedEntity = relatedDocument.GetBaseEntity();
+
+        var relatedEntityDocuments = Document.GetListFor(relatedEntity);
+
+        relatedDocuments.AddRange(relatedEntityDocuments);
+
+        FixedList<Document> moreDocuments = DocumentLink.GetDocumentsFor(relatedEntity);
+
+        relatedDocuments.AddRange(moreDocuments);
+      }
+      return relatedDocuments.ToFixedList();
+    }
+
+    #endregion Helpers
 
   }  // class DocumentServices
 
