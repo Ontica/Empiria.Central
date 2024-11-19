@@ -114,17 +114,14 @@ namespace Empiria.Locations {
       if (this.IsEmptyInstance) {
         return new FixedList<Location>();
       }
-      if (this.IsLeaf) {
-        return new FixedList<Location>();
+
+      var result = new List<Location>(2000);
+
+      foreach (var child in GetChildren()) {
+        result.AddRange(child.GetChildren());
       }
 
-      var children = new List<Location>(GetChildren());
-
-      foreach (var child in children) {
-        children.AddRange(child.GetChildren());
-      }
-
-      return children.ToFixedList();
+      return result.ToFixedList();
     }
 
 
