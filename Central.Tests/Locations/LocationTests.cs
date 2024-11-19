@@ -35,8 +35,10 @@ namespace Empiria.Tests.Locations {
       foreach (var sut in list) {
         Assert.NotNull(sut.LocationType);
         Assert.NotNull(sut.Parent);
+        Assert.NotNull(sut.Children);
+        Assert.NotNull(sut.FullName);
+        Assert.True(sut.Level >= 1);
       }
-
     }
 
 

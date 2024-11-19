@@ -22,8 +22,7 @@ namespace Empiria.Locations {
     static public Location Parse(string uid) => ParseKey<Location>(uid);
 
     static public FixedList<Location> GetList() {
-      return BaseObject.GetList<Location>()
-                       .ToFixedList();
+      return GetList<Location>().ToFixedList();
     }
 
     static public Location Empty => ParseEmpty<Location>();
@@ -34,10 +33,20 @@ namespace Empiria.Locations {
 
     public string Code {
       get {
-        return base.Data.Code;
+        return Data.Code;
       }
       private set {
-        base.Data.Code = EmpiriaString.Clean(value);
+        Data.Code = EmpiriaString.Clean(value);
+      }
+    }
+
+
+    public string FullName {
+      get {
+        if (Parent.IsEmptyInstance) {
+          return Name;
+        }
+        return $"{Parent.FullName} {Name}";
       }
     }
 
@@ -49,22 +58,39 @@ namespace Empiria.Locations {
     }
 
 
+    public int Level {
+      get {
+        if (Parent.IsEmptyInstance) {
+          return 1;
+        }
+        return Parent.Level + 1;
+      }
+    }
+
+
     public LocationType LocationType {
       get {
-        return LocationType.Parse(base.Data.ObjectClassificationId);
+        return LocationType.Parse(Data.ObjectClassificationId);
       }
       private set {
-        base.Data.ObjectClassificationId = value.Id;
+        Data.ObjectClassificationId = value.Id;
       }
     }
 
 
     public Location Parent {
       get {
-        return Location.Parse(base.Data.ParentObjectId);
+        return Parse(Data.ParentObjectId);
       }
       private set {
-        base.Data.ParentObjectId = value.Id;
+        Data.ParentObjectId = value.Id;
+      }
+    }
+
+
+    public FixedList<Location> Children {
+      get {
+        return GetFullList<Location>($"PARENT_OBJECT_ID = {this.Id}", "OBJECT_NAME");
       }
     }
 
