@@ -33,7 +33,19 @@ namespace Empiria.Tests.Locations {
       var sut = LocationType.Empty;
 
       Assert.NotNull(sut);
+      Assert.Empty(sut.GetLocations());
     }
+
+
+    [Fact]
+    public void Should_Get_All_Location_Types_Locations() {
+      var locationTypes = LocationType.GetList();
+
+      foreach (var sut in locationTypes) {
+        Assert.NotEmpty(sut.GetLocations());
+      }
+    }
+
 
     #endregion Facts
 
