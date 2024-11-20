@@ -118,7 +118,8 @@ namespace Empiria.Locations {
       var result = new List<Location>(2000);
 
       foreach (var child in GetChildren()) {
-        result.AddRange(child.GetChildren());
+        result.Add(child);
+        result.AddRange(child.GetAllChildren());
       }
 
       return result.ToFixedList();
@@ -129,7 +130,7 @@ namespace Empiria.Locations {
       if (this.IsEmptyInstance) {
         return new FixedList<Location>();
       }
-      return GetFullList<Location>($"PARENT_OBJECT_ID = {this.Id}", "OBJECT_NAME");
+      return GetFullList<Location>($"PARENT_OBJECT_ID = {this.Id} AND OBJECT_STATUS <> 'X'", "OBJECT_NAME");
     }
 
 
