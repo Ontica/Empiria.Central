@@ -35,7 +35,7 @@ namespace Empiria.Tests.Locations {
       foreach (var sut in list) {
         Assert.NotNull(sut.LocationType);
         Assert.NotNull(sut.Parent);
-        Assert.NotNull(sut.Children);
+        Assert.NotNull(sut.GetChildren());
         Assert.NotNull(sut.FullName);
         Assert.True(sut.Level >= 1);
       }
@@ -47,6 +47,9 @@ namespace Empiria.Tests.Locations {
       var sut = Location.Empty;
 
       Assert.NotNull(sut);
+      Assert.Empty(sut.GetChildren());
+      Assert.Equal(sut, sut.Parent);
+      Assert.Equal(0, sut.Level);
     }
 
     #endregion Facts

@@ -9,6 +9,8 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using System.Collections.Generic;
+
 namespace Empiria.Locations {
 
   /// <summary>Represents a physical location like a building, an office or work place, a store
@@ -24,6 +26,7 @@ namespace Empiria.Locations {
     static public FixedList<Location> GetList() {
       return GetList<Location>().ToFixedList();
     }
+
 
     static public Location Empty => ParseEmpty<Location>();
 
@@ -51,6 +54,19 @@ namespace Empiria.Locations {
     }
 
 
+    public bool IsLeaf {
+      get {
+        return GetChildren().Count == 0;
+      }
+    }
+
+
+    public bool IsRoot {
+      get {
+        return Parent.IsEmptyInstance;
+      }
+    }
+
     public override string Keywords {
       get {
         return EmpiriaString.BuildKeywords(base.Keywords, Code);
@@ -60,7 +76,10 @@ namespace Empiria.Locations {
 
     public int Level {
       get {
-        if (Parent.IsEmptyInstance) {
+        if (IsEmptyInstance) {
+          return 0;
+        }
+        if (IsRoot) {
           return 1;
         }
         return Parent.Level + 1;
@@ -87,14 +106,58 @@ namespace Empiria.Locations {
       }
     }
 
+    #endregion Properties
 
-    public FixedList<Location> Children {
-      get {
-        return GetFullList<Location>($"PARENT_OBJECT_ID = {this.Id}", "OBJECT_NAME");
+    #region Methods
+
+    public FixedList<Location> GetAllChildren() {
+      if (this.IsEmptyInstance) {
+        return new FixedList<Location>();
       }
+      if (this.IsLeaf) {
+        return new FixedList<Location>();
+      }
+
+      var children = new List<Location>(GetChildren());
+
+      foreach (var child in children) {
+        children.AddRange(child.GetChildren());
+      }
+
+      return children.ToFixedList();
     }
 
-    #endregion Properties
+
+    public FixedList<Location> GetChildren() {
+      if (this.IsEmptyInstance) {
+        return new FixedList<Location>();
+      }
+      return GetFullList<Location>($"PARENT_OBJECT_ID = {this.Id}", "OBJECT_NAME");
+    }
+
+
+    public FixedList<Location> GetLeafChildren() {
+      if (this.IsEmptyInstance) {
+        return new FixedList<Location>();
+      }
+      return GetAllChildren().FindAll(x => x.IsLeaf);
+    }
+
+
+    public Location SeekTree(LocationType locationType) {
+      if (this.IsEmptyInstance) {
+        return Empty;
+      }
+      if (this.LocationType.Equals(locationType)) {
+        return this;
+      }
+      if (this.IsRoot) {
+        return Empty;
+      }
+      return Parent.SeekTree(locationType);
+    }
+
+    #endregion Methods
 
   } // class Location
 
