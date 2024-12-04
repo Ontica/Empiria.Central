@@ -9,6 +9,7 @@
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
 using System;
+using System.IO;
 
 using Empiria.Json;
 using Empiria.Ontology;
@@ -281,6 +282,10 @@ namespace Empiria.Documents {
     }
 
 
+    public string ReadAllText() {
+      return File.ReadAllText(this.FullLocalName);
+    }
+
     internal void Update(DocumentFields fields) {
       Assertion.Require(fields, nameof(fields));
 
@@ -298,6 +303,7 @@ namespace Empiria.Documents {
       TargetParty = PatchField(fields.TargetPartyUID, TargetParty);
       SignedBy = PatchField(fields.SignedByUID, SignedBy);
     }
+
 
     #endregion Methods
 
