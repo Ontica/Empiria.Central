@@ -11,6 +11,7 @@
 using Empiria.Services;
 
 using Empiria.Products.Services.Adapters;
+using System;
 
 namespace Empiria.Products.Services {
 
@@ -86,6 +87,18 @@ namespace Empiria.Products.Services {
     }
 
 
+    public FixedList<ProductDescriptorDto> SearchProducts(string keywords) {
+      if (String.IsNullOrWhiteSpace(keywords)) {
+        return new FixedList<ProductDescriptorDto>();
+      }
+      var query = new ProductsQuery {
+         Keywords = keywords
+      };
+
+      return SearchProducts(query);
+    }
+
+
     public FixedList<ProductDescriptorDto> SearchProducts(ProductsQuery query) {
       Assertion.Require(query, nameof(query));
 
@@ -97,6 +110,7 @@ namespace Empiria.Products.Services {
 
       return ProductMapper.MapToDescriptor(products);
     }
+
 
 
     public ProductDto SuspendProduct(string productUID) {

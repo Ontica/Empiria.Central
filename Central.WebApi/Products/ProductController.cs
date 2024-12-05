@@ -71,6 +71,18 @@ namespace Empiria.Products.WebApi {
     }
 
 
+    [HttpGet]
+    [Route("v8/products/search")]
+    public CollectionModel SearchProducts([FromUri] string keywords) {
+
+      using (var services = ProductServices.ServiceInteractor()) {
+        FixedList<ProductDescriptorDto> products = services.SearchProducts(keywords);
+
+        return new CollectionModel(base.Request, products);
+      }
+    }
+
+
     [HttpPost]
     [Route("v8/products/search")]
     public CollectionModel SearchProducts([FromBody] ProductsQuery query) {
