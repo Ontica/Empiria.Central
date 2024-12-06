@@ -18,7 +18,7 @@ namespace Empiria.Products {
     static internal FixedList<T> GetProductsInCategory<T>(ProductCategory category) where T : Product {
       Assertion.Require(category, nameof(category));
 
-      var sql = "SELECT * FROM PMS_PRODUCTS " +
+      var sql = "SELECT * FROM OMS_PRODUCTS " +
                $"WHERE PRODUCT_CATEGORY_ID = {category.Id} AND " +
                $"PRODUCT_STATUS <> 'X' " +
                $"ORDER BY PRODUCT_NAME, PRODUCT_INTERNAL_CODE";
@@ -33,7 +33,7 @@ namespace Empiria.Products {
       Assertion.Require(filter, nameof(filter));
       Assertion.Require(sort, nameof(sort));
 
-      var sql = "SELECT * FROM PMS_PRODUCTS " +
+      var sql = "SELECT * FROM OMS_PRODUCTS " +
                $"WHERE {filter} " +
                $"ORDER BY {sort}";
 
@@ -44,7 +44,7 @@ namespace Empiria.Products {
 
 
     static internal void WriteProduct(Product o) {
-      var op = DataOperation.Parse("write_PMS_PRODUCT", o.Id, o.UID,
+      var op = DataOperation.Parse("write_OMS_PRODUCT", o.Id, o.UID,
                   o.ProductType.Id, o.ProductCategory.Id, o.Name, o.Description,
                   o.InternalCode, string.Join(" ", o.Tags), o.Attributes.ToString(),
                   o.BillingData.ToString(), o.BudgetingData.ToString(),
