@@ -44,12 +44,16 @@ namespace Empiria.Parties {
     }
 
 
-    public string Code {
+    public new string Code {
       get {
-        return base.ExtendedData.Get("code", string.Empty);
+        if (base.Code.Length == 0) {
+          return base.ExtendedData.Get("code", string.Empty);
+        } else {
+          return base.Code;
+        }
       }
       private set {
-        base.ExtendedData.SetIfValue("code", value);
+        base.Code = value;
       }
     }
 
@@ -68,6 +72,12 @@ namespace Empiria.Parties {
         } else {
           return Name;
         }
+      }
+    }
+
+    public OrganizationalUnit Parent {
+      get {
+        return OrganizationalUnit.Parse(base.ParentId);
       }
     }
 

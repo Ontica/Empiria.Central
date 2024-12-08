@@ -61,14 +61,14 @@ namespace Empiria.Parties {
 
 
     static public FixedList<Party> GetPartiesInRole(string roleName) {
-      return GetList<Party>($"PARTY_TAGS LIKE '%{roleName}%'")
+      return GetList<Party>($"PARTY_ROLES LIKE '%{roleName}%'")
             .ToFixedList()
             .Sort((x, y) => x.Name.CompareTo(y.Name));
     }
 
 
     public static Party TryParseWithID(string partyID) {
-      return TryParse<Party>($"PARTY_TAGS LIKE '%{partyID}%'");
+      return TryParse<Party>($"PARTY_CODE = '{partyID}'");
     }
 
     static public Party Empty => ParseEmpty<Person>();
@@ -86,9 +86,35 @@ namespace Empiria.Parties {
     }
 
 
+    [DataField("PARTY_CODE")]
+    public string Code {
+      get; protected set;
+    }
+
+
     [DataField("PARTY_NAME")]
     public string Name {
       get; private set;
+    }
+
+
+    [DataField("PARTY_IDENTIFICATORS")]
+    private string _identificators = string.Empty;
+
+    public FixedList<string> Identificators {
+      get {
+        return _identificators.Split(' ').ToFixedList();
+      }
+    }
+
+
+    [DataField("PARTY_ROLES")]
+    private string _roles = string.Empty;
+
+    public FixedList<string> Roles {
+      get {
+        return _roles.Split(' ').ToFixedList();
+      }
     }
 
 
@@ -128,6 +154,12 @@ namespace Empiria.Parties {
 
     [DataField("PARTY_END_DATE")]
     internal DateTime EndDate {
+      get; private set;
+    }
+
+
+    [DataField("PARTY_PARENT_ID")]
+    protected int ParentId {
       get; private set;
     }
 
