@@ -57,7 +57,7 @@ namespace Empiria.Financial {
 
 
     [DataField("PYMT_ACCT_INSTITUTION_ID")]
-    public Organization Institution {
+    public FinancialInstitution Institution {
       get; private set;
     }
 
