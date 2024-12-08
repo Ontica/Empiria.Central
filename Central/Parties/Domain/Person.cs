@@ -114,6 +114,12 @@ namespace Empiria.Parties {
       }
     }
 
+    public OrganizationalUnit OrganizationalUnit {
+      get {
+        return OrganizationalUnit.Parse(base.ParentId);
+      }
+    }
+
     #endregion Properties
 
     #region Methods

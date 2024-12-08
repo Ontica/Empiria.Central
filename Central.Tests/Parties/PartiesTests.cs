@@ -92,6 +92,55 @@ namespace Empiria.Tests.Parties {
       Assert.True(((Person) sut).LastName.Length != 0);
     }
 
+
+    [Fact]
+    public void Should_Parse_All_Parties() {
+      var parties = BaseObject.GetFullList<Party>();
+
+      foreach (var sut in parties) {
+        Assert.NotNull(sut.Code);
+        Assert.NotNull(sut.Name);
+        Assert.NotNull(sut.Contact);
+      }
+    }
+
+
+    [Fact]
+    public void Should_Parse_All_Persons() {
+      var persons = BaseObject.GetFullList<Person>();
+
+      foreach (var sut in persons) {
+        Assert.NotNull(sut.FullName);
+        Assert.NotNull(sut.FirstName);
+        Assert.NotNull(sut.LastName);
+        Assert.NotNull(sut.LastName2);
+        Assert.NotNull(sut.TaxData);
+        Assert.NotNull(sut.OrganizationalUnit);
+      }
+    }
+
+
+    [Fact]
+    public void Should_Parse_All_Organizations() {
+      var organizations = BaseObject.GetFullList<Organization>();
+
+      foreach (var sut in organizations) {
+        Assert.NotEmpty(sut.Code);
+        Assert.NotNull(sut.TaxData);
+      }
+    }
+
+
+    [Fact]
+    public void Should_Parse_All_OrganizationalUnits() {
+      var organizationalUnits = BaseObject.GetFullList<OrganizationalUnit>();
+
+      foreach (var sut in organizationalUnits) {
+        Assert.NotEmpty(sut.Code);
+        Assert.NotNull(sut.Parent);
+      }
+    }
+
   }  // PartiesTests
 
 }  // namespace Empiria.Tests
