@@ -45,6 +45,12 @@ namespace Empiria.Products.Services.Adapters {
     }
 
 
+    static internal FixedList<ProductSearchDto> MapToSearchDescriptor(FixedList<Product> products) {
+      return products.Select(x => MapToSearchDescriptor(x))
+                     .ToFixedList();
+    }
+
+
     #region Helpers
 
     static private ProductDescriptorDto MapToDescriptor(Product product) {
@@ -60,6 +66,20 @@ namespace Empiria.Products.Services.Adapters {
         StartDate = product.StartDate,
         EndDate = product.EndDate,
         StatusName = product.Status.GetName()
+      };
+    }
+
+
+    static private ProductSearchDto MapToSearchDescriptor(Product product) {
+      return new ProductSearchDto {
+        UID = product.UID,
+        Name = product.Name,
+        Description = product.Description,
+        InternalCode = product.InternalCode,
+        BaseUnit = product.BaseUnit.MapToNamedEntity(),
+        ManagerName = product.Manager.Name,
+        ProductCategoryName = product.ProductCategory.Name,
+        ProductTypeName = product.ProductType.DisplayName
       };
     }
 

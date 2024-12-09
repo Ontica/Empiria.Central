@@ -11,7 +11,6 @@
 using Empiria.Services;
 
 using Empiria.Products.Services.Adapters;
-using System;
 
 namespace Empiria.Products.Services {
 
@@ -87,15 +86,22 @@ namespace Empiria.Products.Services {
     }
 
 
-    public FixedList<ProductDescriptorDto> SearchProducts(string keywords) {
-      if (String.IsNullOrWhiteSpace(keywords)) {
-        return new FixedList<ProductDescriptorDto>();
+    public FixedList<ProductSearchDto> SearchProducts(string keywords) {
+      if (string.IsNullOrWhiteSpace(keywords)) {
+        return new FixedList<ProductSearchDto>();
       }
       var query = new ProductsQuery {
          Keywords = keywords
       };
 
-      return SearchProducts(query);
+
+      string filter = query.MapToFilterString();
+
+      string sort = query.MapToSortString();
+
+      FixedList<Product> products = ProductDataService.SearchProducts(filter, sort);
+
+      return ProductMapper.MapToSearchDescriptor(products);
     }
 
 

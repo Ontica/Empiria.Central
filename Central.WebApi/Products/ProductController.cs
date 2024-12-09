@@ -76,7 +76,7 @@ namespace Empiria.Products.WebApi {
     public CollectionModel SearchProducts([FromUri] string keywords) {
 
       using (var services = ProductServices.ServiceInteractor()) {
-        FixedList<ProductDescriptorDto> products = services.SearchProducts(keywords);
+        FixedList<ProductSearchDto> products = services.SearchProducts(keywords);
 
         return new CollectionModel(base.Request, products);
       }

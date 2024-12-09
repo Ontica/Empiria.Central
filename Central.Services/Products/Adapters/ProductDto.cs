@@ -116,4 +116,43 @@ namespace Empiria.Products.Services.Adapters {
 
   }  // class ProductDescriptorDto
 
+
+
+  /// <summary>Output DTO for Product instances to be used in search lists.</summary>
+  public class ProductSearchDto : INamedEntity {
+
+    public string UID {
+      get; internal set;
+    }
+
+    public string Name {
+      get; internal set;
+    }
+
+    public string Description {
+      get; internal set;
+    }
+
+    public string InternalCode {
+      get; internal set;
+    }
+
+    public NamedEntityDto BaseUnit {
+      get; internal set;
+    }
+
+    public string ManagerName {
+      get; internal set;
+    }
+
+    public string ProductCategoryName {
+      get; internal set;
+    }
+
+    public string ProductTypeName {
+      get; internal set;
+    }
+
+  }  // class ProductSearchDto
+
 }  // namespace Empiria.Products.Services.Adapters
