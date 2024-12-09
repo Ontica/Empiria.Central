@@ -42,7 +42,7 @@ namespace Empiria.Tests.Products.Services {
 
       var fields = new ProductFields {
         ProductCategoryUID = TestingConstants.PRODUCT_CATEGORY_UID,
-        Name = "Servicios de desarrollo de software"
+        Name = "Servicios de auditoría administrativa"
       };
 
       ProductDto sut = _services.CreateProduct(fields);

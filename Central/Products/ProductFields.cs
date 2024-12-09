@@ -30,6 +30,16 @@ namespace Empiria.Products {
     } = string.Empty;
 
 
+    public string[] Identificators {
+      get; set;
+    } = new string[0];
+
+
+    public string[] Roles {
+      get; set;
+    } = new string[0];
+
+
     public string[] Tags {
       get; set;
     } = new string[0];

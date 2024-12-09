@@ -86,6 +86,26 @@ namespace Empiria.Products {
     }
 
 
+    [DataField("PRODUCT_IDENTIFICATORS")]
+    private string _identificators = string.Empty;
+
+    public FixedList<string> Identificators {
+      get {
+        return _identificators.Split(' ').ToFixedList();
+      }
+    }
+
+
+    [DataField("PRODUCT_ROLES")]
+    private string _roles = string.Empty;
+
+    public FixedList<string> Roles {
+      get {
+        return _roles.Split(' ').ToFixedList();
+      }
+    }
+
+
     [DataField("PRODUCT_TAGS")]
     private string _tags = string.Empty;
 
@@ -98,20 +118,6 @@ namespace Empiria.Products {
 
     [DataField("PRODUCT_ATTRIBUTES")]
     public JsonObject Attributes {
-      get;
-      private set;
-    }
-
-
-    [DataField("PRODUCT_BILLING_DATA")]
-    public JsonObject BillingData {
-      get;
-      private set;
-    }
-
-
-    [DataField("PRODUCT_BUDGETING_DATA")]
-    public JsonObject BudgetingData {
       get;
       private set;
     }
@@ -152,6 +158,26 @@ namespace Empiria.Products {
     }
 
 
+    [DataField("PRODUCT_HISTORIC_ID")]
+    internal int HistoricId {
+      get;
+      private set;
+    }
+
+
+    [DataField("PRODUCT_POSTED_BY_ID")]
+    internal Party PostedBy {
+      get;
+      private set;
+    }
+
+
+    [DataField("PRODUCT_POSTING_TIME")]
+    public DateTime PostingTime {
+      get;
+      private set;
+    }
+
     [DataField("PRODUCT_STATUS", Default = EntityStatus.Active)]
     public EntityStatus Status {
       get;
@@ -162,7 +188,7 @@ namespace Empiria.Products {
     protected internal virtual string Keywords {
       get {
         return EmpiriaString.BuildKeywords(InternalCode, Name,
-                                           ProductType.DisplayName, Description);
+                                           ProductType.DisplayName, Description, _identificators, _tags);
       }
     }
 
@@ -186,6 +212,8 @@ namespace Empiria.Products {
       if (this.IsNew) {
         StartDate = DEFAULT_START_DATE;
         EndDate = ExecutionServer.DateMaxValue;
+        PostedBy = Party.ParseWithContact(ExecutionServer.CurrentContact);
+        PostingTime = DateTime.Now;
       }
       ProductDataService.WriteProduct(this);
     }
@@ -204,6 +232,8 @@ namespace Empiria.Products {
       Name = PatchCleanField(fields.Name, Name);
       Description = PatchCleanField(fields.Description, Description);
       InternalCode = PatchCleanField(fields.InternalCode, InternalCode);
+      _identificators = PatchField(string.Join(" ", fields.Identificators), _identificators);
+      _roles = PatchField(string.Join(" ", fields.Roles), _roles);
       _tags = PatchField(string.Join(" ", fields.Tags), _tags);
       BaseUnit = PatchField(fields.BaseUnitUID, BaseUnit);
       Manager = PatchField(fields.ManagerUID, Manager);
