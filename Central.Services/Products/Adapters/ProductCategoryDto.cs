@@ -11,15 +11,7 @@
 namespace Empiria.Products.Services.Adapters {
 
   /// <summary>Output DTO for ProductCategory instances.</summary>
-  public class ProductCategoryDto {
-
-    public string UID {
-      get; internal set;
-    }
-
-    public string Name {
-      get; internal set;
-    }
+  public class ProductCategoryDto : NamedEntityFields {
 
     public string Description {
       get; internal set;

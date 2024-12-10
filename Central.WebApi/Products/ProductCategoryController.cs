@@ -38,7 +38,8 @@ namespace Empiria.Products.WebApi {
     public CollectionModel SearchProductCategories([FromUri] string keywords = "") {
 
       using (var services = ProductCategoryServices.ServiceInteractor()) {
-        FixedList<ProductCategoryDto> categories = services.SearchProductCategories(keywords);
+        FixedList<NamedEntityDto> categories = services.SearchProductCategories(keywords)
+                                                       .MapToNamedEntityList();
 
         return new CollectionModel(base.Request, categories);
       }
