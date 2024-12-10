@@ -50,6 +50,24 @@ namespace Empiria.Parties.Data {
     }
 
 
+    static internal FixedList<Party> SearchPartiesInRole(string roleName, string keywords = "") {
+      Assertion.Require(roleName, nameof(roleName));
+
+      var sql = "SELECT * FROM PARTIES " +
+                $"WHERE PARTY_ROLES LIKE '%{roleName}%' AND " +
+                $"PARTY_STATUS <> 'X'";
+
+      if (!string.IsNullOrEmpty(keywords)) {
+        sql += " AND " + SearchExpression.ParseAndLikeKeywords("PARTY_KEYWORDS", keywords);
+      }
+      sql += " ORDER BY PARTY_NAME";
+
+      var op = DataOperation.Parse(sql);
+
+      return DataReader.GetFixedList<Party>(op);
+    }
+
+
     static internal void WriteParty(Party o) {
       var op = DataOperation.Parse("writeParty",
                  o.Id, o.UID, o.PartyType.Id,
@@ -70,6 +88,7 @@ namespace Empiria.Parties.Data {
 
       DataWriter.Execute(op);
     }
+
   } // class PartyDataService
 
 

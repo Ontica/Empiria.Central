@@ -185,7 +185,7 @@ namespace Empiria.Products {
     }
 
 
-    protected internal virtual string Keywords {
+    public virtual string Keywords {
       get {
         return EmpiriaString.BuildKeywords(InternalCode, Name,
                                            ProductType.DisplayName, Description, _identificators, _tags);

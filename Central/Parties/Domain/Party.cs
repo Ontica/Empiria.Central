@@ -60,14 +60,16 @@ namespace Empiria.Parties {
     }
 
 
-    static public FixedList<Party> GetPartiesInRole(string roleName) {
-      return GetList<Party>($"PARTY_ROLES LIKE '%{roleName}%'")
-            .ToFixedList()
-            .Sort((x, y) => x.Name.CompareTo(y.Name));
+    static public FixedList<Party> GetPartiesInRole(string roleName, string keywords = "") {
+      Assertion.Require(roleName, nameof(roleName));
+
+      return PartyDataService.SearchPartiesInRole(roleName, keywords);
     }
 
 
     public static Party TryParseWithID(string partyID) {
+      Assertion.Require(partyID, nameof(partyID));
+
       return TryParse<Party>($"PARTY_CODE = '{partyID}'");
     }
 

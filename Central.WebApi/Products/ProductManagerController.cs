@@ -25,7 +25,7 @@ namespace Empiria.Products.WebApi {
     [Route("v8/products/primary-party/product-managers")]
     public CollectionModel GetProductManagers([FromUri] string keywords = "") {
 
-      FixedList<Party> productManagers = Party.GetPartiesInRole("product-manager");
+      FixedList<Party> productManagers = Party.GetPartiesInRole("product-manager", keywords);
 
       return new CollectionModel(Request, productManagers.MapToNamedEntityList());
     }

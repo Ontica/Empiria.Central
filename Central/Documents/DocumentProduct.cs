@@ -75,7 +75,7 @@ namespace Empiria.Documents {
     }
 
 
-    protected internal override string Keywords {
+    public override string Keywords {
       get {
         return EmpiriaString.BuildKeywords(base.Keywords);
       }

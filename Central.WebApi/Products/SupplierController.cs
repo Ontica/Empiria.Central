@@ -25,7 +25,7 @@ namespace Empiria.Products.WebApi {
     [Route("v8/products/primary-party/suppliers/list")]
     public CollectionModel GetSuppliers([FromUri] string keywords = "") {
 
-      FixedList<Party> suppliers = Party.GetPartiesInRole("supplier");
+      FixedList<Party> suppliers = Party.GetPartiesInRole("supplier", keywords);
 
       return new CollectionModel(Request, suppliers.MapToNamedEntityList());
     }
