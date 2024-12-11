@@ -14,15 +14,10 @@ using System.Collections.Generic;
 namespace Empiria.Financial {
 
   /// <summary>Defines a payable entity. Payable entities are purchase orders,
-  /// contract milestones, invoices, paychecks, etc.
-  /// </summary>
-  public interface IPayableEntity {
+  /// contract milestones, invoices, paychecks, etc.</summary>
+  public interface IPayableEntity : INamedEntity {
 
     int Id {
-      get;
-    }
-
-    string UID {
       get;
     }
 
@@ -34,9 +29,6 @@ namespace Empiria.Financial {
       get;
     }
 
-    string Name {
-      get;
-    }
 
     string Description {
       get;
@@ -59,21 +51,17 @@ namespace Empiria.Financial {
       get;
     }
 
-
     string UID {
       get;
     }
-
 
     decimal Quantity {
       get;
     }
 
-
     INamedEntity Unit {
       get;
     }
-
 
     decimal UnitPrice {
       get;
@@ -83,16 +71,13 @@ namespace Empiria.Financial {
       get;
     }
 
-
     INamedEntity Product {
       get;
     }
 
-
     string Description {
       get;
     }
-
 
     INamedEntity BudgetAccount {
       get;
