@@ -40,13 +40,13 @@ namespace Empiria.Products.Services.Adapters {
     }
 
 
-    static internal FixedList<ProductDescriptorDto> MapToDescriptor(FixedList<Product> products) {
+    static public FixedList<ProductDescriptorDto> MapToDescriptor(FixedList<Product> products) {
       return products.Select(x => MapToDescriptor(x))
                      .ToFixedList();
     }
 
 
-    static internal FixedList<ProductSearchDto> MapToSearchDescriptor(FixedList<Product> products) {
+    static public FixedList<ProductSearchDto> MapToSearchDescriptor(FixedList<Product> products) {
       return products.Select(x => MapToSearchDescriptor(x))
                      .ToFixedList();
     }

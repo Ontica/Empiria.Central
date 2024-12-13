@@ -19,22 +19,6 @@ namespace Empiria.Tests.Products.Services {
   /// <summary>Test cases for product services.</summary>
   public class ProductServicesTests {
 
-    #region Initialization
-
-    private readonly ProductServices _services;
-
-    public ProductServicesTests() {
-      TestsCommonMethods.Authenticate();
-
-      _services = ProductServices.ServiceInteractor();
-    }
-
-    ~ProductServicesTests() {
-      _services.Dispose();
-    }
-
-    #endregion Initialization
-
     #region Facts
 
     [Fact]
@@ -45,7 +29,7 @@ namespace Empiria.Tests.Products.Services {
         Name = "Servicios de auditoría administrativa"
       };
 
-      ProductDto sut = _services.CreateProduct(fields);
+      Product sut = ProductServices.CreateProduct(fields);
 
       Assert.NotNull(sut);
     }
@@ -53,15 +37,7 @@ namespace Empiria.Tests.Products.Services {
 
     [Fact]
     public void Should_Delete_A_Product() {
-      var sut = _services.DeleteProduct(TestingConstants.PRODUCT_UID);
-
-      Assert.NotNull(sut);
-    }
-
-
-    [Fact]
-    public void Should_Get_A_Product() {
-      var sut = _services.GetProduct(TestingConstants.PRODUCT_UID);
+      var sut = ProductServices.DeleteProduct(TestingConstants.PRODUCT_UID);
 
       Assert.NotNull(sut);
     }
@@ -73,7 +49,7 @@ namespace Empiria.Tests.Products.Services {
         Keywords = "Servicio"
       };
 
-      var sut = _services.SearchProducts(query);
+      var sut = ProductServices.SearchProducts(query);
 
       Assert.NotNull(sut);
       Assert.NotEmpty(sut);
@@ -88,7 +64,7 @@ namespace Empiria.Tests.Products.Services {
         Name = "Servicios de desarrollo de software II"
       };
 
-      var sut = _services.UpdateProduct(fields);
+      var sut = ProductServices.UpdateProduct(fields);
 
       Assert.NotNull(sut);
     }

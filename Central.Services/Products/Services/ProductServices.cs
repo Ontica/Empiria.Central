@@ -1,37 +1,23 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : Products                                   Component : Services Layer                          *
-*  Assembly : Empiria.Central.Services.dll               Pattern   : Services interactor class               *
+*  Assembly : Empiria.Central.Services.dll               Pattern   : Static Services class                   *
 *  Type     : ProductServices                            License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Services for Product instances.                                                                *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-using Empiria.Services;
-
 using Empiria.Products.Services.Adapters;
 
 namespace Empiria.Products.Services {
 
   /// <summary>Services for Product instances.</summary>
-  public class ProductServices : Service {
-
-    #region Constructors and parsers
-
-    protected ProductServices() {
-      // no-op
-    }
-
-    static public ProductServices ServiceInteractor() {
-      return Service.CreateInstance<ProductServices>();
-    }
-
-    #endregion Constructors and parsers
+  static public class ProductServices {
 
     #region Services
 
-    public ProductDto ActivateProduct(string productUID) {
+    static public Product ActivateProduct(string productUID) {
       Assertion.Require(productUID, nameof(productUID));
 
       var product = Product.Parse(productUID);
@@ -40,11 +26,11 @@ namespace Empiria.Products.Services {
 
       product.Save();
 
-      return ProductMapper.Map(product);
+      return product;
     }
 
 
-    public ProductDto CreateProduct(ProductFields fields) {
+    static public Product CreateProduct(ProductFields fields) {
       Assertion.Require(fields, nameof(fields));
 
       fields.EnsureValid();
@@ -60,11 +46,11 @@ namespace Empiria.Products.Services {
 
       product.Save();
 
-      return ProductMapper.Map(product);
+      return product;
     }
 
 
-    public ProductDto DeleteProduct(string productUID) {
+    static public Product DeleteProduct(string productUID) {
       Assertion.Require(productUID, nameof(productUID));
 
       var product = Product.Parse(productUID);
@@ -73,22 +59,13 @@ namespace Empiria.Products.Services {
 
       product.Save();
 
-      return ProductMapper.Map(product);
+      return product;
     }
 
 
-    public ProductDto GetProduct(string productUID) {
-      Assertion.Require(productUID, nameof(productUID));
-
-      var product = Product.Parse(productUID);
-
-      return ProductMapper.Map(product);
-    }
-
-
-    public FixedList<ProductSearchDto> SearchProducts(string keywords) {
+    static public FixedList<Product> SearchProducts(string keywords) {
       if (string.IsNullOrWhiteSpace(keywords)) {
-        return new FixedList<ProductSearchDto>();
+        return new FixedList<Product>();
       }
       var query = new ProductsQuery {
          Keywords = keywords
@@ -99,27 +76,22 @@ namespace Empiria.Products.Services {
 
       string sort = query.MapToSortString();
 
-      FixedList<Product> products = ProductDataService.SearchProducts(filter, sort);
-
-      return ProductMapper.MapToSearchDescriptor(products);
+      return ProductDataService.SearchProducts(filter, sort);
     }
 
 
-    public FixedList<ProductDescriptorDto> SearchProducts(ProductsQuery query) {
+    static public FixedList<Product> SearchProducts(ProductsQuery query) {
       Assertion.Require(query, nameof(query));
 
       string filter = query.MapToFilterString();
 
       string sort = query.MapToSortString();
 
-      FixedList<Product> products = ProductDataService.SearchProducts(filter, sort);
-
-      return ProductMapper.MapToDescriptor(products);
+      return ProductDataService.SearchProducts(filter, sort);
     }
 
 
-
-    public ProductDto SuspendProduct(string productUID) {
+    static public Product SuspendProduct(string productUID) {
       Assertion.Require(productUID, nameof(productUID));
 
       var product = Product.Parse(productUID);
@@ -128,11 +100,11 @@ namespace Empiria.Products.Services {
 
       product.Save();
 
-      return ProductMapper.Map(product);
+      return product;
     }
 
 
-    public ProductDto UpdateProduct(ProductFields fields) {
+    static public Product UpdateProduct(ProductFields fields) {
       Assertion.Require(fields, nameof(fields));
 
       fields.EnsureValid();
@@ -143,7 +115,7 @@ namespace Empiria.Products.Services {
 
       product.Save();
 
-      return ProductMapper.Map(product);
+      return product;
     }
 
     #endregion Services
