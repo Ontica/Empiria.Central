@@ -22,7 +22,8 @@ namespace Empiria.Products.WebApi {
     #region Query web apis
 
     [HttpGet]
-    [Route("v8/products/primary-party/product-managers")]
+    [Route("v8/product-management/product-managers")]
+    [Route("v8/product-management/primary-party/product-managers")]  // ToDo: remove
     public CollectionModel GetProductManagers([FromUri] string keywords = "") {
 
       FixedList<Party> productManagers = Party.GetPartiesInRole("product-manager", keywords);

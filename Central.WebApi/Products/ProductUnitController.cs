@@ -20,7 +20,7 @@ namespace Empiria.Products.WebApi {
     #region Query web apis
 
     [HttpGet]
-    [Route("v8/products/product-units")]
+    [Route("v8/product-management/product-units")]
     public CollectionModel SearchProductUnits([FromUri] string keywords = "") {
 
       FixedList<ProductUnit> productUnits = BaseObject.GetFullList<ProductUnit>();

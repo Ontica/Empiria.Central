@@ -21,7 +21,7 @@ namespace Empiria.Products.WebApi {
     #region Web Apis
 
     [HttpGet]
-    [Route("v8/products/product-types")]
+    [Route("v8/product-management/product-types")]
     public SingleObjectModel GetProductTypes() {
 
       using (var services = ProductTypeServices.ServiceInteractor()) {

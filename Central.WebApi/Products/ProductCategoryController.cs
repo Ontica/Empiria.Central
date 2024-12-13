@@ -7,6 +7,7 @@
 *  Summary  : Web API used to retrive and update product categories.                                         *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
+
 using System.Web.Http;
 
 using Empiria.WebApi;
@@ -22,7 +23,7 @@ namespace Empiria.Products.WebApi {
     #region Query Web Apis
 
     [HttpGet]
-    [Route("v8/products/categories/{productCategoryUID:guid}")]
+    [Route("v8/product-management/categories/{productCategoryUID:guid}")]
     public SingleObjectModel GetProductCategory([FromUri] string productCategoryUID) {
 
       using (var services = ProductCategoryServices.ServiceInteractor()) {
@@ -34,7 +35,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpGet]
-    [Route("v8/products/categories")]
+    [Route("v8/product-management/categories")]
     public CollectionModel SearchProductCategories([FromUri] string keywords = "") {
 
       using (var services = ProductCategoryServices.ServiceInteractor()) {
@@ -50,7 +51,7 @@ namespace Empiria.Products.WebApi {
     #region Command Web Apis
 
     [HttpPost]
-    [Route("v8/products/categories")]
+    [Route("v8/product-management/categories")]
     public SingleObjectModel CreateProductCategory(ProductCategoryFields fields) {
 
       base.RequireBody(fields);
@@ -64,7 +65,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpDelete]
-    [Route("v8/products/categories/{productCategoryUID:guid}")]
+    [Route("v8/product-management/categories/{productCategoryUID:guid}")]
     public NoDataModel DeleteProductCategory([FromUri] string productCategoryUID) {
 
       using (var services = ProductCategoryServices.ServiceInteractor()) {
@@ -76,7 +77,7 @@ namespace Empiria.Products.WebApi {
 
 
     [HttpPut, HttpPatch]
-    [Route("v8/products/categories/{productUID:guid}")]
+    [Route("v8/product-management/categories/{productUID:guid}")]
     public SingleObjectModel UpdateProductCategory([FromUri] string productUID,
                                                    [FromBody] ProductCategoryFields fields) {
 
