@@ -31,6 +31,10 @@ namespace Empiria.Products.Services.Adapters {
       get; internal set;
     }
 
+    public FixedList<string> Identificators {
+      get; internal set;
+    }
+
     public FixedList<string> Tags {
       get; internal set;
     }

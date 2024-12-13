@@ -230,11 +230,11 @@ namespace Empiria.Products {
       fields.EnsureValid();
 
       Name = PatchCleanField(fields.Name, Name);
-      Description = PatchCleanField(fields.Description, Description);
+      Description = fields.Description;
       InternalCode = PatchCleanField(fields.InternalCode, InternalCode);
-      _identificators = PatchField(string.Join(" ", fields.Identificators), _identificators);
+      _identificators = string.Join(" ", fields.Identificators);
       _roles = PatchField(string.Join(" ", fields.Roles), _roles);
-      _tags = PatchField(string.Join(" ", fields.Tags), _tags);
+      _tags = string.Join(" ", fields.Tags);
       BaseUnit = PatchField(fields.BaseUnitUID, BaseUnit);
       Manager = PatchField(fields.ManagerUID, Manager);
     }

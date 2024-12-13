@@ -13,7 +13,7 @@ using Empiria.StateEnums;
 namespace Empiria.Products.Services.Adapters {
 
   /// <summary>Provides mapping services for Product instances.</summary>
-  static internal class ProductMapper {
+  static public class ProductMapper {
 
     static internal FixedList<ProductDto> Map(FixedList<Product> products) {
       return products.Select(x => Map(x))
@@ -21,12 +21,13 @@ namespace Empiria.Products.Services.Adapters {
     }
 
 
-    static internal ProductDto Map(Product product) {
+    static public ProductDto Map(Product product) {
       return new ProductDto {
         UID = product.UID,
         Name = product.Name,
         Description = product.Description,
         InternalCode = product.InternalCode,
+        Identificators = product.Identificators,
         Tags = product.Tags,
         BaseUnit = product.BaseUnit.MapToNamedEntity(),
         Manager = product.Manager.MapToNamedEntity(),
