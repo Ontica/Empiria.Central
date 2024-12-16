@@ -77,6 +77,17 @@ namespace Empiria.Products.SATMexico {
     }
 
 
+    [DataField("SAT_DATA_ITEM_FIELD_05")]
+    protected internal string Field05 {
+      get; set;
+    }
+
+
+    [DataField("SAT_DATA_ITEM_FIELD_06")]
+    protected internal string Field06 {
+      get; set;
+    }
+
     [DataField("SAT_DATA_ITEM_EXT_DATA")]
     protected internal JsonObject ExtData {
       get; private set;
@@ -103,11 +114,35 @@ namespace Empiria.Products.SATMexico {
 
     public virtual string Keywords {
       get {
-        return EmpiriaString.BuildKeywords(Code, Name, Field01, Field02, Field03, Field04, Description);
+        return EmpiriaString.BuildKeywords(Code, Name, Description,
+                                           Field01, Field02, Field03,
+                                           Field04, Field05, Field06);
       }
     }
 
     #endregion Properties
+
+    #region Methods
+
+    private void CleanFields() {
+      Code = EmpiriaString.Clean(Code);
+      Name = EmpiriaString.Clean(Name);
+      Description = EmpiriaString.Clean(Description);
+      Field01 = EmpiriaString.Clean(Field01);
+      Field02 = EmpiriaString.Clean(Field02);
+      Field03 = EmpiriaString.Clean(Field03);
+      Field04 = EmpiriaString.Clean(Field04);
+      Field05 = EmpiriaString.Clean(Field05);
+      Field06 = EmpiriaString.Clean(Field06);
+    }
+
+
+    protected override void OnSave() {
+      CleanFields();
+      SATDataItemDataService.Write(this);
+    }
+
+    #endregion Methods
 
   } // class SATDataItem
 

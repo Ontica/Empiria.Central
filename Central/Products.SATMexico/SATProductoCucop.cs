@@ -70,6 +70,15 @@ namespace Empiria.Products.SATMexico {
       }
     }
 
+    public string UnidadMedida {
+      get {
+        return base.Field05;
+      }
+      private set {
+        base.Field05 = EmpiriaString.Clean(value);
+      }
+    }
+
     #endregion Properties
 
   } // class SATProductoCucop
