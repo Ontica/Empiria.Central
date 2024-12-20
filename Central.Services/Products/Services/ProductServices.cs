@@ -8,6 +8,8 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using Empiria.Products.SATMexico;
+
 using Empiria.Products.Services.Adapters;
 
 namespace Empiria.Products.Services {
@@ -77,6 +79,15 @@ namespace Empiria.Products.Services {
       string sort = query.MapToSortString();
 
       return ProductDataService.SearchProducts(filter, sort);
+    }
+
+
+    static public FixedList<SATProductoCucop> SearchCucopProducts(string keywords) {
+      if (string.IsNullOrWhiteSpace(keywords)) {
+        return new FixedList<SATProductoCucop>();
+      }
+
+      return SATDataItemDataService.SearchSATCucopProducts(keywords);
     }
 
 

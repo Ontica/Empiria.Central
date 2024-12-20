@@ -10,6 +10,8 @@
 
 using Empiria.StateEnums;
 
+using Empiria.Products.SATMexico;
+
 namespace Empiria.Products.Services.Adapters {
 
   /// <summary>Provides mapping services for Product instances.</summary>
@@ -81,6 +83,25 @@ namespace Empiria.Products.Services.Adapters {
         ManagerName = product.Manager.Name,
         ProductCategoryName = product.ProductCategory.Name,
         ProductTypeName = product.ProductType.DisplayName
+      };
+    }
+
+    public static FixedList<ProductSearchDto> MapToSearchDescriptor(FixedList<SATProductoCucop> cucops) {
+      return cucops.Select(x => MapToSearchDescriptor(x))
+               .ToFixedList();
+    }
+
+
+    static private ProductSearchDto MapToSearchDescriptor(SATProductoCucop cucop) {
+      return new ProductSearchDto {
+        UID = cucop.UID,
+        Name = cucop.Name,
+        Description = cucop.Description,
+        InternalCode = cucop.Code,
+        BaseUnit = ProductUnit.Parse(516).MapToNamedEntity(),
+        ManagerName = "No determinado",
+        ProductCategoryName = "Sin categoría",
+        ProductTypeName = cucop.NombreConcepto
       };
     }
 
