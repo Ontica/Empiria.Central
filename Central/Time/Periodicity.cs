@@ -1,7 +1,7 @@
 ﻿/* Empiria Central  ******************************************************************************************
 *                                                                                                            *
 *  Module   : Time                                       Component : Domain Types                            *
-*  Assembly : Empiria.Central.dll                        Pattern   : Infomation Holder                       *
+*  Assembly : Empiria.Central.dll                        Pattern   : Information Holder                      *
 *  Type     : Periodicity                                License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Represents a periodicity.                                                                      *

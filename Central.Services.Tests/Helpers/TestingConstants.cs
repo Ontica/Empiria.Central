@@ -25,7 +25,7 @@ namespace Empiria.Tests {
 
     static internal readonly Person DOCUMENT_ENTITY = Person.Parse(2000);
 
-    static internal readonly Document DOCUMENT = Document.Parse(1);
+    static internal readonly Document DOCUMENT = Document.Parse(-1);
 
     static internal readonly DocumentLinkType DOCUMENT_LINK_TYPE = DocumentLinkType.Parse("baa1aef6-f7a7-4c13-b8a3-93dc48af5e50");
 

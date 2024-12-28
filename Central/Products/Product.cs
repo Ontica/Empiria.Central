@@ -29,7 +29,8 @@ namespace Empiria.Products {
       // Required by Empiria Framework for all partitioned types.
     }
 
-    internal protected Product(ProductCategory productCategory, string name) : base(productCategory.ProductType) {
+    internal protected Product(ProductCategory productCategory, string name) :
+                                                              base(productCategory.ProductType) {
       ProductCategory = productCategory;
 
       name = EmpiriaString.Clean(name);

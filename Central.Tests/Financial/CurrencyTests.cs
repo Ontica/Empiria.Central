@@ -2,7 +2,7 @@
 *                                                                                                            *
 *  Module   : Financial                                  Component : Test cases                              *
 *  Assembly : Empiria.Central.Tests.dll                  Pattern   : Unit tests                              *
-*  Type     : CataloguesUseCasesTests                    License   : Please read LICENSE.txt file            *
+*  Type     : CurrencyTests                              License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Unit tests for Currency type.                                                                  *
 *                                                                                                            *

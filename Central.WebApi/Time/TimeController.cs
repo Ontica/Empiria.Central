@@ -23,8 +23,7 @@ namespace Empiria.Time.WebApi {
     public CollectionModel GetPeriodicityTypes() {
 
       var list = BaseObject.GetFullList<Periodicity>()
-                           .Select(x => x.MapToNamedEntity())
-                           .ToFixedList();
+                           .MapToNamedEntityList();
 
       return new CollectionModel(base.Request, list);
     }
