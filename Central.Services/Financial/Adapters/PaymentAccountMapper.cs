@@ -22,7 +22,7 @@ namespace Empiria.Financial.Adapters {
       return new PaymentAccountDto {
         UID = account.UID,
         Name = account.Identificator,
-        PaymentMethod = account.PaymentMethod.MapToNamedEntity(),
+        PaymentMethod = PaymentMethodMapper.Map(account.PaymentMethod),
         Currency = account.Currency.MapToNamedEntity(),
         Institution = account.Institution.MapToNamedEntity(),
         AccountNo = account.AccountNo,

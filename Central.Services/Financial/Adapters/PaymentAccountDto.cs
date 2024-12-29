@@ -13,7 +13,7 @@ namespace Empiria.Financial.Adapters {
   /// <summary>Output DTO for PaymentAccount instances.</summary>
   public class PaymentAccountDto : NamedEntityFields {
 
-    public NamedEntityDto PaymentMethod {
+    public PaymentMethodDto PaymentMethod {
       get; internal set;
     }
 
