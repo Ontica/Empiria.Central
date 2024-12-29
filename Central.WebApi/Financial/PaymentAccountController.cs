@@ -1,10 +1,10 @@
 ﻿/* Empiria Central  ******************************************************************************************
 *                                                                                                            *
 *  Module   : Financial                                    Component : Web Api                               *
-*  Assembly : Empiria.Central.WebApi.dll                   Pattern   : Query web api controller              *
+*  Assembly : Empiria.Central.WebApi.dll                   Pattern   : Web api controller                    *
 *  Type     : PaymentAccountController                     License   : Please read LICENSE.txt file          *
 *                                                                                                            *
-*  Summary  : Query web API used to retrive and update payment accounts.                                     *
+*  Summary  : Web API used to retrive and update payment accounts.                                           *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
@@ -12,7 +12,8 @@ using System.Web.Http;
 
 using Empiria.WebApi;
 
-using Empiria.Parties;
+using Empiria.Financial.Services;
+using Empiria.Financial.Adapters;
 
 namespace Empiria.Financial.WebApi {
 
@@ -25,11 +26,9 @@ namespace Empiria.Financial.WebApi {
     [Route("v8/financial/parties/{partyUID:guid}/payment-accounts")]
     public CollectionModel GetPartyPaymentAccounts([FromUri] string partyUID) {
 
-      var party = Party.Parse(partyUID);
+      FixedList<PaymentAccountDto> accounts = PaymentAccountServices.GetPaymentAccounts(partyUID);
 
-      FixedList<PaymentAccount> paymentAccounts = PaymentAccount.GetListFor(party);
-
-      return new CollectionModel(Request, paymentAccounts.MapToNamedEntityList());
+      return new CollectionModel(Request, accounts);
     }
 
     #endregion Query web apis
