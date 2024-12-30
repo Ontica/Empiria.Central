@@ -34,7 +34,27 @@ namespace Empiria.Financial {
       get;
     }
 
+    INamedEntity OrganizationalUnit {
+      get;
+    }
+
     INamedEntity PayTo {
+      get;
+    }
+
+    INamedEntity Currency {
+      get;
+    }
+
+    decimal Total {
+      get;
+    }
+
+    INamedEntity Budget {
+      get;
+    }
+
+    INamedEntity Project {
       get;
     }
 
