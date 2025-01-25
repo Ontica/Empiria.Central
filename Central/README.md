@@ -9,10 +9,9 @@ Empiria Core provides the following types:
 -  Documents
 -  Events
 -  Electronic Sign
+-  Financial
 -  Geography
 -  Measurement
--  Money
--  Parties
 -  Postings
 -  Procedures
 -  Products

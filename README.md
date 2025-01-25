@@ -25,10 +25,9 @@ Entre los servicios y componentes que provee se encuentran:
 -  Documents
 -  Events
 -  Electronic Sign
+-  Financial
 -  Geography
 -  Measurement
--  Money
--  Parties
 -  Postings
 -  Procedures
 -  Products

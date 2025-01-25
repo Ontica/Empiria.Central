@@ -9,10 +9,9 @@ Provides services for the following Empiria Central Framework types:
 -  Documents
 -  Events
 -  Electronic Sign
+-  Financial
 -  Geography
 -  Measurement
--  Money
--  Parties
 -  Postings
 -  Procedures
 -  Products
