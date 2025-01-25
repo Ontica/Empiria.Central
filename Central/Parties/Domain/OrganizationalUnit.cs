@@ -44,17 +44,9 @@ namespace Empiria.Parties {
     }
 
 
-    public new string Code {
-      get {
-        if (base.Code.Length == 0) {
-          return base.ExtendedData.Get("code", string.Empty);
-        } else {
-          return base.Code;
-        }
-      }
-      private set {
-        base.Code = value;
-      }
+    [DataField("PARTY_CODE")]
+    public string Code {
+      get; protected set;
     }
 
 
@@ -77,7 +69,7 @@ namespace Empiria.Parties {
 
     public OrganizationalUnit Parent {
       get {
-        return OrganizationalUnit.Parse(base.ParentId);
+        return Parse(base.ParentId);
       }
     }
 

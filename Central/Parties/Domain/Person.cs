@@ -114,12 +114,6 @@ namespace Empiria.Parties {
       }
     }
 
-    public OrganizationalUnit OrganizationalUnit {
-      get {
-        return OrganizationalUnit.Parse(base.ParentId);
-      }
-    }
-
     #endregion Properties
 
     #region Methods
@@ -130,12 +124,13 @@ namespace Empiria.Parties {
       this.TaxData = new TaxData(fields);
     }
 
+
     protected void Update(PersonFields fields) {
       base.Update(fields);
 
-      this.FirstName  = PatchCleanField(fields.FirstName,   FirstName);
-      this.LastName   = PatchCleanField(fields.LastName,    LastName);
-      this.LastName2  = PatchCleanField(fields.LastName2,   LastName2);
+      this.FirstName = PatchCleanField(fields.FirstName, FirstName);
+      this.LastName = PatchCleanField(fields.LastName, LastName);
+      this.LastName2 = fields.LastName2;
       this.IsFemale = fields.IsFemale;
     }
 

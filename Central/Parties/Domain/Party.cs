@@ -22,7 +22,7 @@ namespace Empiria.Parties {
   /// <summary>Abstract partitioned type that represents a person, an organization, an organizational unit
   ///  a group or a team, that can play one or more roles in parties relationships.</summary>
   [PartitionedType(typeof(PartyType))]
-  public abstract class Party : BaseObject, IHistoricObject, INamedEntity {
+  abstract public class Party : BaseObject, IHistoricObject, INamedEntity {
 
     static private int PRIMARY_PARTY_ID = ConfigurationData.Get("PrimaryPartyId", 1);
 
@@ -85,12 +85,6 @@ namespace Empiria.Parties {
       get {
         return (PartyType) base.GetEmpiriaType();
       }
-    }
-
-
-    [DataField("PARTY_CODE")]
-    public string Code {
-      get; protected set;
     }
 
 

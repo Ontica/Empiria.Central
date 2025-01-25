@@ -98,9 +98,7 @@ namespace Empiria.Tests.Parties {
       var parties = BaseObject.GetFullList<Party>();
 
       foreach (var sut in parties) {
-        Assert.NotNull(sut.Code);
         Assert.NotNull(sut.Name);
-        Assert.NotNull(sut.Contact);
       }
     }
 
@@ -110,12 +108,11 @@ namespace Empiria.Tests.Parties {
       var persons = BaseObject.GetFullList<Person>();
 
       foreach (var sut in persons) {
-        Assert.NotNull(sut.FullName);
-        Assert.NotNull(sut.FirstName);
-        Assert.NotNull(sut.LastName);
+        Assert.NotEmpty(sut.FullName);
+        Assert.NotEmpty(sut.FirstName);
+        Assert.NotEmpty(sut.LastName);
         Assert.NotNull(sut.LastName2);
         Assert.NotNull(sut.TaxData);
-        Assert.NotNull(sut.OrganizationalUnit);
       }
     }
 
@@ -125,7 +122,7 @@ namespace Empiria.Tests.Parties {
       var organizations = BaseObject.GetFullList<Organization>();
 
       foreach (var sut in organizations) {
-        Assert.NotEmpty(sut.Code);
+        Assert.NotEmpty(sut.Name);
         Assert.NotNull(sut.TaxData);
       }
     }
@@ -136,7 +133,9 @@ namespace Empiria.Tests.Parties {
       var organizationalUnits = BaseObject.GetFullList<OrganizationalUnit>();
 
       foreach (var sut in organizationalUnits) {
-        Assert.NotEmpty(sut.Code);
+        Assert.NotEmpty(sut.Name);
+        Assert.NotEmpty(sut.FullName);
+        Assert.NotNull(sut.Code);
         Assert.NotNull(sut.Parent);
       }
     }

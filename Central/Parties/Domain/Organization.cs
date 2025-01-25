@@ -66,7 +66,6 @@ namespace Empiria.Parties {
       }
     }
 
-
     #endregion Properties
 
     #region Methods
