@@ -20,7 +20,7 @@ namespace Empiria.Parties {
 
   /// <summary>Partitioned type that represents a relation between parties.</summary>
   [PartitionedType(typeof(PartyRelationType))]
-  public class PartyRelation : BaseObject, IHistoricObject {
+  abstract public class PartyRelation : BaseObject, IHistoricObject {
 
     #region Constructors and parsers
 

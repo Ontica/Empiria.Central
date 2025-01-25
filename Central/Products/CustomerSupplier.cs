@@ -2,9 +2,9 @@
 *                                                                                                            *
 *  Module   : Products                                   Component : Domain Layer                            *
 *  Assembly : Empiria.Central.dll                        Pattern   : Information Holder                      *
-*  Type     : SupplierRelation                           License   : Please read LICENSE.txt file            *
+*  Type     : CustomerSupplier                           License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Represents a supplier relation. A supplier relation is not a supplier.                         *
+*  Summary  : Represents a customer-supplier relationship between two parties.                               *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
@@ -12,24 +12,33 @@ using Empiria.Parties;
 
 namespace Empiria.Products {
 
-  /// <summary>Represents a supplier relation. A supplier relation is not a supplier.</summary>
-  public class SupplierRelation : PartyRelation {
+  /// <summary>Represents a customer-supplier relationship between two parties.</summary>
+  public class CustomerSupplier : PartyRelation {
 
     #region Constructors and parsers
 
-    protected SupplierRelation(PartyRelationType powertype) : base(powertype) {
+    protected CustomerSupplier(PartyRelationType powertype) : base(powertype) {
       // Required by Empiria Framework for all partitioned types.
     }
 
-    static public new SupplierRelation Parse(int id) => ParseId<SupplierRelation>(id);
+    static public new CustomerSupplier Parse(int id) => ParseId<CustomerSupplier>(id);
 
-    static public new SupplierRelation Parse(string uid) => ParseKey<SupplierRelation>(uid);
+    static public new CustomerSupplier Parse(string uid) => ParseKey<CustomerSupplier>(uid);
 
-    static public new SupplierRelation Empty => ParseEmpty<SupplierRelation>();
+    static public new CustomerSupplier Empty => ParseEmpty<CustomerSupplier>();
 
     #endregion Constructors and parsers
 
     #region Properties
+
+    public string CustomerNo {
+      get {
+        return ExtendedData.Get("customerNo", string.Empty);
+      }
+      private set {
+        ExtendedData.SetIfValue("customerNo", value);
+      }
+    }
 
     public string SupplierNo {
       get {
@@ -37,16 +46,6 @@ namespace Empiria.Products {
       }
       private set {
         ExtendedData.SetIfValue("supplierNo", value);
-      }
-    }
-
-
-    public string SubledgerAccount {
-      get {
-        return ExtendedData.Get("subledgerAccount", string.Empty);
-      }
-      private set {
-        ExtendedData.SetIfValue("subledgerAccount", value);
       }
     }
 
@@ -67,12 +66,13 @@ namespace Empiria.Products {
 
     public override string Keywords {
       get {
-        return EmpiriaString.BuildKeywords(base.Keywords, SupplierNo, SubledgerAccount);
+        return EmpiriaString.BuildKeywords(base.Keywords, CustomerNo, SupplierNo,
+                                           Customer.Keywords, Supplier.Keywords);
       }
     }
 
     #endregion Properties
 
-  } // class Supplier
+  } // class CustomerSupplier
 
 } // namespace Empiria.Products
