@@ -52,7 +52,7 @@ namespace Empiria.Locations {
     #region Methods
 
     public FixedList<Location> GetLocations() {
-      return GetFullList<Location>($"OBJECT_CLASSIFICATION_ID = {this.Id}", "OBJECT_NAME");
+      return GetFullList<Location>($"OBJECT_CATEGORY_ID = {this.Id}", "OBJECT_NAME");
     }
 
     #endregion Methods

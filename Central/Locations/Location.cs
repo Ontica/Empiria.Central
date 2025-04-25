@@ -34,12 +34,12 @@ namespace Empiria.Locations {
 
     #region Properties
 
-    public string Code {
+    public string LocationCode {
       get {
-        return Data.Code;
+        return base.Code;
       }
       private set {
-        Data.Code = EmpiriaString.Clean(value);
+        base.Code = EmpiriaString.Clean(value);
       }
     }
 
@@ -89,20 +89,20 @@ namespace Empiria.Locations {
 
     public LocationType LocationType {
       get {
-        return LocationType.Parse(Data.ObjectClassificationId);
+        return LocationType.Parse(base.ObjectCategoryId);
       }
       private set {
-        Data.ObjectClassificationId = value.Id;
+        base.ObjectCategoryId = value.Id;
       }
     }
 
 
     public Location Parent {
       get {
-        return Parse(Data.ParentObjectId);
+        return Parse(base.ParentObjectId);
       }
       private set {
-        Data.ParentObjectId = value.Id;
+        SetParent(value.Id);
       }
     }
 
