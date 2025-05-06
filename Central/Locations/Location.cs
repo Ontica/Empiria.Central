@@ -27,7 +27,6 @@ namespace Empiria.Locations {
       return GetList<Location>().ToFixedList();
     }
 
-
     static public Location Empty => ParseEmpty<Location>();
 
     #endregion Constructors and parsers
@@ -99,10 +98,10 @@ namespace Empiria.Locations {
 
     public Location Parent {
       get {
-        return Parse(base.ParentObjectId);
+        return base.GetParent<Location>();
       }
       private set {
-        SetParent(value.Id);
+        SetParent(value);
       }
     }
 
