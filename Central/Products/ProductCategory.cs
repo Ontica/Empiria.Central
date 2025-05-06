@@ -15,7 +15,7 @@ using Empiria.StateEnums;
 namespace Empiria.Products {
 
   /// <summary>Represents a product category which holds products of the same kind or product type.</summary>
-  public class ProductCategory : GeneralObject {
+  public class ProductCategory : CommonStorage {
 
     #region Constructors and parsers
 
@@ -38,12 +38,12 @@ namespace Empiria.Products {
 
     static public ProductCategory Parse(string uid) => ParseKey<ProductCategory>(uid);
 
-    static public FixedList<ProductCategory> GetList() {
-      return BaseObject.GetList<ProductCategory>()
-                       .ToFixedList();
-    }
-
     static public ProductCategory Empty => ParseEmpty<ProductCategory>();
+
+    static public FixedList<ProductCategory> GetList() {
+      return GetList<ProductCategory>()
+            .ToFixedList();
+    }
 
     #endregion Constructors and parsers
 
@@ -51,60 +51,53 @@ namespace Empiria.Products {
 
     public ProductType ProductType {
       get {
-        return base.ExtendedDataField.Get("productTypeId", ProductType.Empty);
+        return base.ExtData.Get("productTypeId", ProductType.Empty);
       }
       protected set {
-        base.ExtendedDataField.SetIf("productTypeId", value.Id, value.Id != -1);
+        base.ExtData.SetIf("productTypeId", value.Id, value.Id != -1);
       }
     }
-
-
-    public string Description {
-      get {
-        return base.ExtendedDataField.Get("description", string.Empty);
-      }
-      protected set {
-        base.ExtendedDataField.SetIfValue("description", EmpiriaString.TrimAll(value));
-      }
-    }
-
 
     public FixedList<ProductUnit> ProductUnits {
       get {
-        return base.ExtendedDataField.GetFixedList<ProductUnit>("productUnits", false);
+        return base.ExtData.GetFixedList<ProductUnit>("productUnits", false);
       }
       private set {
-        base.ExtendedDataField.Set("productUnits",  value);
+        base.ExtData.Set("productUnits", value);
       }
     }
 
 
     public bool IsAssignable {
       get {
-        return base.ExtendedDataField.Get("isAssignable", IsEmptyInstance ? false : true);
+        return base.ExtData.Get("isAssignable", IsEmptyInstance ? false : true);
       }
       protected set {
-        base.ExtendedDataField.SetIf("isAssignable", value, value == false);
+        base.ExtData.SetIf("isAssignable", value, value == false);
       }
     }
 
 
     public ProductCategory Parent {
       get {
-        return base.ExtendedDataField.Get("parentCategoryId", ProductCategory.Empty);
+        return base.GetParent<ProductCategory>();
       }
-      protected set {
-        base.ExtendedDataField.SetIf("parentCategoryId", value.Id, value.Id != -1);
+      private set {
+        SetParent(value);
       }
     }
 
 
     public override string Keywords {
       get {
-        if (this.IsEmptyInstance) {
-          return string.Empty;
-        }
-        return EmpiriaString.BuildKeywords(Name, ProductType.DisplayName, Parent.Keywords);
+        return EmpiriaString.BuildKeywords(Name, ProductType.DisplayName,
+                                           Parent.IsEmptyInstance ? string.Empty : Parent.Keywords);
+      }
+    }
+
+    public EntityStatus Status {
+      get {
+        return base.GetStatus<EntityStatus>();
       }
     }
 
@@ -113,7 +106,7 @@ namespace Empiria.Products {
     #region Methods
 
     internal void Delete() {
-      base.Status = EntityStatus.Deleted;
+      base.SetStatus(EntityStatus.Deleted);
     }
 
 

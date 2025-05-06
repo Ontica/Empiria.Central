@@ -60,23 +60,20 @@ namespace Empiria.Documents {
 
     public FileLocation FileLocation {
       get {
-        return base.ExtendedDataField.Get<FileLocation>("fileLocationId");
+        return base.ExtData.Get<FileLocation>("fileLocationId");
       }
       private set {
-        base.ExtendedDataField.Set("fileLocationId", value.Id);
+        base.ExtData.Set("fileLocationId", value.Id);
       }
     }
 
 
     public new DocumentCategory Parent {
       get {
-        if (base.Parent.IsEmptyInstance) {
-          return Empty;
-        }
-        return (DocumentCategory) base.Parent;
+        return base.GetParent<DocumentCategory>();
       }
       private set {
-        base.Parent = value;
+        base.SetParent(value);
       }
     }
 

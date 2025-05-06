@@ -32,6 +32,8 @@ namespace Empiria.Tests.Documents {
 
       Assert.Equal(-1, sut.Id);
       Assert.Equal("Empty", sut.UID);
+      Assert.NotNull(sut.Parent);
+      Assert.Equal(sut, sut.Parent);
       Assert.NotEmpty(sut.Name);
     }
 
@@ -48,6 +50,7 @@ namespace Empiria.Tests.Documents {
         Assert.NotEmpty(sut.Keywords);
         Assert.NotNull(sut.Description);
       }
+
     }
 
   }  // class DocumentCategoryTests
