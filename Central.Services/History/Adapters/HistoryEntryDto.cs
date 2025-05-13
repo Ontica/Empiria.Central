@@ -1,10 +1,10 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
-*  Module   : Documents                                  Component : Adapters Layer                          *
+*  Module   : History Services                           Component : Adapters Layer                          *
 *  Assembly : Empiria.Central.Services.dll               Pattern   : Output DTO                              *
-*  Type     : DocumentDto                                License   : Please read LICENSE.txt file            *
+*  Type     : HistoryEntryDto                            License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Output DTO for Document instances.                                                             *
+*  Summary  : Output DTO for History entry instances.                                                        *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
@@ -12,33 +12,29 @@ using System;
 
 namespace Empiria.History.Services.Adapters {
 
-  // <summary>Output DTO used to return minimal history information about payables.</summary>
-  public class HistoryDto {
+  // <summary>Output DTO for History entry instances.</summary>
+  public class HistoryEntryDto {
 
     public string UID {
       get; internal set;
     }
 
-
-    public string Type {
+    public string Operation {
       get; internal set;
     }
 
+    public string PartyName {
+      get; internal set;
+    }
 
     public string Description {
       get; internal set;
     }
 
-
     public DateTime Time {
       get; internal set;
     }
 
+  } // HistoryEntryDto
 
-    public NamedEntityDto Party {
-      get; internal set;
-    }
-
-  } // HistoryDto
-
-}  // namespace Empiria.DocumentDto.Services.Adapters
+}  // namespace Empiria.History.Services.Adapters
