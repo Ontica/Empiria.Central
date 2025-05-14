@@ -19,7 +19,7 @@ namespace Empiria.History.Services {
 
     #region Services
 
-    static public HistoryEntryDto CreateEntityHistoryEntry(BaseObject entity, HistoryFields data) {
+    static public HistoryEntryDto CreateHistoryEntry(BaseObject entity, HistoryFields data) {
       Assertion.Require(entity, nameof(entity));
       Assertion.Require(data, nameof(data));
 

@@ -29,7 +29,7 @@ namespace Empiria.History.Data {
       var sql = "SELECT * FROM HISTORY_ENTRIES " +
                 $"WHERE HIST_ENTRY_OBJECT_ID = {entity.Id} AND " +
                 $"{typeFilter} " +
-                $"ORDER BY HIST_ENTRY_TIMESTAMP";
+                $"ORDER BY HIST_ENTRY_TIMESTAMP, HIST_ENTRY_ID";
 
       var op = DataOperation.Parse(sql);
 
