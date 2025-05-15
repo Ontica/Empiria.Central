@@ -1,7 +1,7 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : Documents                                  Component : Services Layer                          *
-*  Assembly : Empiria.Central.Services.dll               Pattern   : Services interactor class               *
+*  Assembly : Empiria.Central.dll                        Pattern   : Services interactor class               *
 *  Type     : DocumentCategoryServices                   License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Services for DocumentCategory instances.                                                       *
@@ -10,9 +10,7 @@
 
 using Empiria.Services;
 
-using Empiria.Documents.Services.Adapters;
-
-namespace Empiria.Documents.Services {
+namespace Empiria.Documents {
 
   /// <summary>Services for DocumentCategory instances.</summary>
   public class DocumentCategoryServices : Service {
@@ -31,15 +29,14 @@ namespace Empiria.Documents.Services {
 
     #region Services
 
-
     public FixedList<DocumentCategoryDto> GetDocumentCategories() {
 
       var categories = BaseObject.GetFullList<DocumentCategory>()
+                                 .FindAll(x => x.Status != StateEnums.EntityStatus.Deleted)
                                  .Sort((x, y) => x.Name.CompareTo(y.Name));
 
       return DocumentCategoryMapper.Map(categories);
     }
-
 
     #endregion Services
 

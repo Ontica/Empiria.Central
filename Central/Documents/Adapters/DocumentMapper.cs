@@ -1,7 +1,7 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : Documents                                  Component : Adapters Layer                          *
-*  Assembly : Empiria.Central.Services.dll               Pattern   : Mapper                                  *
+*  Assembly : Empiria.Central.dll                        Pattern   : Mapper                                  *
 *  Type     : DocumentMapper                             License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Provides mapping services for Document instances.                                              *
@@ -10,7 +10,7 @@
 
 using Empiria.StateEnums;
 
-namespace Empiria.Documents.Services.Adapters {
+namespace Empiria.Documents {
 
   /// <summary>Provides mapping services for Document instances.</summary>
   static internal class DocumentMapper {
@@ -32,9 +32,11 @@ namespace Empiria.Documents.Services.Adapters {
         Description = document.Description,
         Tags = document.Tags,
         PostingTime = document.PostingTime,
+        PostedBy = document.PostedBy.MapToNamedEntity(),
         LastUpdateTime = document.LastUpdateTime,
         Status = document.Status.MapToDto(),
         File = document.FileDto(),
+        FullLocalName = document.FullLocalName,
         ApplicationContentType = document.DocumentProduct.ApplicationContentType
       };
     }
@@ -53,6 +55,8 @@ namespace Empiria.Documents.Services.Adapters {
         UID = document.UID,
         Name = document.Name,
         Description = document.Description,
+        PostingTime = document.PostingTime,
+        PostedByName = document.PostedBy.Name,
         StatusName = document.Status.GetName(),
         FileDto = document.FileDto()
       };
@@ -62,4 +66,4 @@ namespace Empiria.Documents.Services.Adapters {
 
   }  // class DocumentMapper
 
-} // namespace Empiria.Documents.Services.Adapters
+} // namespace Empiria.Documents

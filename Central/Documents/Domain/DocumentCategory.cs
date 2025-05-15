@@ -14,7 +14,7 @@ using Empiria.Storage;
 namespace Empiria.Documents {
 
   /// <summary>Represents a document category which holds documents of the same kind or document type.</summary>
-  public class DocumentCategory : ProductCategory {
+  internal class DocumentCategory : ProductCategory {
 
     #region Constructors and parsers
 

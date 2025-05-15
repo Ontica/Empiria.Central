@@ -1,14 +1,14 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : Documents                                  Component : Adapters Layer                          *
-*  Assembly : Empiria.Central.Services.dll               Pattern   : Mapper                                  *
+*  Assembly : Empiria.Central.dll                        Pattern   : Mapper                                  *
 *  Type     : DocumentCategoryMapper                     License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Provides mapping services for DocumentCategory instances.                                      *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-namespace Empiria.Documents.Services.Adapters {
+namespace Empiria.Documents {
 
   /// <summary>Provides mapping services for DocumentCategory instances.</summary>
   static internal class DocumentCategoryMapper {
@@ -42,4 +42,4 @@ namespace Empiria.Documents.Services.Adapters {
     }
   }  // class DocumentCategoryMapper
 
-} // namespace Empiria.Documents.Services.Adapters
+} // namespace Empiria.Documents

@@ -18,7 +18,7 @@ using Empiria.StateEnums;
 namespace Empiria.Documents {
 
   /// <summary>Represents a link between a document and another entity.</summary>
-  public class DocumentLink : BaseObject {
+  internal class DocumentLink : BaseObject {
 
     #region Constructors and parsers
 

@@ -1,7 +1,7 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : Documents                                  Component : Services Layer                          *
-*  Assembly : Empiria.Central.Services.dll               Pattern   : Services provider                       *
+*  Assembly : Empiria.Central.dll                        Pattern   : Services provider                       *
 *  Type     : DocumentServices                           License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Services for Document instances.                                                               *
@@ -13,9 +13,7 @@ using System.Linq;
 
 using Empiria.Storage;
 
-using Empiria.Documents.Services.Adapters;
-
-namespace Empiria.Documents.Services {
+namespace Empiria.Documents {
 
   /// <summary>Services for Document instances.</summary>
   static public class DocumentServices {
@@ -31,7 +29,7 @@ namespace Empiria.Documents.Services {
     }
 
 
-    static public FixedList<DocumentDto> GetEntityDocuments(BaseObject entity) {
+    static public FixedList<DocumentDto> GetAllEntityDocuments(BaseObject entity) {
       Assertion.Require(entity, nameof(entity));
 
       FixedList<Document> baseDocuments = Document.GetListFor(entity);
@@ -45,18 +43,20 @@ namespace Empiria.Documents.Services {
     }
 
 
-    static public FixedList<DocumentDto> GetEntityBaseDocuments(BaseObject entity) {
+    static public FixedList<DocumentDto> GetEntityDocuments(BaseObject entity) {
       Assertion.Require(entity, nameof(entity));
 
-      FixedList<Document> baseDocuments = Document.GetListFor(entity);
+      FixedList<Document> documents = Document.GetListFor(entity);
 
-      return DocumentMapper.Map(baseDocuments);
+      return DocumentMapper.Map(documents.ToFixedList());
     }
 
 
-    static public DocumentDto RemoveDocument(BaseObject entity, Document document) {
+    static public DocumentDto RemoveDocument(BaseObject entity, DocumentDto documentDto) {
       Assertion.Require(entity, nameof(entity));
-      Assertion.Require(document, nameof(document));
+      Assertion.Require(documentDto, nameof(documentDto));
+
+      Document document = Document.Parse(documentDto.UID);
 
       Assertion.Require(document.BaseEntityId == entity.Id, "Document entity mismatch.");
 
@@ -81,11 +81,11 @@ namespace Empiria.Documents.Services {
 
 
     static public DocumentDto StoreDocument(InputFile inputFile,
-                                            BaseObject baseEntity,
+                                            BaseObject entity,
                                             DocumentFields fields) {
 
       Assertion.Require(inputFile, nameof(inputFile));
-      Assertion.Require(baseEntity, nameof(baseEntity));
+      Assertion.Require(entity, nameof(entity));
       Assertion.Require(fields, nameof(fields));
 
       fields.EnsureValid();
@@ -97,7 +97,7 @@ namespace Empiria.Documents.Services {
 
       FileData fileData = product.ProductCategory.FileLocation.Store(inputFile);
 
-      var document = new Document(product, baseEntity, fileData, fields.Name);
+      var document = new Document(product, entity, fileData, fields.Name);
 
       document.Update(fields);
 
@@ -107,10 +107,12 @@ namespace Empiria.Documents.Services {
     }
 
 
-    static public DocumentDto UpdateDocument(BaseObject entity, Document document, DocumentFields fields) {
+    static public DocumentDto UpdateDocument(BaseObject entity, DocumentDto documentDto, DocumentFields fields) {
       Assertion.Require(entity, nameof(entity));
-      Assertion.Require(document, nameof(document));
+      Assertion.Require(documentDto, nameof(documentDto));
       Assertion.Require(fields, nameof(fields));
+
+      Document document = Document.Parse(documentDto.UID);
 
       Assertion.Require(document.BaseEntityId == entity.Id, "Document entity mismatch.");
 
@@ -125,27 +127,6 @@ namespace Empiria.Documents.Services {
 
     #endregion Services
 
-    #region Helpers
-
-    static private FixedList<Document> GetRelatedDocuments(FixedList<Document> documents) {
-      var relatedDocuments = new List<Document>();
-
-      foreach (var relatedDocument in documents) {
-        BaseObject relatedEntity = relatedDocument.GetBaseEntity();
-
-        var relatedEntityDocuments = Document.GetListFor(relatedEntity);
-
-        relatedDocuments.AddRange(relatedEntityDocuments);
-
-        FixedList<Document> moreDocuments = DocumentLink.GetDocumentsFor(relatedEntity);
-
-        relatedDocuments.AddRange(moreDocuments);
-      }
-      return relatedDocuments.ToFixedList();
-    }
-
-    #endregion Helpers
-
   }  // class DocumentServices
 
-}  // namespace Empiria.Documents.Services
+}  // namespace Empiria.Documents

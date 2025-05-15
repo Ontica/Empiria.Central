@@ -12,9 +12,6 @@ using System.Web.Http;
 
 using Empiria.WebApi;
 
-using Empiria.Documents.Services;
-using Empiria.Documents.Services.Adapters;
-
 namespace Empiria.Documents.WebApi {
 
   /// <summary>Web API used to retrive and update document categories.</summary>

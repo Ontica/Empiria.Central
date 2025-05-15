@@ -1,26 +1,25 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : Documents                                  Component : Services Layer                          *
-*  Assembly : Empiria.Central.Services.dll               Pattern   : Service provider                        *
+*  Assembly : Empiria.Central.dll                        Pattern   : Service provider                        *
 *  Type     : DocumentLinkServices                       License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Services for link documents to entities.                                                       *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-using Empiria.Documents.Services.Adapters;
-
-namespace Empiria.Documents.Services {
+namespace Empiria.Documents {
 
   /// <summary>Services for link documents to entities.</summary>
   static public class DocumentLinkServices {
 
     #region Services
 
-    static public DocumentLinkDto CreateLink(Document document, BaseObject linkedEntity) {
-      Assertion.Require(document, nameof(document));
+    static public DocumentLinkDto CreateLink(DocumentDto documentDto, BaseObject linkedEntity) {
+      Assertion.Require(documentDto, nameof(documentDto));
       Assertion.Require(linkedEntity, nameof(linkedEntity));
 
+      var document = Document.Parse(documentDto.UID);
 
       var link = new DocumentLink(document, linkedEntity);
 
@@ -30,13 +29,15 @@ namespace Empiria.Documents.Services {
     }
 
 
-    static public DocumentLinkDto CreateLink(DocumentLinkType linkType, Document document,
+    static public DocumentLinkDto CreateLink(DocumentLinkType linkType, DocumentDto documentDto,
                                              BaseObject linkedEntity,
                                              DocumentLinkFields fields) {
       Assertion.Require(linkType, nameof(linkType));
-      Assertion.Require(document, nameof(document));
+      Assertion.Require(documentDto, nameof(documentDto));
       Assertion.Require(linkedEntity, nameof(linkedEntity));
       Assertion.Require(fields, nameof(fields));
+
+      var document = Document.Parse(documentDto.UID);
 
       var link = new DocumentLink(linkType, document, linkedEntity);
 
@@ -57,8 +58,10 @@ namespace Empiria.Documents.Services {
     }
 
 
-    static public FixedList<DocumentLinkDto> GetDocumentLinks(Document document) {
-      Assertion.Require(document, nameof(document));
+    static public FixedList<DocumentLinkDto> GetDocumentLinks(DocumentDto documentDto) {
+      Assertion.Require(documentDto, nameof(documentDto));
+
+      var document = Document.Parse(documentDto.UID);
 
       FixedList<DocumentLink> links = DocumentLink.GetListFor(document);
 
@@ -66,10 +69,12 @@ namespace Empiria.Documents.Services {
     }
 
 
-    static public FixedList<Document> GetDocumentsForEntity(BaseObject entity) {
+    static public FixedList<DocumentDto> GetDocumentsForEntity(BaseObject entity) {
       Assertion.Require(entity, nameof(entity));
 
-      return DocumentLink.GetDocumentsFor(entity);
+      FixedList<Document> documents = DocumentLink.GetDocumentsFor(entity);
+
+      return DocumentMapper.Map(documents);
     }
 
 
@@ -104,4 +109,4 @@ namespace Empiria.Documents.Services {
 
   }  // class DocumentLinkServices
 
-}  // namespace Empiria.Documents.Services
+}  // namespace Empiria.Documents

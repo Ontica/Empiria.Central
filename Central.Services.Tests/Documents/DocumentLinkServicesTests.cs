@@ -11,8 +11,6 @@
 using Xunit;
 
 using Empiria.Documents;
-using Empiria.Documents.Services;
-using Empiria.Documents.Services.Adapters;
 
 namespace Empiria.Tests.Documents.Services {
 

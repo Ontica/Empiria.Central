@@ -1,6 +1,6 @@
 ﻿/* Empiria Central  ******************************************************************************************
 *                                                                                                            *
-*  Module   : Products                                   Component : Data Access Layer                       *
+*  Module   : Documents                                  Component : Data Access Layer                       *
 *  Assembly : Empiria.Central.dll                        Pattern   : Data service                            *
 *  Type     : DocumentDataService                        License   : Please read LICENSE.txt file            *
 *                                                                                                            *

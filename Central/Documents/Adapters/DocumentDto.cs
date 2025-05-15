@@ -1,7 +1,7 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : Documents                                  Component : Adapters Layer                          *
-*  Assembly : Empiria.Central.Services.dll               Pattern   : Output DTO                              *
+*  Assembly : Empiria.Central.dll                        Pattern   : Output DTO                              *
 *  Type     : DocumentDto                                License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Output DTO for Document instances.                                                             *
@@ -9,9 +9,10 @@
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
 using System;
+
 using Empiria.Storage;
 
-namespace Empiria.Documents.Services.Adapters {
+namespace Empiria.Documents {
 
   /// <summary>Output DTO for Document instances.</summary>
   public class DocumentDto : INamedEntity {
@@ -52,6 +53,11 @@ namespace Empiria.Documents.Services.Adapters {
       get; internal set;
     }
 
+    public NamedEntityDto PostedBy {
+      get;
+      internal set;
+    }
+
     public DateTime LastUpdateTime {
       get; internal set;
     }
@@ -61,6 +67,10 @@ namespace Empiria.Documents.Services.Adapters {
     }
 
     public FileDto File {
+      get; internal set;
+    }
+
+    public string FullLocalName {
       get; internal set;
     }
 
@@ -86,6 +96,14 @@ namespace Empiria.Documents.Services.Adapters {
       get; internal set;
     }
 
+    public DateTime PostingTime {
+      get; internal set;
+    }
+
+    public string PostedByName {
+      get; internal set;
+    }
+
     public string StatusName {
       get; internal set;
     }
@@ -96,4 +114,4 @@ namespace Empiria.Documents.Services.Adapters {
 
   }  // class DocumentDescriptorDto
 
-}  // namespace Empiria.DocumentDto.Services.Adapters
+}  // namespace Empiria.DocumentDto

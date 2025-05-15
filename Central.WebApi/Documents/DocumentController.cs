@@ -12,9 +12,6 @@ using System.Web.Http;
 
 using Empiria.WebApi;
 
-using Empiria.Documents.Services;
-using Empiria.Documents.Services.Adapters;
-
 namespace Empiria.Documents.WebApi {
 
   /// <summary>Web API used to retrive and update documents.</summary>
@@ -40,7 +37,7 @@ namespace Empiria.Documents.WebApi {
 
       BaseObject entity = BaseObject.Parse(entityType, entityUID);
 
-      FixedList<DocumentDto> documents = DocumentServices.GetEntityDocuments(entity);
+      FixedList<DocumentDto> documents = DocumentServices.GetAllEntityDocuments(entity);
 
       return new CollectionModel(base.Request, documents);
     }

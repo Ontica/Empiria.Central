@@ -21,7 +21,7 @@ namespace Empiria.Documents {
 
   /// <summary>Partitioned type that represents a document.</summary>
   [PartitionedType(typeof(DocumentType))]
-  public class Document : BaseObject, INamedEntity {
+  internal class Document : BaseObject, INamedEntity {
 
     #region Constructors and parsers
 

@@ -11,8 +11,6 @@
 using Xunit;
 
 using Empiria.Documents;
-using Empiria.Documents.Services;
-using Empiria.Documents.Services.Adapters;
 
 namespace Empiria.Tests.Documents.Services {
 
@@ -55,7 +53,7 @@ namespace Empiria.Tests.Documents.Services {
 
     [Fact]
     public void Should_Get_Entity_Documents() {
-      var sut = DocumentServices.GetEntityDocuments(TestingConstants.DOCUMENT_ENTITY);
+      var sut = DocumentServices.GetAllEntityDocuments(TestingConstants.DOCUMENT_ENTITY);
 
       Assert.NotNull(sut);
       Assert.NotEmpty(sut);

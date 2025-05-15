@@ -1,7 +1,7 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : Documents                                  Component : Adapters Layer                          *
-*  Assembly : Empiria.Central.Services.dll               Pattern   : Output DTO                              *
+*  Assembly : Empiria.Central.dll                        Pattern   : Output DTO                              *
 *  Type     : DocumentCategoryDto                        License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Output DTO with a DocumentCategory data.                                                       *
@@ -10,7 +10,7 @@
 
 using Empiria.Storage;
 
-namespace Empiria.Documents.Services.Adapters {
+namespace Empiria.Documents {
 
   /// <summary>Output DTO with a DocumentCategory data.</summary>
   public class DocumentCategoryDto : NamedEntityFields {
@@ -34,5 +34,4 @@ namespace Empiria.Documents.Services.Adapters {
     }
   }
 
-}  // namespace Empiria.Documents.Services.Adapters
-
+}  // namespace Empiria.Documents
