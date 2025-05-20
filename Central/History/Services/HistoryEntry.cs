@@ -1,7 +1,7 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : History Services                          Component : Domain Layer                             *
-*  Assembly : Empiria.Central.Services.dll              Pattern   : Information Holder                       *
+*  Assembly : Empiria.Central.dll                       Pattern   : Information Holder                       *
 *  Type     : HistoryEntry                              License   : Please read LICENSE.txt file             *
 *                                                                                                            *
 *  Summary  : Holds information about an object's history entry.                                             *
@@ -12,9 +12,6 @@ using System;
 
 using Empiria.Json;
 using Empiria.Parties;
-
-using Empiria.History.Data;
-using Empiria.History.Services;
 
 namespace Empiria.History {
 
@@ -108,7 +105,7 @@ namespace Empiria.History {
 
     protected override void OnSave() {
       if (this.IsNew) {
-        HistoryData.Write(this);
+        HistoryDataService.Write(this);
       }
     }
 

@@ -1,7 +1,7 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : History Services                           Component : Domain Layer                            *
-*  Assembly : Empiria.Central.Services.dll               Pattern   : Value type, Input Fields DTO            *
+*  Assembly : Empiria.Central.dll                        Pattern   : Value type, Input Fields DTO            *
 *  Type     : HistoryFields                              License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Value type with input fields usted to create history instances.                                *
@@ -10,7 +10,7 @@
 
 using Empiria.Parties;
 
-namespace Empiria.History.Services {
+namespace Empiria.History {
 
   // <summary>Value type with input fields usted to create history instances.</summary>
   public class HistoryFields {
@@ -58,4 +58,4 @@ namespace Empiria.History.Services {
 
   } // HistoryFields
 
-}  // namespace Empiria.History.Services
+}  // namespace Empiria.History

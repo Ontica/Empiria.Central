@@ -1,7 +1,7 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : History Services                           Component : Adapters Layer                          *
-*  Assembly : Empiria.Central.Services.dll               Pattern   : Output DTO                              *
+*  Assembly : Empiria.Central.dll                        Pattern   : Output DTO                              *
 *  Type     : HistoryEntryDto                            License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Output DTO for History entry instances.                                                        *
@@ -10,7 +10,7 @@
 
 using System;
 
-namespace Empiria.History.Services.Adapters {
+namespace Empiria.History {
 
   // <summary>Output DTO for History entry instances.</summary>
   public class HistoryEntryDto {
@@ -37,4 +37,4 @@ namespace Empiria.History.Services.Adapters {
 
   } // HistoryEntryDto
 
-}  // namespace Empiria.History.Services.Adapters
+}  // namespace Empiria.History

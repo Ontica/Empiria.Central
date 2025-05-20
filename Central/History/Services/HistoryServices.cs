@@ -1,18 +1,14 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : History Services                          Component : Services Layer                           *
-*  Assembly : Empiria.Central.Services.dll              Pattern   : Services provider                        *
+*  Assembly : Empiria.Central.dll                       Pattern   : Services provider                        *
 *  Type     : HistoryServices                           License   : Please read LICENSE.txt file             *
 *                                                                                                            *
 *  Summary  : Provides services for object's history.                                                        *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-using Empiria.History.Data;
-
-using Empiria.History.Services.Adapters;
-
-namespace Empiria.History.Services {
+namespace Empiria.History {
 
   /// <summary>Provides services for object's history.</summary>
   static public class HistoryServices {
@@ -34,7 +30,7 @@ namespace Empiria.History.Services {
     static public FixedList<HistoryEntryDto> GetEntityHistory(BaseObject entity) {
       Assertion.Require(entity, nameof(entity));
 
-      FixedList<HistoryEntry> history = HistoryData.GetHistory(entity);
+      FixedList<HistoryEntry> history = HistoryDataService.GetHistory(entity);
 
       return HistoryEntryMapper.Map(history);
     }
@@ -43,4 +39,4 @@ namespace Empiria.History.Services {
 
   }  // class HistoryServices
 
-}  // namespace Empiria.History.Services
+}  // namespace Empiria.History

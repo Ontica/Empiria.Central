@@ -1,7 +1,7 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
 *  Module   : History Services                          Component : Data Layer                               *
-*  Assembly : Empiria.Central.Services.dll              Pattern   : Data access services provider            *
+*  Assembly : Empiria.Central.dll                       Pattern   : Data access services provider            *
 *  Type     : HistoryData                               License   : Please read LICENSE.txt file             *
 *                                                                                                            *
 *  Summary  : Persistance services for object's history entries.                                             *
@@ -10,10 +10,10 @@
 
 using Empiria.Data;
 
-namespace Empiria.History.Data {
+namespace Empiria.History {
 
   /// <summary>Persistance services for object's history entries.</summary>
-  static internal class HistoryData {
+  static internal class HistoryDataService {
 
     static internal FixedList<HistoryEntry> GetHistory(BaseObject entity) {
       Assertion.Require(entity, nameof(entity));
@@ -48,4 +48,4 @@ namespace Empiria.History.Data {
 
   }  // class HistoryData
 
-}  // namespace Empiria.History.Data
+}  // namespace Empiria.History
