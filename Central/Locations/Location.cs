@@ -88,10 +88,10 @@ namespace Empiria.Locations {
 
     public LocationType LocationType {
       get {
-        return LocationType.Parse(base.ObjectCategoryId);
+        return base.GetCategory<LocationType>();
       }
       private set {
-        base.ObjectCategoryId = value.Id;
+        base.SetCategory(value);
       }
     }
 
