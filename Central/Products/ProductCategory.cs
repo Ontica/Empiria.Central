@@ -41,8 +41,7 @@ namespace Empiria.Products {
     static public ProductCategory Empty => ParseEmpty<ProductCategory>();
 
     static public FixedList<ProductCategory> GetList() {
-      return GetList<ProductCategory>()
-            .ToFixedList();
+      return GetStorageObjects<ProductCategory>();
     }
 
     #endregion Constructors and parsers

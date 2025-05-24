@@ -24,7 +24,7 @@ namespace Empiria.Locations {
     static public Location Parse(string uid) => ParseKey<Location>(uid);
 
     static public FixedList<Location> GetList() {
-      return GetList<Location>().ToFixedList();
+      return GetStorageObjects<Location>();
     }
 
     static public Location Empty => ParseEmpty<Location>();

@@ -75,8 +75,7 @@ namespace Empiria.Products.Services {
 
     public FixedList<ProductCategoryDto> SearchProductCategories(string keywords) {
 
-      FixedList<ProductCategory> categories = ProductCategory.GetList<ProductCategory>()
-                                                             .ToFixedList();
+      FixedList<ProductCategory> categories = CommonStorage.GetStorageObjects<ProductCategory>();
 
       return ProductCategoryMapper.Map(categories);
     }

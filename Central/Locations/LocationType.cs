@@ -28,24 +28,13 @@ namespace Empiria.Locations {
                        .ToFixedList();
     }
 
-    static public LocationType ParseWithNamedKey(string namedKey) {
-      Assertion.Require(namedKey, nameof(namedKey));
-
-      var locationType = TryParse<LocationType>($"OBJECT_NAMED_KEY = '{namedKey}'");
-
-      if (locationType != null) {
-        return locationType;
-      }
-      return Empty;
-    }
-
     static public LocationType Empty => ParseEmpty<LocationType>();
 
-    static public LocationType Building => ParseWithNamedKey("Building");
+    static public LocationType Building => ParseNamedKey<LocationType>("Building");
 
-    static public LocationType Floor => ParseWithNamedKey("Floor");
+    static public LocationType Floor => ParseNamedKey<LocationType>("Floor");
 
-    static public LocationType Place => ParseWithNamedKey("Place");
+    static public LocationType Place => ParseNamedKey<LocationType>("Place");
 
     #endregion Constructors and parsers
 
