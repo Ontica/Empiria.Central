@@ -32,7 +32,8 @@ namespace Empiria.HumanResources {
     static public FixedList<Person> GetEmployees() {
       var employments = GetList();
 
-      return employments.Select(e => e.Employee).ToFixedList();
+      return employments.Select(e => e.Employee)
+                        .ToFixedList();
     }
 
     static public FixedList<Employment> GetList() {

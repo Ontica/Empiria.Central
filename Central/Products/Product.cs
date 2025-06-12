@@ -39,7 +39,7 @@ namespace Empiria.Products {
 
       Name = name;
       BaseUnit = ProductUnit.Empty;
-      Manager = Party.Primary;
+      Manager = Organization.Primary;
     }
 
     static public Product Parse(int id) => ParseId<Product>(id);
