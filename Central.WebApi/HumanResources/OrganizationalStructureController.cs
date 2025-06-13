@@ -22,6 +22,18 @@ namespace Empiria.Products.WebApi {
 
     #region Query Web Apis
 
+    [HttpGet]
+    [Route("v8/human-resources/organizational-structure/{orgUnitUID:guid}")]
+    public SingleObjectModel GetOrganizationalStructure([FromUri] string orgUnitUID) {
+
+      using (var services = OrganizationalStructureServices.ServiceInteractor()) {
+        OrganizationalStructureHolder structure = services.GetOrganizationalStructure(orgUnitUID);
+
+        return new SingleObjectModel(base.Request, structure);
+      }
+    }
+
+
     [HttpPost]
     [Route("v8/human-resources/organizational-structure/search")]
     public SingleObjectModel SearchOrganizationalStructure([FromBody] OrganizationalStructureQuery query) {

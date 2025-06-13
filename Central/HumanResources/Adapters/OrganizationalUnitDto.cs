@@ -9,10 +9,64 @@
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
 using System;
-using Empiria.StateEnums;
 
 namespace Empiria.HumanResources {
 
+  /// <summary>Output Holder DTO for an organizational unit structure.</summary>
+  public class OrganizationalStructureHolder {
+
+    public OrganizationalUnitDto OrganizationalUnit {
+      get; internal set;
+    }
+
+    public FixedList<AccountabilityDescriptor> Accountabilities {
+      get; internal set;
+    }
+
+  } // class OrganizationalStructureHolder
+
+
+
+  /// <summary>Output DTO for an organizational unit.</summary>
+  public class OrganizationalUnitDto {
+
+    public string UID {
+      get; internal set;
+    }
+
+    public string Code {
+      get; internal set;
+    }
+
+    public string Name {
+      get; internal set;
+    }
+
+    public NamedEntityDto Type {
+      get; internal set;
+    }
+
+    public NamedEntityDto Parent {
+      get; internal set;
+    }
+
+    public NamedEntityDto Responsible {
+      get; internal set;
+    }
+
+    public DateTime StartDate {
+      get; internal set;
+    }
+
+    public DateTime EndDate {
+      get; internal set;
+    }
+
+  }  // class OrganizationalUnitDto
+
+
+
+  /// <summary>Output DTO for an organizational unit for use in lists.</summary>
   public class OrganizationalUnitDescriptor {
 
     public string UID {
@@ -32,6 +86,10 @@ namespace Empiria.HumanResources {
     }
 
     public string TypeName {
+      get; internal set;
+    }
+
+    public string ParentName {
       get; internal set;
     }
 
@@ -63,6 +121,6 @@ namespace Empiria.HumanResources {
       get; internal set;
     }
 
-  }  // class OrganizationalUnitDto
+  }  // class OrganizationalUnitDescriptor
 
 }  // namespace Empiria.HumanResources
