@@ -43,13 +43,19 @@ namespace Empiria.HumanResources {
 
 
     public FixedList<OrganizationalUnitDescriptor> SearchOrganizationalStructure(OrganizationalStructureQuery query) {
-      var orgUnits = OrganizationalUnit.GetListFor(Organization.Primary);
+      Assertion.Require(query, nameof(query));
+
+      string filter = query.MapToFilterString();
+
+      string sort = query.MapToSortString();
+
+      FixedList<OrganizationalUnit> orgUnits = HumanResourcesDataService.SearchOrganizationalUnits(filter, sort);
 
       return OrganizationalUnitMapper.Map(orgUnits);
     }
 
     #endregion Services
 
-  }  // class DocumentServices
+  }  // class OrganizationalStructureServices
 
 }  // namespace Empiria.HumanResources

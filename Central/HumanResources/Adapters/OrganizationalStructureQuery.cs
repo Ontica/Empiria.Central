@@ -8,12 +8,24 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using Empiria.StateEnums;
+
 namespace Empiria.HumanResources.Adapters {
 
   /// <summary>Input query DTO used to retrieve organizational structures.</summary>
   public class OrganizationalStructureQuery {
 
     public string Keywords {
+      get; set;
+    } = string.Empty;
+
+
+    public EntityStatus Status {
+      get; set;
+    } = EntityStatus.All;
+
+
+    public string OrderBy {
       get; set;
     } = string.Empty;
 
