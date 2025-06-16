@@ -22,6 +22,11 @@ namespace Empiria.HumanResources {
       // Required by Empiria Framework for all partitioned types.
     }
 
+    internal Accountability(PartyRole role, Party commissioner, Party responsible) :
+                                                  base(role, commissioner, responsible) {
+      // no-op
+    }
+
     static public new Accountability Parse(int id) => ParseId<Accountability>(id);
 
     static public new Accountability Parse(string uid) => ParseKey<Accountability>(uid);
@@ -29,7 +34,7 @@ namespace Empiria.HumanResources {
     static public new Accountability Empty => ParseEmpty<Accountability>();
 
     static public FixedList<Accountability> GetList() {
-      var accountabilities = GetList<Accountability>("PARTY_RELATION_STATUS <> 'X'");
+      var accountabilities = GetList<Accountability>("PTY_REL_STATUS <> 'X'");
 
       return accountabilities.ToFixedList();
     }
@@ -38,11 +43,15 @@ namespace Empiria.HumanResources {
       Assertion.Require(commissioner, nameof(commissioner));
       Assertion.Require(!commissioner.IsEmptyInstance, nameof(commissioner));
 
-      var accountabilities = GetList<Accountability>($"COMMISSIONER_PARTY_ID = {commissioner.Id} AND " +
-                                                     $"PARTY_RELATION_STATUS <> 'X'");
+      var accountabilities = GetList<Accountability>($"PTY_REL_COMMISSIONER_ID = {commissioner.Id} AND " +
+                                                     $"PTY_REL_STATUS <> 'X'");
 
-      return accountabilities.ToFixedList();
+      return accountabilities.ToFixedList()
+                             .Sort((x, y) => $"{x.Responsible.Name}|{x.Role.Name}".CompareTo(
+                                             $"{y.Responsible.Name}|{y.Role.Name}")
+                             );
     }
+
 
     #endregion Constructors and parsers
 
@@ -68,6 +77,20 @@ namespace Empiria.HumanResources {
     }
 
     #endregion Properties
+
+    #region Methods
+
+    internal new void Update(PartyRelationFields fields) {
+      Assertion.Require(fields, nameof(fields));
+
+      base.Update(fields);
+    }
+
+    internal new void Delete() {
+      base.Delete();
+    }
+
+    #endregion Methods
 
   } // class Accountability
 

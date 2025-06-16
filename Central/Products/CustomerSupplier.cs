@@ -33,19 +33,19 @@ namespace Empiria.Products {
 
     public string CustomerNo {
       get {
-        return ExtendedData.Get("customerNo", string.Empty);
+        return ExtData.Get("customerNo", string.Empty);
       }
       private set {
-        ExtendedData.SetIfValue("customerNo", value);
+        ExtData.SetIfValue("customerNo", value);
       }
     }
 
     public string SupplierNo {
       get {
-        return ExtendedData.Get("supplierNo", string.Empty);
+        return ExtData.Get("supplierNo", string.Empty);
       }
       private set {
-        ExtendedData.SetIfValue("supplierNo", value);
+        ExtData.SetIfValue("supplierNo", value);
       }
     }
 

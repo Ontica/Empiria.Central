@@ -10,12 +10,31 @@
 
 using Xunit;
 
+using Empiria.Ontology;
+using Empiria.Parties;
+
 using Empiria.HumanResources;
 
 namespace Empiria.Tests.HumanResources {
 
   /// <summary>Unit tests for Accountability instances.</summary>
   public class AccountabilityTests {
+
+    [Fact]
+    public void Should_Create_Accountability() {
+      var role = TestsObjects.TryGetObject<PartyRole>();
+      var commissioner = TestsObjects.TryGetObject<OrganizationalUnit>();
+      var responsible = TestsObjects.TryGetObject<Person>();
+
+      var sut = new Accountability(role, commissioner, responsible);
+
+      Assert.Equal(ObjectTypeInfo.Parse<Accountability>(), sut.PartyRelationType);
+      Assert.Equal(role, sut.Role);
+      Assert.Equal(commissioner, sut.Commissioner);
+      Assert.Equal(responsible, sut.Responsible);
+      Assert.Equal(StateEnums.EntityStatus.Active, sut.Status);
+    }
+
 
     [Fact]
     public void Should_Get_Empty_Accountability() {

@@ -37,7 +37,7 @@ namespace Empiria.HumanResources {
     }
 
     static public FixedList<Employment> GetList() {
-      var employments = GetList<Employment>("PARTY_RELATION_STATUS <> 'X'");
+      var employments = GetList<Employment>("PTY_REL_STATUS <> 'X'");
 
       return employments.ToFixedList();
     }
@@ -62,7 +62,7 @@ namespace Empiria.HumanResources {
 
     public string EmployeeNo {
       get {
-        return base.ExtendedData.Get("employeeNo", "N/D");
+        return base.ExtData.Get("employeeNo", "N/D");
       }
     }
 
