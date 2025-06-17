@@ -14,6 +14,7 @@ using Empiria.Parties;
 using Empiria.WebApi;
 
 using Empiria.HumanResources;
+using Empiria.HumanResources.Adapters;
 
 namespace Empiria.Products.WebApi {
 
@@ -54,6 +55,18 @@ namespace Empiria.Products.WebApi {
         AccountabilityDto accountability = services.GetAccountability(accountabilityUID);
 
         return new SingleObjectModel(base.Request, accountability);
+      }
+    }
+
+
+    [HttpGet]
+    [Route("v8/human-resources/accountabilities/{commissionerUID:guid}/structured-data-for-edition")]
+    public SingleObjectModel GetStructureForEditAccountabilities([FromUri] string commissionerUID) {
+
+      using (var services = AccountabilityServices.ServiceInteractor()) {
+        StructureForEditAccountabilities structure = services.GetStructureForEditAccountabilities(commissionerUID);
+
+        return new SingleObjectModel(base.Request, structure);
       }
     }
 

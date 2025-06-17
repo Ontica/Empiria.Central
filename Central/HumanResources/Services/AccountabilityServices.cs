@@ -12,6 +12,8 @@ using Empiria.Services;
 
 using Empiria.Parties;
 
+using Empiria.HumanResources.Adapters;
+
 namespace Empiria.HumanResources {
 
   /// <summary>Provides services to update and retrieve accountabilities.</summary>
@@ -68,6 +70,15 @@ namespace Empiria.HumanResources {
     }
 
 
+    public StructureForEditAccountabilities GetStructureForEditAccountabilities(string commissionerUID) {
+      Assertion.Require(commissionerUID, nameof(commissionerUID));
+
+      var commissioner = Party.Parse(commissionerUID);
+
+      return StructureForEditAccountabilitiesMapper.Map(commissioner);
+    }
+
+
     public OrganizationalStructureHolder UpdateAccountability(PartyRelationFields fields) {
       Assertion.Require(fields, nameof(fields));
 
@@ -79,7 +90,6 @@ namespace Empiria.HumanResources {
 
       return OrganizationalUnitMapper.Map((OrganizationalUnit) accountability.Commissioner);
     }
-
 
     #endregion Services
 
