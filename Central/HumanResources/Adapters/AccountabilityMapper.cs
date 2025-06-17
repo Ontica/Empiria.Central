@@ -10,7 +10,7 @@
 
 using Empiria.Parties;
 
-namespace Empiria.HumanResources {
+namespace Empiria.HumanResources.Adapters {
 
   /// <summary>Mapping services for accountability data.</summary>
   static public class AccountabilityMapper {
@@ -55,4 +55,4 @@ namespace Empiria.HumanResources {
 
   }  // class AccountabilityMapper
 
-}  // namespace Empiria.HumanResources
+}  // namespace Empiria.HumanResources.Adapters

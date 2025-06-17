@@ -10,7 +10,7 @@
 
 using System;
 
-namespace Empiria.HumanResources {
+namespace Empiria.HumanResources.Adapters {
 
   /// <summary>Output DTO with acountability data.</summary>
   public class AccountabilityDto {
@@ -85,4 +85,4 @@ namespace Empiria.HumanResources {
 
   }  // class AccountabilityDescriptor
 
-}  // namespace Empiria.HumanResources
+}  // namespace Empiria.HumanResources.Adapters

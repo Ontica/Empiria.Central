@@ -11,7 +11,7 @@
 using Empiria.Parties;
 using Empiria.StateEnums;
 
-namespace Empiria.HumanResources {
+namespace Empiria.HumanResources.Adapters {
 
   /// <summary>Mapping services for organizational structure.</summary>
   static public class OrganizationalUnitMapper {
@@ -64,4 +64,4 @@ namespace Empiria.HumanResources {
 
   }  // class OrganizationalStructureMapper
 
-}  // namespace Empiria.HumanResources
+}  // namespace Empiria.HumanResources.Adapters

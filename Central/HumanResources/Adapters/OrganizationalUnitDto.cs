@@ -10,7 +10,7 @@
 
 using System;
 
-namespace Empiria.HumanResources {
+namespace Empiria.HumanResources.Adapters {
 
   /// <summary>Output Holder DTO for an organizational unit structure.</summary>
   public class OrganizationalStructureHolder {
@@ -123,4 +123,4 @@ namespace Empiria.HumanResources {
 
   }  // class OrganizationalUnitDescriptor
 
-}  // namespace Empiria.HumanResources
+}  // namespace Empiria.HumanResources.Adapters
