@@ -12,10 +12,54 @@ using System;
 
 namespace Empiria.HumanResources {
 
+  /// <summary>Output DTO with acountability data.</summary>
+  public class AccountabilityDto {
+
+    public string UID {
+      get; internal set;
+    }
+
+    [Newtonsoft.Json.JsonProperty(PropertyName = "PartyRelationType")]
+    public NamedEntityDto PartyRelationCategory {
+      get; internal set;
+    }
+
+    public NamedEntityDto Responsible {
+      get; internal set;
+    }
+
+    public NamedEntityDto Role {
+      get; internal set;
+    }
+
+    public NamedEntityDto Commissioner {
+      get; internal set;
+    }
+
+    public FixedList<string> Tags {
+      get; internal set;
+    }
+
+    public DateTime StartDate {
+      get; internal set;
+    }
+
+    public DateTime EndDate {
+      get; internal set;
+    }
+
+  }  // class AccountabilityDto
+
+
+
   /// <summary>Output DTO with acountability data for use in lists.</summary>
   public class AccountabilityDescriptor {
 
     public string UID {
+      get; internal set;
+    }
+
+    public string PartyRelationCategoryName {
       get; internal set;
     }
 

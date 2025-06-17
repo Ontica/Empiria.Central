@@ -25,10 +25,26 @@ namespace Empiria.HumanResources {
     }
 
 
+    static internal AccountabilityDto Map(Accountability accountability) {
+
+      return new AccountabilityDto {
+        UID = accountability.UID,
+        PartyRelationCategory = accountability.Category.MapToNamedEntity(),
+        Responsible = accountability.Responsible.MapToNamedEntity(),
+        Role = accountability.Role.MapToNamedEntity(),
+        Commissioner = accountability.Commissioner.MapToNamedEntity(),
+        Tags = accountability.Tags,
+        StartDate = accountability.StartDate,
+        EndDate = accountability.EndDate,
+      };
+    }
+
+
     static private AccountabilityDescriptor MapToDescriptor(Accountability accountability) {
 
       return new AccountabilityDescriptor {
         UID = accountability.UID,
+        PartyRelationCategoryName = accountability.Category.Name,
         ResponsibleName = accountability.Responsible.Name,
         RoleName = accountability.Role.Name,
         CommissionerName = accountability.Commissioner.Name,

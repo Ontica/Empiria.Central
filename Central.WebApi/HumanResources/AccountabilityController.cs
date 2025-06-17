@@ -46,6 +46,18 @@ namespace Empiria.Products.WebApi {
     }
 
 
+    [HttpGet]
+    [Route("v8/human-resources/accountabilities/{accountabilityUID:guid}")]
+    public SingleObjectModel GetAccountability([FromUri] string accountabilityUID) {
+
+      using (var services = AccountabilityServices.ServiceInteractor()) {
+        AccountabilityDto accountability = services.GetAccountability(accountabilityUID);
+
+        return new SingleObjectModel(base.Request, accountability);
+      }
+    }
+
+
     [HttpPut, HttpPatch]
     [Route("v8/human-resources/accountabilities/{accountabilityUID:guid}")]
     public SingleObjectModel UpdateAccountability([FromUri] string accountabilityUID,

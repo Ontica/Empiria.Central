@@ -59,6 +59,15 @@ namespace Empiria.HumanResources {
     }
 
 
+    public AccountabilityDto GetAccountability(string accountabilityUID) {
+      Assertion.Require(accountabilityUID, nameof(accountabilityUID));
+
+      var accountability = Accountability.Parse(accountabilityUID);
+
+      return AccountabilityMapper.Map(accountability);
+    }
+
+
     public OrganizationalStructureHolder UpdateAccountability(PartyRelationFields fields) {
       Assertion.Require(fields, nameof(fields));
 
