@@ -70,6 +70,21 @@ namespace Empiria.HumanResources.WebApi {
     }
 
 
+    [HttpPost]
+    [Route("v8/human-resources/accountabilities/{commissionerUID:guid}/responsibles/search-available")]
+    public CollectionModel SearchAvailableResponsibles([FromUri] string commissionerUID,
+                                                       [FromBody] CommissionerResponsiblesQuery query) {
+
+      query.CommissionerUID = commissionerUID;
+
+      using (var services = AccountabilityServices.ServiceInteractor()) {
+        FixedList<NamedEntityDto> responsibles = services.SearchAvailableResponsibles(query);
+
+        return new CollectionModel(base.Request, responsibles);
+      }
+    }
+
+
     [HttpPut, HttpPatch]
     [Route("v8/human-resources/accountabilities/{accountabilityUID:guid}")]
     public SingleObjectModel UpdateAccountability([FromUri] string accountabilityUID,

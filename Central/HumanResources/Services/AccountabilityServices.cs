@@ -79,6 +79,25 @@ namespace Empiria.HumanResources {
     }
 
 
+    public FixedList<NamedEntityDto> SearchAvailableResponsibles(CommissionerResponsiblesQuery query) {
+      Assertion.Require(query, nameof(query));
+
+      var commissioner = Party.Parse(query.CommissionerUID);
+
+      var role = PartyRole.Parse(query.PartyRoleUID);
+
+      FixedList<Party> securityPlayers = role.SearchSecurityPlayers(query.Keywords);
+
+      FixedList<Person> alreadyAssigned = Accountability.GetListFor(commissioner)
+                                                        .FindAll(x => x.Role.Equals(role))
+                                                        .SelectDistinct(x => x.Responsible);
+
+      securityPlayers = securityPlayers.Remove(alreadyAssigned);
+
+      return securityPlayers.MapToNamedEntityList();
+    }
+
+
     public OrganizationalStructureHolder UpdateAccountability(PartyRelationFields fields) {
       Assertion.Require(fields, nameof(fields));
 
