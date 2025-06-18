@@ -92,7 +92,7 @@ namespace Empiria.Products {
 
     public FixedList<string> Identificators {
       get {
-        return _identificators.Split(' ').ToFixedList();
+        return EmpiriaString.Tagging(_identificators);
       }
     }
 
@@ -102,7 +102,7 @@ namespace Empiria.Products {
 
     public FixedList<string> Roles {
       get {
-        return _roles.Split(' ').ToFixedList();
+        return EmpiriaString.Tagging(_roles);
       }
     }
 
@@ -112,7 +112,7 @@ namespace Empiria.Products {
 
     public FixedList<string> Tags {
       get {
-        return _tags.Split(' ').ToFixedList();
+        return EmpiriaString.Tagging(_tags);
       }
     }
 
@@ -189,7 +189,7 @@ namespace Empiria.Products {
     public virtual string Keywords {
       get {
         return EmpiriaString.BuildKeywords(InternalCode, Name,
-                                           ProductType.DisplayName, Description, _identificators, _tags);
+                                           ProductType.DisplayName, Description, _identificators, _tags, _roles);
       }
     }
 
@@ -233,9 +233,9 @@ namespace Empiria.Products {
       Name = PatchCleanField(fields.Name, Name);
       Description = fields.Description;
       InternalCode = PatchCleanField(fields.InternalCode, InternalCode);
-      _identificators = string.Join(" ", fields.Identificators);
-      _roles = PatchField(string.Join(" ", fields.Roles), _roles);
-      _tags = string.Join(" ", fields.Tags);
+      _identificators = EmpiriaString.Tagging(fields.Identificators);
+      _roles = EmpiriaString.Tagging(fields.Roles);
+      _tags = EmpiriaString.Tagging(fields.Tags);
       BaseUnit = PatchField(fields.BaseUnitUID, BaseUnit);
       Manager = PatchField(fields.ManagerUID, Manager);
     }

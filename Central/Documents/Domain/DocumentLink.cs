@@ -137,13 +137,21 @@ namespace Empiria.Documents {
 
 
     [DataField("DOCUMENT_LINK_IDENTIFICATORS")]
-    public string Identificators {
-      get; private set;
+    private string _identificators = string.Empty;
+
+    public FixedList<string> Identificators {
+      get {
+        return EmpiriaString.Tagging(_identificators);
+      }
     }
 
     [DataField("DOCUMENT_LINK_TAGS")]
-    public string Tags {
-      get; private set;
+    private string _tags = string.Empty;
+
+    public FixedList<string> Tags {
+      get {
+        return EmpiriaString.Tagging(_tags);
+      }
     }
 
     [DataField("DOCUMENT_LINK_EXT_DATA")]

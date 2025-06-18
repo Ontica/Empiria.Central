@@ -33,11 +33,6 @@ namespace Empiria.Documents {
     } = string.Empty;
 
 
-    public string[] Identifiers {
-      get; set;
-    } = new string[0];
-
-
     public string[] Tags {
       get; set;
     } = new string[0];

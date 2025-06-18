@@ -46,8 +46,8 @@ namespace Empiria.Products {
     static internal void WriteProduct(Product o) {
       var op = DataOperation.Parse("write_OMS_Product", o.Id, o.UID,
                   o.ProductType.Id, o.ProductCategory.Id, o.Name,
-                  o.Description, o.InternalCode, string.Join(" ", o.Identificators),
-                  string.Join(" ", o.Roles), string.Join(" ", o.Tags), o.Attributes.ToString(),
+                  o.Description, o.InternalCode, EmpiriaString.Tagging(o.Identificators),
+                  EmpiriaString.Tagging(o.Roles), EmpiriaString.Tagging(o.Tags), o.Attributes.ToString(),
                   o.BaseUnit.Id, o.Manager.Id, o.ExtensionData.ToString(), o.Keywords,
                   o.StartDate, o.EndDate, o.HistoricId, o.PostedBy.Id, o.PostingTime, (char) o.Status);
 

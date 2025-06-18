@@ -108,12 +108,13 @@ namespace Empiria.Documents {
       private set;
     }
 
+
     [DataField("DOCUMENT_IDENTIFIERS")]
     private string _identifiers = string.Empty;
 
     public FixedList<string> Identifiers {
       get {
-        return _identifiers.Split(' ').ToFixedList();
+        return EmpiriaString.Tagging(_identifiers);
       }
     }
 
@@ -123,7 +124,7 @@ namespace Empiria.Documents {
 
     public FixedList<string> Tags {
       get {
-        return _tags.Split(' ').ToFixedList();
+        return EmpiriaString.Tagging(_tags);
       }
     }
 
@@ -297,8 +298,8 @@ namespace Empiria.Documents {
       Description = PatchCleanField(fields.Description, Description);
       DocumentDate = PatchField(fields.DocumentDate, DocumentDate);
 
-      _identifiers = PatchField(string.Join(" ", fields.Identifiers), _identifiers);
-      _tags = PatchField(string.Join(" ", fields.Tags), _tags);
+      _tags = EmpiriaString.Tagging(fields.Tags);
+
       SourceParty = PatchField(fields.SourcePartyUID, SourceParty);
       TargetParty = PatchField(fields.TargetPartyUID, TargetParty);
       SignedBy = PatchField(fields.SignedByUID, SignedBy);

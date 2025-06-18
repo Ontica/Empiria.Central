@@ -32,8 +32,8 @@ namespace Empiria.Documents {
     static internal void WriteDocument(Document o) {
       var op = DataOperation.Parse("write_Document", o.Id, o.UID,
                   o.DocumentType.Id, o.DocumentCategory.Id, o.DocumentProduct.Id,
-                  o.DocumentNo, o.Name, o.Description, string.Join(" ", o.Tags),
-                  string.Join(" ", o.Identifiers), o.SourceParty.Id, o.TargetParty.Id,
+                  o.DocumentNo, o.Name, o.Description, EmpiriaString.Tagging(o.Tags),
+                  EmpiriaString.Tagging(o.Identifiers), o.SourceParty.Id, o.TargetParty.Id,
                   o.SignedBy.Id, o.DocumentDate, o.BaseEntityTypeId, o.BaseEntityId,
                   o.FileLocation.Id, o.FileData.ToString(), o.ExtensionData.ToString(), o.Keywords,
                   o.HistoricId, o.LastUpdateTime, o.PostedBy.Id, o.PostingTime, (char) o.Status);
@@ -45,7 +45,8 @@ namespace Empiria.Documents {
     static internal void WriteDocumentLink(DocumentLink o) {
       var op = DataOperation.Parse("write_Document_Link", o.Id, o.UID,
           o.DocumentLinkType.Id, o.Document.Id, o.LinkedEntityTypeId, o.LinkedEntityId,
-          o.LinkedEntityRole, o.Identificators, o.Tags, o.ExtensionData.ToString(),
+          o.LinkedEntityRole, EmpiriaString.Tagging(o.Identificators),
+          EmpiriaString.Tagging(o.Tags), o.ExtensionData.ToString(),
           o.Keywords, o.PostedBy.Id, o.PostingTime, (char) o.Status);
 
       DataWriter.Execute(op);
