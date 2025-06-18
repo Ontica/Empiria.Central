@@ -44,7 +44,7 @@ namespace Empiria.HumanResources {
 
       accountability.Save();
 
-      return OrganizationalUnitMapper.Map((OrganizationalUnit) accountability.Commissioner);
+      return OrganizationalStructureMapper.Map((OrganizationalUnit) accountability.Commissioner);
     }
 
 
@@ -57,7 +57,7 @@ namespace Empiria.HumanResources {
 
       accountability.Save();
 
-      return OrganizationalUnitMapper.Map((OrganizationalUnit) accountability.Commissioner);
+      return OrganizationalStructureMapper.Map((OrganizationalUnit) accountability.Commissioner);
     }
 
 
@@ -88,7 +88,7 @@ namespace Empiria.HumanResources {
 
       accountability.Save();
 
-      return OrganizationalUnitMapper.Map((OrganizationalUnit) accountability.Commissioner);
+      return OrganizationalStructureMapper.Map((OrganizationalUnit) accountability.Commissioner);
     }
 
     #endregion Services

@@ -12,10 +12,11 @@ using System.Web.Http;
 
 using Empiria.WebApi;
 
-using Empiria.HumanResources;
+using Empiria.Parties.Adapters;
+
 using Empiria.HumanResources.Adapters;
 
-namespace Empiria.Products.WebApi {
+namespace Empiria.HumanResources.WebApi {
 
   /// <summary>Web API used to retrive and update organizational structures.</summary>
   public class OrganizationalStructureController : WebApiController {
@@ -49,4 +50,4 @@ namespace Empiria.Products.WebApi {
 
   }  // class OrganizationalStructureController
 
-}  // namespace Empiria.Products.WebApi
+}  // namespace Empiria.HumanResources.WebApi

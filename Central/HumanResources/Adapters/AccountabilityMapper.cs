@@ -20,8 +20,7 @@ namespace Empiria.HumanResources.Adapters {
       FixedList<Accountability> accountabilities = Accountability.GetListFor(orgUnit);
 
       return accountabilities.Select(x => MapToDescriptor(x))
-                     .ToFixedList();
-
+                             .ToFixedList();
     }
 
 

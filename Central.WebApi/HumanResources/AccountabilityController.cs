@@ -13,10 +13,9 @@ using System.Web.Http;
 using Empiria.Parties;
 using Empiria.WebApi;
 
-using Empiria.HumanResources;
 using Empiria.HumanResources.Adapters;
 
-namespace Empiria.Products.WebApi {
+namespace Empiria.HumanResources.WebApi {
 
   /// <summary>Web API used to retrive and update accountabilites.</summary>
   public class AccountabilityController : WebApiController {
@@ -89,4 +88,4 @@ namespace Empiria.Products.WebApi {
 
   }  // class AccountabilityController
 
-}  // namespace Empiria.Products.WebApi
+}  // namespace Empiria.HumanResources.WebApi

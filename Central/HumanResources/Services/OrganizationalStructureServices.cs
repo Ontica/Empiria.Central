@@ -11,6 +11,7 @@
 using Empiria.Services;
 
 using Empiria.Parties;
+using Empiria.Parties.Adapters;
 
 using Empiria.HumanResources.Adapters;
 
@@ -38,7 +39,7 @@ namespace Empiria.HumanResources {
 
       var orgUnit = OrganizationalUnit.Parse(orgUnitUID);
 
-      return OrganizationalUnitMapper.Map(orgUnit);
+      return OrganizationalStructureMapper.Map(orgUnit);
     }
 
 
