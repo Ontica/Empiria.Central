@@ -106,10 +106,10 @@ namespace Empiria.Projects {
 
       fields.EnsureValid();
 
-      ProjectType = PatchField(fields.ProjectTypeUID, this.ProjectType);
-      Code = PatchCleanField(fields.Code, this.Code);
-      Name = PatchCleanField(fields.Name, this.Name);
-      Description = PatchCleanField(fields.Description, this.Description);
+      ProjectType = Patcher.Patch(fields.ProjectTypeUID, this.ProjectType);
+      Code = Patcher.PatchClean(fields.Code, this.Code);
+      Name = Patcher.PatchClean(fields.Name, this.Name);
+      Description = Patcher.PatchClean(fields.Description, this.Description);
 
       MarkAsDirty();
     }

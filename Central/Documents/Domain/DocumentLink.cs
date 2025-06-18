@@ -217,7 +217,7 @@ namespace Empiria.Documents {
 
       fields.EnsureValid();
 
-      LinkedEntityRole = PatchCleanField(fields.LinkedEntityRole, LinkedEntityRole);
+      LinkedEntityRole = Patcher.PatchClean(fields.LinkedEntityRole, LinkedEntityRole);
     }
 
     #endregion Methods

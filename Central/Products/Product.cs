@@ -230,14 +230,14 @@ namespace Empiria.Products {
 
       fields.EnsureValid();
 
-      Name = PatchCleanField(fields.Name, Name);
+      Name = Patcher.PatchClean(fields.Name, Name);
       Description = fields.Description;
-      InternalCode = PatchCleanField(fields.InternalCode, InternalCode);
+      InternalCode = Patcher.PatchClean(fields.InternalCode, InternalCode);
       _identificators = EmpiriaString.Tagging(fields.Identificators);
       _roles = EmpiriaString.Tagging(fields.Roles);
       _tags = EmpiriaString.Tagging(fields.Tags);
-      BaseUnit = PatchField(fields.BaseUnitUID, BaseUnit);
-      Manager = PatchField(fields.ManagerUID, Manager);
+      BaseUnit = Patcher.Patch(fields.BaseUnitUID, BaseUnit);
+      Manager = Patcher.Patch(fields.ManagerUID, Manager);
     }
 
     #endregion Methods

@@ -114,10 +114,10 @@ namespace Empiria.Products {
 
       fields.EnsureValid();
 
-      Name = PatchField(fields.Name, Name);
-      Description = PatchField(fields.Description, Description);
-      Parent = PatchField(fields.ParentCategoryUID, Parent);
-      IsAssignable = PatchField(fields.IsAssignable, IsAssignable);
+      Name = Patcher.PatchClean(fields.Name, Name);
+      Description = Patcher.PatchClean(fields.Description, Description);
+      Parent = Patcher.Patch(fields.ParentCategoryUID, Parent);
+      IsAssignable = Patcher.Patch(fields.IsAssignable, IsAssignable);
 
       if (fields.ProductUnits.Length != 0) {
         ProductUnits = fields.ProductUnits.Select(x => ProductUnit.Parse(x))

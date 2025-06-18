@@ -292,17 +292,17 @@ namespace Empiria.Documents {
 
       fields.EnsureValid();
 
-      DocumentProduct = PatchField(fields.DocumentProductUID, DocumentProduct);
-      DocumentNo = PatchCleanField(fields.DocumentNo, DocumentNo);
-      Name = PatchCleanField(fields.Name, Name);
-      Description = PatchCleanField(fields.Description, Description);
-      DocumentDate = PatchField(fields.DocumentDate, DocumentDate);
+      DocumentProduct = Patcher.Patch(fields.DocumentProductUID, DocumentProduct);
+      DocumentNo = Patcher.PatchClean(fields.DocumentNo, DocumentNo);
+      Name = Patcher.PatchClean(fields.Name, Name);
+      Description = Patcher.PatchClean(fields.Description, Description);
+      DocumentDate = Patcher.Patch(fields.DocumentDate, DocumentDate);
 
       _tags = EmpiriaString.Tagging(fields.Tags);
 
-      SourceParty = PatchField(fields.SourcePartyUID, SourceParty);
-      TargetParty = PatchField(fields.TargetPartyUID, TargetParty);
-      SignedBy = PatchField(fields.SignedByUID, SignedBy);
+      SourceParty = Patcher.Patch(fields.SourcePartyUID, SourceParty);
+      TargetParty = Patcher.Patch(fields.TargetPartyUID, TargetParty);
+      SignedBy = Patcher.Patch(fields.SignedByUID, SignedBy);
     }
 
 
