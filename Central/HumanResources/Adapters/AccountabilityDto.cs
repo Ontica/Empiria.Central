@@ -36,6 +36,14 @@ namespace Empiria.HumanResources.Adapters {
       get; internal set;
     }
 
+    public string Code {
+      get; internal set;
+
+    }
+    public string Description {
+      get; internal set;
+    }
+
     public FixedList<string> Tags {
       get; internal set;
     }
@@ -72,6 +80,14 @@ namespace Empiria.HumanResources.Adapters {
     }
 
     public string CommissionerName {
+      get; internal set;
+    }
+
+    public string Code {
+      get; internal set;
+    }
+
+    public string Description {
       get; internal set;
     }
 

@@ -17,7 +17,7 @@ namespace Empiria.HumanResources.Adapters {
 
     static internal FixedList<AccountabilityDescriptor> Map(OrganizationalUnit orgUnit) {
 
-      FixedList<Accountability> accountabilities = Accountability.GetListFor(orgUnit);
+      FixedList<Accountability> accountabilities = Accountability.GetListForCommissioner(orgUnit);
 
       return accountabilities.Select(x => MapToDescriptor(x))
                              .ToFixedList();
@@ -32,9 +32,11 @@ namespace Empiria.HumanResources.Adapters {
         Responsible = accountability.Responsible.MapToNamedEntity(),
         Role = accountability.Role.MapToNamedEntity(),
         Commissioner = accountability.Commissioner.MapToNamedEntity(),
+        Code = accountability.Code,
+        Description = accountability.Description,
         Tags = accountability.Tags,
         StartDate = accountability.StartDate,
-        EndDate = accountability.EndDate,
+        EndDate = accountability.EndDate
       };
     }
 
@@ -44,11 +46,13 @@ namespace Empiria.HumanResources.Adapters {
       return new AccountabilityDescriptor {
         UID = accountability.UID,
         PartyRelationCategoryName = accountability.Category.Name,
-        ResponsibleName = accountability.Responsible.Name,
+        ResponsibleName = accountability.Responsible.FullName,
         RoleName = accountability.Role.Name,
         CommissionerName = accountability.Commissioner.Name,
+        Code = accountability.Code,
+        Description = accountability.Description,
         StartDate = accountability.StartDate,
-        EndDate = accountability.EndDate,
+        EndDate = accountability.EndDate
       };
     }
 

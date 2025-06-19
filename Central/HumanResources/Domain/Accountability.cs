@@ -9,6 +9,7 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using System;
 using Empiria.Parties;
 
 namespace Empiria.HumanResources {
@@ -39,7 +40,8 @@ namespace Empiria.HumanResources {
       return accountabilities.ToFixedList();
     }
 
-    static internal FixedList<Accountability> GetListFor(Party commissioner) {
+
+    static public FixedList<Accountability> GetListForCommissioner(Party commissioner) {
       Assertion.Require(commissioner, nameof(commissioner));
       Assertion.Require(!commissioner.IsEmptyInstance, nameof(commissioner));
 
@@ -47,15 +49,57 @@ namespace Empiria.HumanResources {
                                                      $"PTY_REL_STATUS <> 'X'");
 
       return accountabilities.ToFixedList()
-                             .Sort((x, y) => $"{x.Responsible.Name}|{x.Role.Name}".CompareTo(
-                                             $"{y.Responsible.Name}|{y.Role.Name}")
+                             .Sort((x, y) => $"{x.Role.Name}|{x.Responsible.Name}".CompareTo(
+                                             $"{y.Role.Name}|{y.Responsible.Name}")
                              );
     }
 
 
+    static public FixedList<Accountability> GetListForResponsible(Party responsible) {
+      Assertion.Require(responsible, nameof(responsible));
+      Assertion.Require(!responsible.IsEmptyInstance, nameof(responsible));
+
+      var accountabilities = GetList<Accountability>($"PTY_REL_RESPONSIBLE_ID = {responsible.Id} AND " +
+                                                     $"PTY_REL_STATUS <> 'X'");
+
+      return accountabilities.ToFixedList()
+                             .Sort((x, y) => $"{x.Role.Name}|{x.Commissioner.Name}".CompareTo(
+                                             $"{y.Role.Name}|{y.Commissioner.Name}")
+                             );
+    }
+
+
+    static public FixedList<T> GetCommissionersFor<T>(Party party, string listName, string role) where T : Party {
+      Assertion.Require(party, nameof(party));
+      Assertion.Require(role, nameof(role));
+
+      FixedList<T> list = Party.GetList<T>(DateTime.Today)
+                               .FindAll(x => x.PlaysRole(listName));
+
+      list.Sort((x, y) => ((INamedEntity) x).Name.CompareTo(((INamedEntity) y).Name));
+
+      FixedList<Accountability> accountabilities = GetListForResponsible(party);
+
+      FixedList<PartyRole> roles = accountabilities.FindAll(x => x.Role.AppliesTo.Contains(y => y == role))
+                                                   .SelectDistinct(x => x.Role);
+
+      if (roles.Contains(x => x.HasOrganizationalScope)) {
+        return list;
+      }
+
+      return list.FindAll(x => accountabilities.Contains(y => y.Commissioner.Equals(x)));
+    }
+
     #endregion Constructors and parsers
 
     #region Properties
+
+    public new string Code {
+      get {
+        return base.Code;
+      }
+    }
+
 
     public new Party Commissioner {
       get {
@@ -69,6 +113,7 @@ namespace Empiria.HumanResources {
         return (Person) base.Responsible;
       }
     }
+
 
     public new PartyRole Role {
       get {

@@ -88,7 +88,7 @@ namespace Empiria.HumanResources {
 
       FixedList<Party> securityPlayers = role.SearchSecurityPlayers(query.Keywords);
 
-      FixedList<Person> alreadyAssigned = Accountability.GetListFor(commissioner)
+      FixedList<Person> alreadyAssigned = Accountability.GetListForCommissioner(commissioner)
                                                         .FindAll(x => x.Role.Equals(role))
                                                         .SelectDistinct(x => x.Responsible);
 
