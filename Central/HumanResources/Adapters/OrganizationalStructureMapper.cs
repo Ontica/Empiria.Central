@@ -21,6 +21,16 @@ namespace Empiria.HumanResources.Adapters {
       return new OrganizationalStructureHolder {
         OrganizationalUnit = OrganizationalUnitMapper.Map(orgUnit),
         Accountabilities = AccountabilityMapper.Map(orgUnit),
+        Actions = MapActions(orgUnit),
+      };
+    }
+
+
+    static private BaseActions MapActions(OrganizationalUnit orgUnit) {
+      return new BaseActions {
+        CanUpdate = true,
+        CanDelete = false,
+        CanEditDocuments = false,
       };
     }
 

@@ -23,6 +23,10 @@ namespace Empiria.HumanResources.Adapters {
       get; internal set;
     }
 
+    public BaseActions Actions {
+      get; internal set;
+    }
+
   } // class OrganizationalStructureHolder
 
 }  // namespace Empiria.HumanResources.Adapters
