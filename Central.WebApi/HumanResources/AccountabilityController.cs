@@ -71,11 +71,8 @@ namespace Empiria.HumanResources.WebApi {
 
 
     [HttpPost]
-    [Route("v8/human-resources/accountabilities/{commissionerUID:guid}/responsibles/search-available")]
-    public CollectionModel SearchAvailableResponsibles([FromUri] string commissionerUID,
-                                                       [FromBody] CommissionerResponsiblesQuery query) {
-
-      query.CommissionerUID = commissionerUID;
+    [Route("v8/human-resources/accountabilities/responsibles/search-available")]
+    public CollectionModel SearchAvailableResponsibles([FromBody] CommissionerResponsiblesQuery query) {
 
       using (var services = AccountabilityServices.ServiceInteractor()) {
         FixedList<NamedEntityDto> responsibles = services.SearchAvailableResponsibles(query);
