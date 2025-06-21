@@ -22,20 +22,6 @@ namespace Empiria.HumanResources.WebApi {
 
     #region Command Web Apis
 
-    [HttpGet]
-    [Route("v5/security/management/subjects/{subjectUID:guid}/accountabilities")]
-    public CollectionModel CreateAccountability([FromUri] string subjectUID) {
-
-      Party responsible = GetResponsibleParty(subjectUID);
-
-      using (var services = ResponsibleAccountabilityServices.ServiceInteractor()) {
-        FixedList<AccountabilityDescriptor> accountabilities = services.GetAccountabilities(responsible.UID);
-
-        return new CollectionModel(base.Request, accountabilities);
-      }
-    }
-
-
     [HttpPost]
     [Route("v5/security/management/subjects/{subjectUID:guid}/accountabilities")]
     public CollectionModel CreateAccountability([FromUri] string subjectUID,
@@ -78,7 +64,21 @@ namespace Empiria.HumanResources.WebApi {
 
 
     [HttpGet]
-    [Route("v5/security/management/subjects/{subjectUID:guid}/structured-data-for-edition")]
+    [Route("v5/security/management/subjects/{subjectUID:guid}/accountabilities")]
+    public CollectionModel GetAccountabilities([FromUri] string subjectUID) {
+
+      Party responsible = GetResponsibleParty(subjectUID);
+
+      using (var services = ResponsibleAccountabilityServices.ServiceInteractor()) {
+        FixedList<AccountabilityDescriptor> accountabilities = services.GetAccountabilities(responsible.UID);
+
+        return new CollectionModel(base.Request, accountabilities);
+      }
+    }
+
+
+    [HttpGet]
+    [Route("v5/security/management/subjects/{subjectUID:guid}/accountabilities/structured-data-for-edition")]
     public SingleObjectModel GetStructureForEditAccountabilities([FromUri] string subjectUID) {
 
       Party responsible = GetResponsibleParty(subjectUID);
@@ -92,11 +92,10 @@ namespace Empiria.HumanResources.WebApi {
 
 
     [HttpPost]
-    [Route("v5/security/management/subjects/{subjectUID:guid}/commissioners/search-available")]
-    public CollectionModel SearchAvailableCommissioners([FromUri] string subjectUID,
-                                                        [FromBody] CommissionerResponsiblesQuery query) {
+    [Route("v5/security/management/subjects/commissioners/search-available")]
+    public CollectionModel SearchAvailableCommissioners([FromBody] CommissionerResponsiblesQuery query) {
 
-      query.ResponsibleUID = GetResponsibleParty(subjectUID).UID;
+      query.ResponsibleUID = GetResponsibleParty(query.ResponsibleUID).UID;
 
       using (var services = ResponsibleAccountabilityServices.ServiceInteractor()) {
         FixedList<NamedEntityDto> responsibles = services.SearchAvailableCommissioners(query);

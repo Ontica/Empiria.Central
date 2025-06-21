@@ -8,9 +8,10 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-using Empiria.Services;
+using System;
 
 using Empiria.Parties;
+using Empiria.Services;
 
 using Empiria.HumanResources.Adapters;
 
@@ -90,7 +91,10 @@ namespace Empiria.HumanResources {
 
       var responsible = Party.Parse(responsibleUID);
 
-      FixedList<PartyRole> availableRoles = responsible.GetSecurityRoles();
+      FixedList<string> resposibleRoles = responsible.GetSecurityRoles().SelectDistinctFlat(x => x.AppliesTo);
+
+      FixedList<PartyRole> availableRoles = PartyRole.GetList()
+                                                     .FindAll(x => x.AppliesTo.Intersect(resposibleRoles).Count != 0);
 
       return StructureForEditAccountabilitiesMapper.Map(responsible, availableRoles);
     }
@@ -103,15 +107,18 @@ namespace Empiria.HumanResources {
 
       var role = PartyRole.Parse(query.PartyRoleUID);
 
-      FixedList<Party> securityPlayers = role.SearchSecurityPlayers(query.Keywords);
+      string keywords = SearchExpression.ParseAndLikeKeywords("PARTY_KEYWORDS", query.Keywords);
+
+      FixedList<OrganizationalUnit> commissioners = Party.GetFullList<OrganizationalUnit>(keywords, "PARTY_CODE")
+                                                         .FindAll(x => x.Roles.Intersect(role.AppliesTo).Count != 0);
 
       FixedList<OrganizationalUnit> alreadyAssigned = Accountability.GetListForResponsible(responsible)
                                                                     .FindAll(x => x.Role.Equals(role))
                                                                     .SelectDistinct(x => (OrganizationalUnit) x.Commissioner);
 
-      securityPlayers = securityPlayers.Remove(alreadyAssigned);
+      commissioners = commissioners.Remove(alreadyAssigned);
 
-      return securityPlayers.MapToNamedEntityList();
+      return commissioners.MapToNamedEntityList();
     }
 
 
