@@ -19,6 +19,12 @@ namespace Empiria.HumanResources.Adapters {
 
       FixedList<Accountability> accountabilities = Accountability.GetListForCommissioner(orgUnit);
 
+      return Map(accountabilities);
+    }
+
+
+    static internal FixedList<AccountabilityDescriptor> Map(FixedList<Accountability> accountabilities) {
+
       return accountabilities.Select(x => MapToDescriptor(x))
                              .ToFixedList();
     }
@@ -40,6 +46,7 @@ namespace Empiria.HumanResources.Adapters {
       };
     }
 
+    #region Helpers
 
     static private AccountabilityDescriptor MapToDescriptor(Accountability accountability) {
 
@@ -55,6 +62,8 @@ namespace Empiria.HumanResources.Adapters {
         EndDate = accountability.EndDate
       };
     }
+
+    #endregion Helpers
 
   }  // class AccountabilityMapper
 

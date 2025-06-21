@@ -18,6 +18,11 @@ namespace Empiria.HumanResources.Adapters {
     } = string.Empty;
 
 
+    public string ResponsibleUID {
+      get; set;
+    } = string.Empty;
+
+
     public string PartyRoleUID {
       get; set;
     } = string.Empty;
