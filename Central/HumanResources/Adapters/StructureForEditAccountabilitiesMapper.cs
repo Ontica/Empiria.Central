@@ -15,12 +15,10 @@ namespace Empiria.HumanResources.Adapters {
   /// <summary>Maps structured data for use in accountabilities edition.</summary>
   static internal class StructureForEditAccountabilitiesMapper {
 
-    static private FixedList<PartyRole> _allRoles = PartyRole.GetList();
-
-    static internal StructureForEditAccountabilities Map(Party commissioner) {
+    static internal StructureForEditAccountabilities Map(Party commissioner, FixedList<PartyRole> partyRoles) {
       Assertion.Require(commissioner, nameof(commissioner));
 
-      var structurer = new Structurer(commissioner);
+      var structurer = new Structurer(commissioner, partyRoles);
 
       return structurer.MapAccountabilities();
     }
@@ -31,9 +29,9 @@ namespace Empiria.HumanResources.Adapters {
       private Party _commissioner;
       private FixedList<PartyRole> _commissionerRoles;
 
-      internal Structurer(Party commissioner) {
+      internal Structurer(Party commissioner, FixedList<PartyRole> partyRoles) {
         _commissioner = commissioner;
-        _commissionerRoles =_allRoles.FindAll(x => x.AppliesTo.Intersect(_commissioner.Roles).Count != 0);
+        _commissionerRoles = partyRoles;
       }
 
 

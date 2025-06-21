@@ -75,7 +75,11 @@ namespace Empiria.HumanResources {
 
       var commissioner = Party.Parse(commissionerUID);
 
-      return StructureForEditAccountabilitiesMapper.Map(commissioner);
+      FixedList<PartyRole> _allRoles = PartyRole.GetList();
+
+      var availableRoles = _allRoles.FindAll(x => x.AppliesTo.Intersect(commissioner.Roles).Count != 0);
+
+      return StructureForEditAccountabilitiesMapper.Map(commissioner, availableRoles);
     }
 
 
