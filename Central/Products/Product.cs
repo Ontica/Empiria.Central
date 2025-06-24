@@ -48,6 +48,10 @@ namespace Empiria.Products {
 
     static public Product Empty => ParseEmpty<Product>();
 
+    static public Product TryParseWithCode(string code) {
+      return BaseObject.TryParse<Product>($"Product_Internal_Code = '{code}'");
+    }
+
     #endregion Constructors and parsers
 
     #region Properties
