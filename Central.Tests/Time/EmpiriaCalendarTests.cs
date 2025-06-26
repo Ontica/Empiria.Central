@@ -43,20 +43,30 @@ namespace Empiria.Tests.Time {
 
 
     [Fact]
-    public void Should_Handle_Non_Working_Days_Periods() {
+    public void Should_Handle_Non_Working_Days_Exceptions() {
       var calendar = EmpiriaCalendar.Default;
 
-      Assert.True(calendar.IsNonWorkingDate(ToDate("2025-01-01")),
-                  "'2025-01-01' must be a non-working date.");
+      Assert.True(calendar.IsNonWorkingDate(ToDate("2024-01-01")));
+      Assert.False(calendar.IsNonWorkingDate(ToDate("2024-01-02")));
+      Assert.True(calendar.IsNonWorkingDate(ToDate("2024-01-06")));
     }
 
 
     [Fact]
-    public void Should_Handle_Non_Working_Days_Exceptions() {
+    public void Should_Handle_Non_Working_Days_Periods() {
       var calendar = EmpiriaCalendar.Default;
 
-      Assert.True(calendar.IsWorkingDate(ToDate("2025-01-02")),
-                  "'2025-01-02' must be a working date.");
+      Assert.True(calendar.IsNonWorkingDate(ToDate("2024-01-01")));
+    }
+
+
+    [Fact]
+    public void Should_Handle_WeekendDays() {
+      var calendar = EmpiriaCalendar.Default;
+
+      Assert.False(calendar.IsWeekendDay(ToDate("2025-01-01")));
+      Assert.True(calendar.IsWeekendDay(ToDate("2025-01-04")));
+      Assert.True(calendar.IsWeekendDay(ToDate("2025-01-05")));
     }
 
 
@@ -64,8 +74,17 @@ namespace Empiria.Tests.Time {
     public void Should_Read_Stored_Calendar_Holidays() {
       var calendar = EmpiriaCalendar.Default;
 
-      Assert.Contains(calendar.Holidays, x => x.Date.Equals(ToDate("2025-01-01")));
-      Assert.Contains(calendar.Holidays, x => x.Date.Equals(ToDate("2025-09-16")));
+      Assert.Contains(calendar.Holidays, x => x.Equals(ToDate("2024-01-01")));
+      Assert.Contains(calendar.Holidays, x => x.Equals(ToDate("2024-09-16")));
+    }
+
+
+    [Fact]
+    public void Should_Read_WeekendDays() {
+      var calendar = EmpiriaCalendar.Default;
+
+      Assert.Contains(calendar.WeekendDays, x => x.Equals(DayOfWeek.Sunday));
+      Assert.DoesNotContain(calendar.WeekendDays, x => x.Equals(DayOfWeek.Wednesday));
     }
 
 

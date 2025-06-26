@@ -61,7 +61,7 @@ namespace Empiria.Time {
       get {
         var calendarName = ConfigurationData.Get<string>("Default.Calendar.Name", "Default");
 
-        return EmpiriaCalendar.Parse(calendarName);
+        return Parse(calendarName);
       }
     }
 
@@ -75,20 +75,22 @@ namespace Empiria.Time {
 
 
     public FixedList<DateTime> Holidays {
-      get;
-      private set;
+      get; private set;
     }
 
 
     public FixedList<TimePeriod> NonWorkingDaysPeriods {
-      get;
-      private set;
+      get; private set;
     }
 
 
     public FixedList<DateTime> NonWorkingDaysExceptions {
-      get;
-      private set;
+      get; private set;
+    }
+
+
+    public FixedList<DayOfWeek> WeekendDays {
+      get; private set;
     }
 
     #endregion Properties
@@ -127,20 +129,26 @@ namespace Empiria.Time {
     }
 
     public bool IsNonWorkingDate(DateTime date) {
-      return (this.IsWeekendDay(date) || this.IsHoliday(date) ||
-             (this.IncludedInANonWorkingDaysPeriod(date) &&
-             !this.IsNonWorkingDateException(date)));
+      return !IsWorkingDate(date);
     }
 
 
     public bool IsWeekendDay(DateTime date) {
-      return (date.DayOfWeek == DayOfWeek.Saturday ||
-              date.DayOfWeek == DayOfWeek.Sunday);
+      return WeekendDays.Contains(date.DayOfWeek);
     }
 
 
     public bool IsWorkingDate(DateTime date) {
-      return !this.IsNonWorkingDate(date);
+      if (IsNonWorkingDateException(date)) {
+        return true;
+      }
+      if (IncludedInANonWorkingDaysPeriod(date)) {
+        return false;
+      }
+      if (IsHoliday(date) || IsWeekendDay(date)) {
+        return false;
+      }
+      return true;
     }
 
 
@@ -257,7 +265,7 @@ namespace Empiria.Time {
 
 
     public DateTime SubstractWorkingDays(DateTime date, int days) {
-      Assertion.Require(days >= 0, "'days' parameter must be a non-negative number.");
+      Assertion.Require(0 <= days, "'days' parameter must be a non-negative number.");
 
       int workingDaysCounter = 0;
       DateTime datePointer = date.Date;
@@ -308,7 +316,7 @@ namespace Empiria.Time {
     #region Helpers
 
     private bool IncludedInANonWorkingDaysPeriod(DateTime date) {
-      foreach (var period in this.NonWorkingDaysPeriods) {
+      foreach (var period in NonWorkingDaysPeriods) {
         if (period.Includes(date)) {
           return true;
         }
@@ -318,31 +326,22 @@ namespace Empiria.Time {
 
 
     private bool IsNonWorkingDateException(DateTime date) {
-      return this.NonWorkingDaysExceptions.Contains(date.Date);
+      return NonWorkingDaysExceptions.Contains(date.Date);
     }
 
 
     private void LoadJsonData(JsonObject json) {
 
-      this.Holidays = new FixedList<DateTime>();
-      if (json.HasValue("holidays")) {
-        this.Holidays = json.GetList<DateTime>("holidays")
-                            .ToFixedList();
+      Holidays = json.GetFixedList<DateTime>("holidays", false);
 
+      NonWorkingDaysPeriods = json.GetFixedList<TimePeriod>("nonWorkingPeriods", false);
+      NonWorkingDaysExceptions = json.GetFixedList<DateTime>("nonWorkingExceptions", false);
+
+      if (json.HasValue("weekendDays")) {
+        WeekendDays = json.GetFixedList<DayOfWeek>("weekendDays");
+      } else {
+        WeekendDays = new DayOfWeek[2] { DayOfWeek.Saturday, DayOfWeek.Sunday }.ToFixedList();
       }
-
-      this.NonWorkingDaysPeriods = new FixedList<TimePeriod>();
-      if (json.HasValue("nonWorkingPeriods")) {
-        this.NonWorkingDaysPeriods = json.GetList<TimePeriod>("nonWorkingPeriods")
-                                         .ToFixedList();
-      }
-
-      this.NonWorkingDaysExceptions = new FixedList<DateTime>();
-      if (json.HasValue("nonWorkingExceptions")) {
-        this.NonWorkingDaysExceptions = json.GetList<DateTime>("nonWorkingExceptions")
-                                            .ToFixedList();
-      }
-
     }
 
     #endregion Helpers
