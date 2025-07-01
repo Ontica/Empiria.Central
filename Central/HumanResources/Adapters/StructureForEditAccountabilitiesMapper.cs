@@ -36,7 +36,8 @@ namespace Empiria.HumanResources.Adapters {
 
 
       internal StructureForEditAccountabilities MapAccountabilities() {
-        FixedList<PartyRelationCategory> categories = _commissionerRoles.SelectDistinct(x => x.Category);
+        FixedList<PartyRelationCategory> categories = _commissionerRoles.SelectDistinct(x => x.Category)
+                                                                        .Sort((x, y) => x.Name.CompareTo(y.Name));
 
         return new StructureForEditAccountabilities {
           UID = _commissioner.UID,
