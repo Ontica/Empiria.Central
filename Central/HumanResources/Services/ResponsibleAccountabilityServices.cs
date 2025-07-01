@@ -91,7 +91,9 @@ namespace Empiria.HumanResources {
 
       var responsible = Party.Parse(responsibleUID);
 
-      FixedList<string> resposibleRoles = responsible.GetSecurityRoles().SelectDistinctFlat(x => x.AppliesTo);
+      FixedList<string> resposibleRoles = responsible.GetSecurityRoles()
+                                                     .FindAll(x => !x.HasOrganizationalScope)
+                                                     .SelectDistinctFlat(x => x.AppliesTo);
 
       FixedList<PartyRole> availableRoles = PartyRole.GetList()
                                                      .FindAll(x => x.AppliesTo.Intersect(resposibleRoles).Count != 0);
