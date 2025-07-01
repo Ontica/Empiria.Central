@@ -10,6 +10,7 @@
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
 using System;
+
 using Empiria.Parties;
 
 namespace Empiria.HumanResources {
@@ -41,6 +42,30 @@ namespace Empiria.HumanResources {
     }
 
 
+    static public FixedList<T> GetCommissionersFor<T>(Party responsible,
+                                                      string listName, string role) where T : Party {
+
+      Assertion.Require(responsible, nameof(responsible));
+      Assertion.Require(listName, nameof(listName));
+      Assertion.Require(role, nameof(role));
+
+      FixedList<T> commissioners = Party.GetList<T>(DateTime.Today)
+                                        .FindAll(x => x.PlaysRole(listName));
+
+      commissioners.Sort((x, y) => ((INamedEntity) x).Name.CompareTo(((INamedEntity) y).Name));
+
+      FixedList<PartyRole> securityRoles = responsible.GetSecurityRoles();
+
+      if (securityRoles.Contains(x => x.HasOrganizationalScope)) {
+        return commissioners;
+      }
+
+      FixedList<Accountability> accountabilities = GetListForResponsible(responsible);
+
+      return commissioners.FindAll(x => accountabilities.Contains(y => y.Commissioner.Equals(x)));
+    }
+
+
     static public FixedList<Accountability> GetListForCommissioner(Party commissioner) {
       Assertion.Require(commissioner, nameof(commissioner));
       Assertion.Require(!commissioner.IsEmptyInstance, nameof(commissioner));
@@ -69,25 +94,11 @@ namespace Empiria.HumanResources {
     }
 
 
-    static public FixedList<T> GetCommissionersFor<T>(Party party, string listName, string role) where T : Party {
-      Assertion.Require(party, nameof(party));
-      Assertion.Require(role, nameof(role));
+    static public FixedList<string> GetResponsibleRoles(Party responsible) {
+      FixedList<PartyRole> securityRoles = responsible.GetSecurityRoles();
 
-      FixedList<T> list = Party.GetList<T>(DateTime.Today)
-                               .FindAll(x => x.PlaysRole(listName));
-
-      list.Sort((x, y) => ((INamedEntity) x).Name.CompareTo(((INamedEntity) y).Name));
-
-      FixedList<Accountability> accountabilities = GetListForResponsible(party);
-
-      FixedList<PartyRole> roles = accountabilities.FindAll(x => x.Role.AppliesTo.Contains(y => y == role))
-                                                   .SelectDistinct(x => x.Role);
-
-      if (roles.Contains(x => x.HasOrganizationalScope)) {
-        return list;
-      }
-
-      return list.FindAll(x => accountabilities.Contains(y => y.Commissioner.Equals(x)));
+      return GetListForResponsible(responsible)
+            .SelectDistinctFlat(x => x.Role.AppliesTo);
     }
 
     #endregion Constructors and parsers
