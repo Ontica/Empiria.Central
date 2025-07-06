@@ -20,6 +20,16 @@ namespace Empiria.Tests.Locations {
     #region Facts
 
     [Fact]
+    public void Clean_Locations() {
+      var locations = Location.GetList();
+
+      foreach (var location in locations) {
+        location.Clean();
+      }
+    }
+
+
+    [Fact]
     public void Should_Get_All_Locations() {
       var sut = Location.GetList();
 

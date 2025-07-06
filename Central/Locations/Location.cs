@@ -9,7 +9,10 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using System;
 using System.Collections.Generic;
+using Empiria.Data;
+using Empiria.Parties;
 
 namespace Empiria.Locations {
 
@@ -68,7 +71,14 @@ namespace Empiria.Locations {
 
     public override string Keywords {
       get {
-        return EmpiriaString.BuildKeywords(base.Keywords, Code);
+        if (this.IsEmptyInstance) {
+          return String.Empty;
+        }
+        if (Parent.IsEmptyInstance) {
+          return EmpiriaString.BuildKeywords(FullName, Code, LocationType.Keywords);
+        } else {
+          return EmpiriaString.BuildKeywords(FullName, Code, Parent.Keywords, LocationType.Keywords);
+        }
       }
     }
 
@@ -152,6 +162,24 @@ namespace Empiria.Locations {
         return Empty;
       }
       return Parent.SeekTree(locationType);
+    }
+
+    internal void Clean() {
+      if (IsEmptyInstance) {
+        return;
+      }
+      var sql = "UPDATE COMMON_STORAGE " +
+                $"SET OBJECT_UID = '{Guid.NewGuid().ToString()}', " +
+                $"OBJECT_HISTORIC_ID = {Id}, " +
+                $"OBJECT_KEYWORDS = '{this.Keywords}', " +
+                $"OBJECT_START_DATE = {DataCommonMethods.FormatSqlDbDate(new DateTime(2025, 06, 25))}, " +
+                $"OBJECT_POSTING_TIME = {DataCommonMethods.FormatSqlDbDate(new DateTime(2025, 06, 25))}, " +
+                $"OBJECT_END_DATE = {DataCommonMethods.FormatSqlDbDate(new DateTime(2078, 12, 31))} " +
+                $"WHERE OBJECT_ID = {Id}";
+
+      var op = DataOperation.Parse(sql);
+
+      DataWriter.Execute(op);
     }
 
     #endregion Methods
