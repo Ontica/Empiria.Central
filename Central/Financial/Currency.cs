@@ -1,7 +1,7 @@
 ﻿/* Empiria Central  ******************************************************************************************
 *                                                                                                            *
 *  Module   : Financial                                  Component : Domain Types                            *
-*  Assembly : Empiria.Central.dll                        Pattern   : General Object                          *
+*  Assembly : Empiria.Central.dll                        Pattern   : Common Storage                          *
 *  Type     : Currency                                   License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Represents a currency data type.                                                               *
@@ -11,7 +11,7 @@
 namespace Empiria.Financial {
 
   /// <summary>Represents a currency data type.</summary>
-  public class Currency : GeneralObject {
+  public class Currency : CommonStorage {
 
     #region Fields
 
@@ -29,15 +29,22 @@ namespace Empiria.Financial {
 
     static public Currency Parse(string uid) => ParseKey<Currency>(uid);
 
-    static public FixedList<Currency> GetList() => GetList<Currency>().ToFixedList();
-
     static public Currency Default => Parse(defaultCurrencyId);
 
     static public Currency Empty => ParseEmpty<Currency>();
 
+    static public FixedList<Currency> GetList() => GetList<Currency>().ToFixedList();
+
     #endregion Constructors and parsers
 
     #region Properties
+
+    public new string Code {
+      get {
+        return base.Code;
+      }
+    }
+
 
     public bool HasSymbol {
       get {
@@ -45,15 +52,17 @@ namespace Empiria.Financial {
       }
     }
 
+
     public string ISOCode {
       get {
-        return base.ExtendedDataField.Get<string>("isoCode", string.Empty);
+        return base.ExtData.Get<string>("isoCode", string.Empty);
       }
     }
 
+
     public string Symbol {
       get {
-        return base.ExtendedDataField.Get<string>("symbol", string.Empty);
+        return base.ExtData.Get<string>("symbol", string.Empty);
       }
     }
 
