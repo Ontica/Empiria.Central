@@ -1,6 +1,6 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
-*  Module   : Documents                                  Component : Adpaters Layer                          *
+*  Module   : Documents                                  Component : Adapters Layer                          *
 *  Assembly : Empiria.Central.dll                        Pattern   : Input Query DTO                         *
 *  Type     : DocumentServices                           License   : Please read LICENSE.txt file            *
 *                                                                                                            *

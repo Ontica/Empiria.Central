@@ -1,6 +1,6 @@
 ﻿/* Empiria Central *******************************************************************************************
 *                                                                                                            *
-*  Module   : Financial                                  Component : Adpaters Layer                          *
+*  Module   : Financial                                  Component : Adapters Layer                          *
 *  Assembly : Empiria.Central.Services.dll               Pattern   : Mapper                                  *
 *  Type     : PaymentMethodMapper                        License   : Please read LICENSE.txt file            *
 *                                                                                                            *

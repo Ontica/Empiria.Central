@@ -11,8 +11,8 @@
 
 using System;
 using System.Collections.Generic;
+
 using Empiria.Data;
-using Empiria.Parties;
 
 namespace Empiria.Locations {
 
@@ -51,7 +51,7 @@ namespace Empiria.Locations {
         if (Parent.IsEmptyInstance) {
           return Name;
         }
-        return $"{Parent.FullName} {Name}";
+        return $"{Parent.FullName} - {Name}";
       }
     }
 

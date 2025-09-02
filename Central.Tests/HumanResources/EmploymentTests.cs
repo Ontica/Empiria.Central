@@ -25,6 +25,7 @@ namespace Empiria.Tests.HumanResources {
 
       Assert.Equal(-1, sut.Id);
       Assert.Equal("Empty", sut.UID);
+      Assert.Equal(Employment.Parse("Empty"), sut);
       Assert.Equal("N/D", sut.EmployeeNo);
     }
 
