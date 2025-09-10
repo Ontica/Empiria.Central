@@ -29,6 +29,16 @@ namespace Empiria.Financial {
 
     static public Currency Parse(string uid) => ParseKey<Currency>(uid);
 
+    static public Currency ParseWithISOCode(string isoCode) {
+      Assertion.Require(isoCode, nameof(isoCode));
+
+      var currency = GetList().Find(x => x.ISOCode == isoCode.ToUpperInvariant());
+
+      Assertion.Require(currency, $"Unrecognized currency ISO code '{isoCode}'.");
+
+      return currency;
+    }
+
     static public Currency Default => Parse(defaultCurrencyId);
 
     static public Currency Empty => ParseEmpty<Currency>();
