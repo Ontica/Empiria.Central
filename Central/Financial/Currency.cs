@@ -1,7 +1,7 @@
 ﻿/* Empiria Central  ******************************************************************************************
 *                                                                                                            *
 *  Module   : Financial                                  Component : Domain Types                            *
-*  Assembly : Empiria.Central.dll                        Pattern   : Common Storage                          *
+*  Assembly : Empiria.Central.dll                        Pattern   : Common Storage Type                     *
 *  Type     : Currency                                   License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Represents a currency data type.                                                               *
