@@ -29,31 +29,31 @@ namespace Empiria.Measurement {
 
     #region Properties
 
-    [DataField(ExtensionDataFieldName + ".PluralName", IsOptional = true)]
     public string PluralName {
-      get;
-      private set;
+      get {
+        return base.ExtendedDataField.Get<string>("PluralName", string.Empty);
+      }
     }
 
 
-    [DataField(ExtensionDataFieldName + ".Abbr", IsOptional = true)]
     public string Abbr {
-      get;
-      private set;
+      get {
+        return base.ExtendedDataField.Get<string>("Abbr", string.Empty);
+      }
     }
 
 
-    [DataField(ExtensionDataFieldName + ".IsIndivisible", IsOptional = true)]
     public bool IsIndivisible {
-      get;
-      private set;
+      get {
+        return base.ExtendedDataField.Get<bool>("IsIndivisible", false);
+      }
     }
 
 
-    [DataField(ExtensionDataFieldName + ".Format", IsOptional = true)]
     public string Format {
-      get;
-      private set;
+      get {
+        return base.ExtendedDataField.Get<string>("Format", string.Empty);
+      }
     }
 
     #endregion Properties
