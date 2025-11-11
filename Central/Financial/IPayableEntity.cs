@@ -104,7 +104,7 @@ namespace Empiria.Financial {
     }
 
 
-    decimal Total {
+    decimal Subtotal {
       get;
     }
 
