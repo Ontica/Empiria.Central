@@ -11,6 +11,8 @@
 
 using System.Collections.Generic;
 
+using Empiria.Ontology;
+
 namespace Empiria.Financial {
 
   /// <summary>Defines a payable entity. Payable entities are purchase orders,
@@ -21,9 +23,8 @@ namespace Empiria.Financial {
       get;
     }
 
-    INamedEntity Type {
-      get;
-    }
+    ObjectTypeInfo GetEmpiriaType();
+
 
     string EntityNo {
       get;
@@ -65,6 +66,8 @@ namespace Empiria.Financial {
   }  // interface IPayableEntity
 
 
+
+  /// <summary>Defines a payable entity item.</summary>
   public interface IPayableEntityItem {
 
     int Id {

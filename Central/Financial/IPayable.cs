@@ -21,6 +21,10 @@ namespace Empiria.Financial {
       get;
     }
 
+    decimal Total {
+      get;
+    }
+
   }  // interface IPayable
 
 }  // namespace Empiria.Financial
