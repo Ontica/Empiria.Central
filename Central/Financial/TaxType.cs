@@ -8,6 +8,8 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using Empiria.Products;
+
 namespace Empiria.Financial {
 
   /// <summary>Represents a tax type.</summary>
@@ -25,8 +27,28 @@ namespace Empiria.Financial {
       return GetStorageObjects<TaxType>();
     }
 
+    static public FixedList<TaxType> AppliableFor(Product product) {
+      return GetList().FindAll(x => x.ProductAppliable);
+    }
+
     #endregion Constructors and parsers
 
+    #region Properties
+
+    public bool ProductAppliable {
+      get {
+        return ExtData.Get("productAppliable", false);
+      }
+    }
+
+
+    public decimal Rate {
+      get {
+        return ExtData.Get("rate", decimal.Zero);
+      }
+    }
+
+    #endregion Properties
   } // class TaxType
 
 } // namespace Empiria.Financial
