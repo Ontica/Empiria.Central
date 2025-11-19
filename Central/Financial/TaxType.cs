@@ -1,7 +1,7 @@
 ﻿/* Empiria Central  ******************************************************************************************
 *                                                                                                            *
 *  Module   : Financial                                  Component : Domain Types                            *
-*  Assembly : Empiria.Central.dll                        Pattern   : General Object                          *
+*  Assembly : Empiria.Central.dll                        Pattern   : Common Storage Type                     *
 *  Type     : TaxType                                    License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Represents a tax type.                                                                         *
@@ -11,23 +11,19 @@
 namespace Empiria.Financial {
 
   /// <summary>Represents a tax type.</summary>
-  public class TaxType : GeneralObject {
+  public class TaxType : CommonStorage {
 
     #region Constructors and parsers
 
-    private TaxType() {
-      // Required by Empiria Framework.
-    }
+    static public TaxType Parse(int id) => ParseId<TaxType>(id);
 
-    static public TaxType Parse(int id) {
-      return BaseObject.ParseId<TaxType>(id);
-    }
+    static public TaxType Parse(string uid) => ParseKey<TaxType>(uid);
 
-    static public TaxType Parse(string uid) {
-      return BaseObject.ParseKey<TaxType>(uid);
-    }
+    static public TaxType Empty => ParseEmpty<TaxType>();
 
-    static public TaxType Empty => BaseObject.ParseEmpty<TaxType>();
+    static public FixedList<TaxType> GetList() {
+      return GetStorageObjects<TaxType>();
+    }
 
     #endregion Constructors and parsers
 

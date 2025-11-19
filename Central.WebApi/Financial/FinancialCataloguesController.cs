@@ -38,6 +38,16 @@ namespace Empiria.Financial.WebApi {
       return new CollectionModel(Request, interestRateTypes.MapToNamedEntityList());
     }
 
+
+    [HttpGet]
+    [Route("v8/financial/tax-types")]
+    public CollectionModel GetTaxTypes() {
+
+      FixedList<TaxType> taxTypes = TaxType.GetList();
+
+      return new CollectionModel(Request, taxTypes.MapToNamedEntityList());
+    }
+
     #endregion Query web apis
 
   }  // class FinancialCataloguesController
