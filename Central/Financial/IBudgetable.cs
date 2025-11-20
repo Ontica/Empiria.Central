@@ -19,8 +19,27 @@ namespace Empiria.Financial {
   /// transaction that affects a budget.</summary>
   public interface IBudgetable : IIdentifiable {
 
+
+    FixedList<ITaxEntry> Taxes {
+      get;
+    }
+
     ObjectTypeInfo GetEmpiriaType();
 
+
   } // interface IBudgetable
+
+
+  public interface ITaxEntry {
+
+    TaxType TaxType {
+      get;
+    }
+
+    decimal Total {
+      get;
+    }
+
+  }  // interface ITaxEntry
 
 } // namespace Empiria.Financial
