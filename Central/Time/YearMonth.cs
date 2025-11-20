@@ -54,7 +54,7 @@ namespace Empiria.Time {
     /// <param name="initialDate">The initial date when the YearMonth list starts.</param>
     /// <param name="endDate">The fianl date when the YearMonth list ends.</param>
     /// <returns>A fixed list of YearMonths values.</returns>
-    public static FixedList<YearMonth> GetList(DateTime initialDate, DateTime endDate) {
+    static public FixedList<YearMonth> GetList(DateTime initialDate, DateTime endDate) {
       var list = new List<YearMonth>();
 
       for (DateTime date = initialDate; date <= endDate; date = date.AddMonths(1)) {
@@ -62,6 +62,11 @@ namespace Empiria.Time {
         list.Add(temp);
       }
       return list.ToFixedList();
+    }
+
+
+    static public int GetMonths(DateTime initialDate, DateTime endDate) {
+      return GetList(initialDate, endDate).Count;
     }
 
     #endregion Constructors and parsers
