@@ -17,7 +17,7 @@ namespace Empiria.Financial {
   /// <summary>Interface for budgetable entities. Budgetable entities can be product orders 
   /// or requisitions, loans, payment liabilities, or any other operational or financial 
   /// transaction that affects a budget.</summary>
-  public interface IBudgetable : IIdentifiable {
+  public interface IBudgetable : IIdentifiable, INamedEntity {
 
 
     FixedList<ITaxEntry> Taxes {
