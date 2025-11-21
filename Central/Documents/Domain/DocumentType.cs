@@ -18,7 +18,7 @@ namespace Empiria.Documents {
 
   /// <summary>Power type that describes a document.</summary>
   [Powertype(typeof(Document))]
-  internal class DocumentType : ProductType {
+  public class DocumentType : ProductType {
 
     #region Constructors and parsers
 

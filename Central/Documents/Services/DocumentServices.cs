@@ -52,6 +52,22 @@ namespace Empiria.Documents {
     }
 
 
+    static public void RemoveAllDocuments(BaseObject entity) {
+      Assertion.Require(entity, nameof(entity));
+
+      FixedList<Document> documents = Document.GetListFor(entity);
+
+      foreach (var document in documents) {
+        foreach (var link in DocumentLink.GetListFor(document)) {
+          link.Delete();
+          link.Save();
+        }
+        document.Delete();
+        document.Save();
+      }
+    }
+
+
     static public DocumentDto RemoveDocument(BaseObject entity, DocumentDto documentDto) {
       Assertion.Require(entity, nameof(entity));
       Assertion.Require(documentDto, nameof(documentDto));
@@ -124,6 +140,7 @@ namespace Empiria.Documents {
 
       return DocumentMapper.Map(document);
     }
+
 
     #endregion Services
 

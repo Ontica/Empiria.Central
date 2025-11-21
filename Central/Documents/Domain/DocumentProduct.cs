@@ -18,7 +18,7 @@ namespace Empiria.Documents {
 
   /// <summary>Partitioned type that represents a good or a service.</summary>
   [PartitionedType(typeof(DocumentType))]
-  internal class DocumentProduct : Product {
+  public class DocumentProduct : Product {
 
     #region Constructors and parsers
 
