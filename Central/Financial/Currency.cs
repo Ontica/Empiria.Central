@@ -13,12 +13,6 @@ namespace Empiria.Financial {
   /// <summary>Represents a currency data type.</summary>
   public class Currency : CommonStorage {
 
-    #region Fields
-
-    static readonly int defaultCurrencyId = ConfigurationData.Get<int>("Default.Currency.Id", -1);
-
-    #endregion Fields
-
     #region Constructors and parsers
 
     private Currency() {
@@ -39,7 +33,7 @@ namespace Empiria.Financial {
       return currency;
     }
 
-    static public Currency Default => Parse(defaultCurrencyId);
+    static public Currency Default => ParseWithISOCode("MXN");
 
     static public Currency Empty => ParseEmpty<Currency>();
 
