@@ -19,17 +19,21 @@ namespace Empiria.Locations {
 
     static public Country Parse(string uid) => ParseKey<Country>(uid);
 
+    static public Country ParseWithISOCode(string isoCode) => ParseWithCode<Country>(isoCode);
+
+    static public Country Default => ParseWithISOCode("MEX");
+
+    static public Country Empty => ParseEmpty<Country>();
+
     static public FixedList<Country> GetList() {
       return GetStorageObjects<Country>();
     }
-
-    static public Country Empty => ParseEmpty<Country>();
 
     #endregion Constructors and parsers
 
     #region Properties
 
-    public string CountryCode {
+    public string CountryISOCode {
       get {
         return base.Code;
       }
