@@ -9,8 +9,6 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
-using System.Collections.Generic;
-
 using Empiria.Ontology;
 
 namespace Empiria.Financial {
@@ -59,12 +57,11 @@ namespace Empiria.Financial {
       get;
     }
 
-    IEnumerable<IPayableEntityItem> Items {
+    FixedList<IPayableEntityItem> Items {
       get;
     }
 
   }  // interface IPayableEntity
-
 
 
   /// <summary>Defines a payable entity item.</summary>
