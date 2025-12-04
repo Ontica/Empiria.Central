@@ -30,9 +30,16 @@ namespace Empiria.Financial {
 
     #region Properties
 
-    public bool LinkedToAccount {
+    public bool AccountRelated {
       get {
-        return base.ExtData.Get("linkedToAccount", false);
+        return base.ExtData.Get("accountRelated", false);
+      }
+    }
+
+
+    public bool BrokerCode {
+      get {
+        return base.ExtData.Get("brokerCode", false);
       }
     }
 
