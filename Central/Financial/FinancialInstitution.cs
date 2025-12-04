@@ -1,7 +1,7 @@
 ﻿/* Empiria Central  ******************************************************************************************
 *                                                                                                            *
 *  Module   : Financial                                  Component : Domain Layer                            *
-*  Assembly : Empiria.Central.dll                        Pattern   : Information Holder                      *
+*  Assembly : Empiria.Central.dll                        Pattern   : Common Storage Type                     *
 *  Type     : FinancialInstitution                       License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Represents a financial institution like a bank or a payments broker.                           *
@@ -13,7 +13,7 @@ using Empiria.Parties;
 namespace Empiria.Financial {
 
   /// <summary>Represents a financial institution like a bank or a payments broker.</summary>
-  public class FinancialInstitution : Organization {
+  public class FinancialInstitution : CommonStorage {
 
     #region Constructors and parsers
 
@@ -27,22 +27,27 @@ namespace Empiria.Financial {
     }
 
 
-    static public new FinancialInstitution Parse(int id) => ParseId<FinancialInstitution>(id);
+    static public FinancialInstitution Parse(int id) => ParseId<FinancialInstitution>(id);
 
-    static public new FinancialInstitution Parse(string uid) => ParseKey<FinancialInstitution>(uid);
+    static public FinancialInstitution Parse(string uid) => ParseKey<FinancialInstitution>(uid);
 
-    public FinancialInstitution(PartyFields fields) {
-      Assertion.Require(fields, nameof(fields));
-
-      Update(fields);
-    }
-
-    static public new FinancialInstitution Empty => ParseEmpty<FinancialInstitution>();
+    static public FinancialInstitution Empty => ParseEmpty<FinancialInstitution>();
 
     #endregion Constructors and parsers
 
     #region Properties
 
+    public string BrokerCode {
+      get {
+        return base.Code;
+      }
+    }
+
+    public string CommonName {
+      get {
+        return base.ExtData.Get("commonName", base.Name);
+      }
+    }
 
     #endregion Properties
 
