@@ -1,7 +1,7 @@
 ﻿/* Empiria Central  ******************************************************************************************
 *                                                                                                            *
 *  Module   : Financial                                  Component : Domain Layer                            *
-*  Assembly : Empiria.Central.Core.dll                   Pattern   : Information Holder                      *
+*  Assembly : Empiria.Central.Core.dll                   Pattern   : Common Storage type                     *
 *  Type     : PaymentMethod                              License   : Please read LICENSE.txt file            *
 *                                                                                                            *
 *  Summary  : Represents a payment method.                                                                   *
@@ -11,7 +11,7 @@
 namespace Empiria.Financial {
 
   /// <summary>Represents a payment method.</summary>
-  public class PaymentMethod : GeneralObject {
+  public class PaymentMethod : CommonStorage {
 
     #region Constructors and parsers
 
@@ -20,12 +20,11 @@ namespace Empiria.Financial {
     static public PaymentMethod Parse(string uid) => ParseKey<PaymentMethod>(uid);
 
     static public FixedList<PaymentMethod> GetList() {
-      return BaseObject.GetList<PaymentMethod>()
-                       .ToFixedList();
+      return GetList<PaymentMethod>()
+            .ToFixedList();
     }
 
     static public PaymentMethod Empty => ParseEmpty<PaymentMethod>();
-
 
     #endregion Constructors and parsers
 
@@ -33,7 +32,7 @@ namespace Empiria.Financial {
 
     public bool LinkedToAccount {
       get {
-        return ExtendedDataField.Get("linkedToAccount", false);
+        return base.ExtData.Get("linkedToAccount", false);
       }
     }
 
