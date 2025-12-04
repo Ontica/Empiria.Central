@@ -26,7 +26,7 @@ namespace Empiria.Financial.Services {
 
       var accounts = PaymentAccount.GetListFor(party);
 
-      return PaymentAccountMapper.Map(accounts);
+      return PaymentAccountDto.Map(accounts);
     }
 
     #endregion Services

@@ -11,11 +11,26 @@
 namespace Empiria.Financial.Adapters {
 
   /// <summary>Output DTO for PaymentMethod instances.</summary>
-  public class PaymentMethodDto: NamedEntityFields {
+  public class PaymentMethodDto : NamedEntityFields {
 
-    public bool LinkedToAccount {
-      get; internal set;
+    public PaymentMethodDto(PaymentMethod x) {
+      base.UID = x.UID;
+      base.Name = x.Name;
+      AccountRelated = x.AccountRelated;
     }
+
+    public bool AccountRelated {
+      get;
+    }
+
+    #region Mappers
+
+    static public FixedList<PaymentMethodDto> Map(FixedList<PaymentMethod> methods) {
+      return methods.Select(x => new PaymentMethodDto(x))
+                    .ToFixedList();
+    }
+
+    #endregion Mappers
 
   }  // class PaymentMethodDto
 

@@ -13,29 +13,51 @@ namespace Empiria.Financial.Adapters {
   /// <summary>Output DTO for PaymentAccount instances.</summary>
   public class PaymentAccountDto : NamedEntityFields {
 
+    public PaymentAccountDto(PaymentAccount account) {
+      PaymentMethod = new PaymentMethodDto(account.PaymentMethod);
+      Currency = new NamedEntityDto(account.Currency);
+      Institution = new NamedEntityDto(account.Institution);
+      AccountNo = account.AccountNo;
+      HolderName = account.HolderName;
+      CLABE = account.CLABE;
+    }
+
+    #region Properties
+
     public PaymentMethodDto PaymentMethod {
-      get; internal set;
+      get;
     }
 
     public NamedEntityDto Currency {
-      get; internal set;
+      get;
     }
 
     public NamedEntityDto Institution {
-      get; internal set;
+      get;
     }
 
     public string AccountNo {
-      get; internal set;
+      get;
     }
 
     public string HolderName {
-      get; internal set;
+      get;
     }
 
     public string CLABE {
-      get; internal set;
+      get;
     }
+
+    #endregion Properties
+
+    #region Mappers
+
+    static public FixedList<PaymentAccountDto> Map(FixedList<PaymentAccount> accounts) {
+      return accounts.Select(x => new PaymentAccountDto(x))
+                     .ToFixedList();
+    }
+
+    #endregion Mappers
 
   }  // class PaymentAccountDto
 

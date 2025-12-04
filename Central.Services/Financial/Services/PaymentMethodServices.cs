@@ -35,7 +35,7 @@ namespace Empiria.Financial.Services {
 
       var list = PaymentMethod.GetList();
 
-      return PaymentMethodMapper.Map(list);
+      return PaymentMethodDto.Map(list);
     }
 
     #endregion Services
