@@ -11,12 +11,12 @@
 namespace Empiria.Financial.Adapters {
 
   /// <summary>Output DTO for PaymentAccount instances.</summary>
-  public class PaymentAccountDto : NamedEntityFields {
+  public class PaymentAccountDto : NamedEntityDto {
 
-    public PaymentAccountDto(PaymentAccount account) {
+    public PaymentAccountDto(PaymentAccount account) : base(account) {
       PaymentMethod = new PaymentMethodDto(account.PaymentMethod);
-      Currency = new NamedEntityDto(account.Currency);
-      Institution = new NamedEntityDto(account.Institution);
+      Currency = account.Currency.MapToNamedEntity();
+      Institution = account.Institution.MapToNamedEntity();
       AccountNo = account.AccountNo;
       HolderName = account.HolderName;
       CLABE = account.CLABE;

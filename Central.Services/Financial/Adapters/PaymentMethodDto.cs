@@ -11,12 +11,10 @@
 namespace Empiria.Financial.Adapters {
 
   /// <summary>Output DTO for PaymentMethod instances.</summary>
-  public class PaymentMethodDto : NamedEntityFields {
+  public class PaymentMethodDto : NamedEntityDto {
 
-    public PaymentMethodDto(PaymentMethod x) {
-      base.UID = x.UID;
-      base.Name = x.Name;
-      AccountRelated = x.AccountRelated;
+    public PaymentMethodDto(PaymentMethod method) : base(method) {
+      AccountRelated = method.AccountRelated;
     }
 
     public bool AccountRelated {
