@@ -37,9 +37,9 @@ namespace Empiria.Financial {
     }
 
 
-    public bool BrokerCode {
+    public string BrokerCode {
       get {
-        return base.ExtData.Get("brokerCode", false);
+        return base.ExtData.Get("brokerCode", string.Empty);
       }
     }
 
