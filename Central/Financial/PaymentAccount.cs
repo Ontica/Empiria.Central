@@ -73,13 +73,7 @@ namespace Empiria.Financial {
         if (ExtData.HasValue("identificator")) {
           return ExtData.Get<string>("identificator");
         }
-        if (CLABE.Length != 0) {
-          return $"{Institution.CommonName} - {EmpiriaString.TruncateLast(CLABE, 4)}";
-        } else if (AccountNo.Length != 0) {
-          return $"{Institution.CommonName} - {EmpiriaString.TruncateLast(AccountNo, 4)}";
-        } else {
-          return Institution.CommonName;
-        }
+        return $"{Institution.CommonName} - {EmpiriaString.TruncateLast(AccountNo, 4)}";
       }
       private set {
         ExtData.SetIfValue("identificator", value);
@@ -106,13 +100,9 @@ namespace Empiria.Financial {
       }
     }
 
-
-    public string CLABE {
+    public string ReferenceNumber {
       get {
-        return ExtData.Get("clabe", string.Empty);
-      }
-      private set {
-        ExtData.SetIfValue("clabe", value);
+        return ExtData.Get("referenceNumber", string.Empty);
       }
     }
 
@@ -143,8 +133,14 @@ namespace Empiria.Financial {
 
     public string Keywords {
       get {
-        return EmpiriaString.BuildKeywords(AccountNo, HolderName, CLABE, Party.Keywords,
+        return EmpiriaString.BuildKeywords(AccountNo, HolderName, Party.Keywords,
                                            Institution.Keywords, Identificator);
+      }
+    }
+
+    public bool AskForReferenceNumber {
+      get {
+        return ExtData.Get("askForReferenceNumber", false);
       }
     }
 

@@ -14,21 +14,28 @@ namespace Empiria.Financial.Adapters {
   public class PaymentAccountDto : NamedEntityDto {
 
     public PaymentAccountDto(PaymentAccount account) : base(account) {
-      PaymentMethod = new PaymentMethodDto(account.PaymentMethod);
-      Currency = account.Currency.MapToNamedEntity();
+      if (account.IsEmptyInstance) {
+        PaymentMethod = new PaymentMethodDto(Financial.PaymentMethod.Parse(1595));
+      } else {
+        PaymentMethod = new PaymentMethodDto(account.PaymentMethod);
+      }
+      AccountType = account.GetEmpiriaType().MapToNamedEntity();
       Institution = account.Institution.MapToNamedEntity();
       AccountNo = account.AccountNo;
+      Currency = account.Currency.MapToNamedEntity();
+
       HolderName = account.HolderName;
-      CLABE = account.CLABE;
+      ReferenceNumber = account.ReferenceNumber;
+      AskForReferenceNumber = account.AskForReferenceNumber;
     }
 
     #region Properties
 
-    public PaymentMethodDto PaymentMethod {
+    public NamedEntityDto AccountType {
       get;
     }
 
-    public NamedEntityDto Currency {
+    public PaymentMethodDto PaymentMethod {
       get;
     }
 
@@ -40,11 +47,19 @@ namespace Empiria.Financial.Adapters {
       get;
     }
 
+    public NamedEntityDto Currency {
+      get;
+    }
+
     public string HolderName {
       get;
     }
 
-    public string CLABE {
+    public string ReferenceNumber {
+      get;
+    }
+
+    public bool AskForReferenceNumber {
       get;
     }
 
