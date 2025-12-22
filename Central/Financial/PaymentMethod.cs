@@ -20,8 +20,7 @@ namespace Empiria.Financial {
     static public PaymentMethod Parse(string uid) => ParseKey<PaymentMethod>(uid);
 
     static public FixedList<PaymentMethod> GetList() {
-      return GetList<PaymentMethod>()
-            .ToFixedList();
+      return GetStorageObjects<PaymentMethod>();
     }
 
     static public PaymentMethod Empty => ParseEmpty<PaymentMethod>();
@@ -40,6 +39,13 @@ namespace Empiria.Financial {
     public string BrokerCode {
       get {
         return base.ExtData.Get("brokerCode", string.Empty);
+      }
+    }
+
+
+    public bool IsElectronic {
+      get {
+        return BrokerCode.Length != 0;
       }
     }
 
