@@ -98,7 +98,7 @@ namespace Empiria.Products.Services.Adapters {
         Name = cucop.Name,
         Description = cucop.Description,
         InternalCode = cucop.Code,
-        BaseUnit = ProductUnit.Parse(516).MapToNamedEntity(),
+        BaseUnit = ProductUnit.Parse(460).MapToNamedEntity(),
         ManagerName = "No determinado",
         ProductCategoryName = "Sin categoría",
         ProductTypeName = cucop.NombreConcepto

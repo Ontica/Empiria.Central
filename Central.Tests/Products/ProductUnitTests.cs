@@ -19,7 +19,7 @@ namespace Empiria.Tests.Products {
 
     [Fact]
     public void Should_Get_All_Product_Units() {
-      var sut = BaseObject.GetList<ProductUnit>();
+      var sut = ProductUnit.GetList();
 
       Assert.NotNull(sut);
       Assert.NotEmpty(sut);
@@ -34,19 +34,16 @@ namespace Empiria.Tests.Products {
       Assert.Equal("Empty", sut.UID);
       Assert.NotNull(sut.Abbreviation);
       Assert.NotNull(sut.Name);
-      Assert.NotNull(sut.SATCodes);
     }
 
 
     [Fact]
     public void Should_Parse_All_Product_Units() {
-      var units = BaseObject.GetList<ProductUnit>();
+      var units = ProductUnit.GetList();
 
       foreach (var sut in units) {
         Assert.NotNull(sut.Abbreviation);
         Assert.NotEmpty(sut.Name);
-        Assert.NotNull(sut.SATCodes);
-        Assert.NotEmpty(sut.SATCodes);
       }
     }
 

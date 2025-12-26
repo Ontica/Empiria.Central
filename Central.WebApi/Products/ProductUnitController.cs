@@ -23,7 +23,7 @@ namespace Empiria.Products.WebApi {
     [Route("v8/product-management/product-units")]
     public CollectionModel SearchProductUnits([FromUri] string keywords = "") {
 
-      FixedList<ProductUnit> productUnits = BaseObject.GetFullList<ProductUnit>();
+      FixedList<ProductUnit> productUnits = ProductUnit.GetList();
 
       return new CollectionModel(Request, productUnits.MapToNamedEntityList());
     }
