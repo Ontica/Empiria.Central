@@ -19,10 +19,8 @@ namespace Empiria.Financial.Services {
 
     #region Services
 
-    static public FixedList<PaymentAccountDto> GetPaymentAccounts(string partyUID) {
-      Assertion.Require(partyUID, nameof(partyUID));
-
-      var party = Party.Parse(partyUID);
+    static public FixedList<PaymentAccountDto> GetPaymentAccounts(Party party) {
+      Assertion.Require(party, nameof(party));
 
       var accounts = PaymentAccount.GetListFor(party);
 
