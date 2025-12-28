@@ -8,7 +8,11 @@
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
+using System.Web.Http;
+
 using Empiria.WebApi;
+
+using Empiria.Financial.Adapters;
 
 namespace Empiria.Financial.WebApi {
 
@@ -16,6 +20,17 @@ namespace Empiria.Financial.WebApi {
   public class PaymentAccountController : WebApiController {
 
     #region Query web apis
+
+    [HttpGet]
+    [Route("v8/financial/payment-methods")]
+    public CollectionModel GetPaymentMethods() {
+
+      FixedList<PaymentMethod> paymentMethods = PaymentMethod.GetList();
+
+      FixedList<PaymentMethodDto> dtos = PaymentMethodDto.Map(paymentMethods);
+
+      return new CollectionModel(Request, dtos);
+    }
 
     #endregion Query web apis
 

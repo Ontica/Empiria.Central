@@ -26,7 +26,6 @@ namespace Empiria.Financial {
       // Required by Empiria Framework for all partitioned types.
     }
 
-
     static public FinancialInstitution Parse(int id) => ParseId<FinancialInstitution>(id);
 
     static public FinancialInstitution Parse(string uid) => ParseKey<FinancialInstitution>(uid);
