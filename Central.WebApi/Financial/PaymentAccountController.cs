@@ -22,6 +22,26 @@ namespace Empiria.Financial.WebApi {
     #region Query web apis
 
     [HttpGet]
+    [Route("v8/financial/financial-institutions")]
+    public CollectionModel GetFinancialInstitutions() {
+
+      FixedList<FinancialInstitution> institutions = FinancialInstitution.GetList();
+
+      return new CollectionModel(Request, institutions.MapToNamedEntityList());
+    }
+
+
+    [HttpGet]
+    [Route("v8/financial/payment-account-types")]
+    public CollectionModel GetPaymentAccountTypes() {
+
+      FixedList<PaymentAccountType> accountTypes = PaymentAccountType.GetList();
+
+      return new CollectionModel(Request, accountTypes.MapToNamedEntityList());
+    }
+
+
+    [HttpGet]
     [Route("v8/financial/payment-methods")]
     public CollectionModel GetPaymentMethods() {
 

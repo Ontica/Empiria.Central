@@ -19,11 +19,11 @@ namespace Empiria.Financial {
 
     static public PaymentMethod Parse(string uid) => ParseKey<PaymentMethod>(uid);
 
+    static public PaymentMethod Empty => ParseEmpty<PaymentMethod>();
+
     static public FixedList<PaymentMethod> GetList() {
       return GetStorageObjects<PaymentMethod>();
     }
-
-    static public PaymentMethod Empty => ParseEmpty<PaymentMethod>();
 
     #endregion Constructors and parsers
 

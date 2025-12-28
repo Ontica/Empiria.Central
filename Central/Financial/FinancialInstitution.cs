@@ -32,6 +32,10 @@ namespace Empiria.Financial {
 
     static public FinancialInstitution Empty => ParseEmpty<FinancialInstitution>();
 
+    static public FixedList<FinancialInstitution> GetList() {
+      return GetStorageObjects<FinancialInstitution>();
+    }
+
     #endregion Constructors and parsers
 
     #region Properties
