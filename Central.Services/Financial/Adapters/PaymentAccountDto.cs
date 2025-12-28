@@ -19,7 +19,7 @@ namespace Empiria.Financial.Adapters {
       } else {
         PaymentMethod = new PaymentMethodDto(account.PaymentMethod);
       }
-      AccountType = account.GetEmpiriaType().MapToNamedEntity();
+      AccountType = account.AccountType.MapToNamedEntity();
       Institution = account.Institution.MapToNamedEntity();
       AccountNo = account.AccountNo;
       Currency = account.Currency.MapToNamedEntity();

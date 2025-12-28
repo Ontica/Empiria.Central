@@ -37,6 +37,12 @@ namespace Empiria.Financial {
 
     #region Properties
 
+    [DataField("PYMT_ACCT_TYPE_ID")]
+    public PaymentAccountType AccountType {
+      get; private set;
+    }
+
+
     string INamedEntity.Name {
       get {
         return this.Identificator;
