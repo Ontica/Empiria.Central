@@ -25,7 +25,7 @@ namespace Empiria.Documents {
       return new DocumentDto {
         UID = document.UID,
         Name = document.Name,
-        DocumentNo = document.DocumentNo,
+        DocumentNo = document.DocumentNumber,
         DocumentDate = document.DocumentDate,
         DocumentProduct = document.DocumentProduct.MapToNamedEntity(),
         DocumentCategory = document.DocumentCategory.MapToNamedEntity(),

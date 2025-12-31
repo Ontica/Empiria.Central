@@ -89,7 +89,7 @@ namespace Empiria.Documents {
 
 
     [DataField("DOCUMENT_NO")]
-    public string DocumentNo {
+    public string DocumentNumber {
       get;
       private set;
     }
@@ -241,7 +241,7 @@ namespace Empiria.Documents {
 
     protected internal virtual string Keywords {
       get {
-        return EmpiriaString.BuildKeywords(DocumentNo, Name,
+        return EmpiriaString.BuildKeywords(DocumentNumber, Name,
                                            DocumentType.DisplayName, Description);
       }
     }
@@ -302,7 +302,7 @@ namespace Empiria.Documents {
       fields.EnsureValid();
 
       DocumentProduct = Patcher.Patch(fields.DocumentProductUID, DocumentProduct);
-      DocumentNo = Patcher.PatchClean(fields.DocumentNo, DocumentNo);
+      DocumentNumber = Patcher.PatchClean(fields.DocumentNumber, DocumentNumber);
       Name = Patcher.PatchClean(fields.Name, Name);
       Description = Patcher.PatchClean(fields.Description, Description);
       DocumentDate = Patcher.Patch(fields.DocumentDate, DocumentDate);

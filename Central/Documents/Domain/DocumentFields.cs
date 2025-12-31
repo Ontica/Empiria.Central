@@ -23,7 +23,7 @@ namespace Empiria.Documents {
     } = string.Empty;
 
 
-    public string DocumentNo {
+    public string DocumentNumber {
       get; set;
     } = string.Empty;
 
@@ -70,7 +70,7 @@ namespace Empiria.Documents {
 
     static internal void EnsureValid(this DocumentFields fields) {
       fields.Name = EmpiriaString.Clean(fields.Name);
-      fields.DocumentNo = EmpiriaString.Clean(fields.DocumentNo);
+      fields.DocumentNumber = EmpiriaString.Clean(fields.DocumentNumber);
       fields.Description = EmpiriaString.Clean(fields.Description);
 
       if (fields.DocumentProductUID.Length != 0) {

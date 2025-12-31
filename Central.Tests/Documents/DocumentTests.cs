@@ -79,7 +79,7 @@ namespace Empiria.Tests.Documents {
       Assert.NotNull(sut.DocumentCategory);
       Assert.Equal(DocumentCategory.Empty, sut.DocumentCategory);
       Assert.NotEmpty(sut.Name);
-      Assert.NotNull(sut.DocumentNo);
+      Assert.NotNull(sut.DocumentNumber);
       Assert.NotNull(sut.Description);
     }
 
@@ -92,7 +92,7 @@ namespace Empiria.Tests.Documents {
         Assert.NotNull(sut.DocumentType);
         Assert.NotNull(sut.DocumentCategory);
         Assert.NotEmpty(sut.Name);
-        Assert.NotNull(sut.DocumentNo);
+        Assert.NotNull(sut.DocumentNumber);
         Assert.NotNull(sut.Description);
         Assert.NotNull(sut.DocumentProduct);
         Assert.NotNull(sut.SourceParty);

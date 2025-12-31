@@ -32,7 +32,7 @@ namespace Empiria.Documents {
     static internal void WriteDocument(Document o) {
       var op = DataOperation.Parse("write_Document", o.Id, o.UID,
                   o.DocumentType.Id, o.DocumentCategory.Id, o.DocumentProduct.Id,
-                  o.DocumentNo, o.Name, o.Description, EmpiriaString.Tagging(o.Tags),
+                  o.DocumentNumber, o.Name, o.Description, EmpiriaString.Tagging(o.Tags),
                   EmpiriaString.Tagging(o.Identifiers), o.SourceParty.Id, o.TargetParty.Id,
                   o.SignedBy.Id, o.DocumentDate, o.BaseEntityTypeId, o.BaseEntityId,
                   o.FileLocation.Id, o.FileData.ToString(), o.ExtensionData.ToString(), o.Keywords,
