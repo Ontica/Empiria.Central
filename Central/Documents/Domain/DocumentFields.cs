@@ -58,6 +58,10 @@ namespace Empiria.Documents {
     } = ExecutionServer.DateMaxValue;
 
 
+    public decimal Total {
+      get; set;
+    }
+
   }  // class DocumentFields
 
 

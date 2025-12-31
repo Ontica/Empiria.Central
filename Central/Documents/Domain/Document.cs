@@ -229,6 +229,15 @@ namespace Empiria.Documents {
     }
 
 
+    public decimal Total {
+      get {
+        return ExtensionData.Get("total", 0m);
+      }
+      private set {
+        ExtensionData.SetIf("total", value, value != 0);
+      }
+    }
+
 
     protected internal virtual string Keywords {
       get {
@@ -303,6 +312,8 @@ namespace Empiria.Documents {
       SourceParty = Patcher.Patch(fields.SourcePartyUID, SourceParty);
       TargetParty = Patcher.Patch(fields.TargetPartyUID, TargetParty);
       SignedBy = Patcher.Patch(fields.SignedByUID, SignedBy);
+
+      Total = fields.Total;
     }
 
 
