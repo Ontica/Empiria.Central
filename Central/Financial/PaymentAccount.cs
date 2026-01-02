@@ -74,6 +74,11 @@ namespace Empiria.Financial {
     }
 
 
+    [DataField("PYMT_ACCT_NUMBER")]
+    public string AccountNo {
+      get; private set;
+    }
+
     public string Identificator {
       get {
         if (ExtData.HasValue("identificator")) {
@@ -93,16 +98,6 @@ namespace Empiria.Financial {
       }
       private set {
         ExtData.SetIfValue("holderName", value);
-      }
-    }
-
-
-    public string AccountNo {
-      get {
-        return ExtData.Get("accountNo", string.Empty);
-      }
-      private set {
-        ExtData.SetIfValue("accountNo", value);
       }
     }
 
