@@ -21,11 +21,14 @@ namespace Empiria.Financial.WebApi {
 
     [HttpGet]
     [Route("v8/financial/currencies")]
-    public CollectionModel GetCurrencies() {
+    public CollectionModel GetCurrencies([FromUri] string role = null) {
 
-      FixedList<Currency> currencies = Currency.GetList();
+      role = role ?? "procurement";
 
-      return new CollectionModel(Request, currencies.MapToNamedEntityList());
+      FixedList<Currency> currencies = Currency.GetList()
+                                               .FindAll(x => x.PlaysRole(role));
+
+      return new CollectionModel(Request, currencies.MapToNamedEntityList(false));
     }
 
 

@@ -37,7 +37,7 @@ namespace Empiria.Financial {
 
     static public Currency Empty => ParseEmpty<Currency>();
 
-    static public FixedList<Currency> GetList() => GetList<Currency>().ToFixedList();
+    static public FixedList<Currency> GetList() => GetStorageObjects<Currency>();
 
     #endregion Constructors and parsers
 
