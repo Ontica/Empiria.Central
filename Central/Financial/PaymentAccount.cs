@@ -82,7 +82,8 @@ namespace Empiria.Financial {
     public string Identificator {
       get {
         if (ExtData.HasValue("identificator")) {
-          return ExtData.Get<string>("identificator");
+          return $"{Institution.CommonName} ({ExtData.Get<string>("identificator")}) - " +
+                 $"{EmpiriaString.TruncateLast(AccountNo, 4)}";
         }
         return $"{Institution.CommonName} - {EmpiriaString.TruncateLast(AccountNo, 4)}";
       }
@@ -104,6 +105,9 @@ namespace Empiria.Financial {
     public string ReferenceNumber {
       get {
         return ExtData.Get("referenceNumber", string.Empty);
+      }
+      private set {
+        ExtData.SetIfValue("referenceNumber", value);
       }
     }
 
@@ -143,9 +147,43 @@ namespace Empiria.Financial {
       get {
         return ExtData.Get("askForReferenceNumber", false);
       }
+      private set {
+        ExtData.SetIf("askForReferenceNumber", value, value == true);
+      }
     }
 
     #endregion Properties
+
+    #region Methods
+
+
+    protected override void OnSave() {
+      if (IsNew) {
+        PostedBy = Party.ParseWithContact(ExecutionServer.CurrentContact);
+        PostingTime = DateTime.Now;
+      }
+
+      PaymentAccountData.Write(this);
+    }
+
+
+    public void Update(PaymentAccountFields fields) {
+      Assertion.Require(fields, nameof(fields));
+
+      AccountType = PaymentAccountType.Parse(fields.AccountTypeUID);
+      PaymentMethod = PaymentMethod.Parse(fields.PaymentMethodUID);
+      Institution = FinancialInstitution.Parse(fields.InstitutionUID);
+      AccountNo = EmpiriaString.Clean(fields.AccountNo);
+      Identificator = EmpiriaString.Clean(fields.Identificator);
+      Currency = Currency.Parse(fields.CurrencyUID);
+      HolderName = EmpiriaString.Clean(fields.HolderName);
+      AskForReferenceNumber = fields.AskForReferenceNumber;
+      ReferenceNumber = EmpiriaString.Clean(fields.ReferenceNumber);
+
+      MarkAsDirty();
+    }
+
+    #endregion Methods
 
   }  // class PaymentAccount
 
