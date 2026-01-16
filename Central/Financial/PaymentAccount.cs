@@ -21,6 +21,22 @@ namespace Empiria.Financial {
 
     #region Constructors and parsers
 
+    protected PaymentAccount() {
+      // Required by Empiria Framework.
+    }
+
+    public PaymentAccount(Party party, PaymentAccountFields fields) {
+      Assertion.Require(party, nameof(party));
+      Assertion.Require(!party.IsEmptyInstance, nameof(party));
+      Assertion.Require(fields, nameof(fields));
+
+      fields.EnsureValid();
+
+      Party = party;
+
+      Update(fields);
+    }
+
     static public PaymentAccount Parse(int id) => ParseId<PaymentAccount>(id);
 
     static public PaymentAccount Parse(string uid) => ParseKey<PaymentAccount>(uid);
@@ -45,7 +61,15 @@ namespace Empiria.Financial {
 
     string INamedEntity.Name {
       get {
-        return this.Identificator;
+        string temp = Institution.IsEmptyInstance ? PaymentMethod.Name : Institution.CommonName;
+
+        if (Identificator.Length != 0) {
+          temp = $"{temp} ({Identificator})";
+        }
+        if (AccountNo.Length == 0) {
+          return temp;
+        }
+        return $"{temp} - {EmpiriaString.TruncateLast(AccountNo, 6)}";
       }
     }
 
@@ -81,14 +105,11 @@ namespace Empiria.Financial {
 
     public string Identificator {
       get {
-        if (ExtData.HasValue("identificator")) {
-          return $"{Institution.CommonName} ({ExtData.Get<string>("identificator")}) - " +
-                 $"{EmpiriaString.TruncateLast(AccountNo, 4)}";
-        }
-        return $"{Institution.CommonName} - {EmpiriaString.TruncateLast(AccountNo, 4)}";
+        return ExtData.Get("identificator", string.Empty);
       }
       private set {
-        ExtData.SetIfValue("identificator", value);
+        ExtData.SetIf("identificator", value, value.Length != 0 &&
+                                              value != ((INamedEntity) this).Name);
       }
     }
 
@@ -98,7 +119,7 @@ namespace Empiria.Financial {
         return ExtData.Get("holderName", Party.Name);
       }
       private set {
-        ExtData.SetIfValue("holderName", value);
+        ExtData.SetIf("holderName", value, value.Length != 0 && value != Party.Name);
       }
     }
 
@@ -156,6 +177,12 @@ namespace Empiria.Financial {
 
     #region Methods
 
+    public void Delete() {
+      Status = EntityStatus.Deleted;
+
+      MarkAsDirty();
+    }
+
 
     protected override void OnSave() {
       if (IsNew) {
@@ -170,12 +197,14 @@ namespace Empiria.Financial {
     public void Update(PaymentAccountFields fields) {
       Assertion.Require(fields, nameof(fields));
 
-      AccountType = PaymentAccountType.Parse(fields.AccountTypeUID);
-      PaymentMethod = PaymentMethod.Parse(fields.PaymentMethodUID);
-      Institution = FinancialInstitution.Parse(fields.InstitutionUID);
+      fields.EnsureValid();
+
+      AccountType = Patcher.Patch(fields.AccountTypeUID, AccountType);
+      PaymentMethod = Patcher.Patch(fields.PaymentMethodUID, PaymentMethod);
+      Institution = Patcher.Patch(fields.InstitutionUID, Institution);
       AccountNo = EmpiriaString.Clean(fields.AccountNo);
       Identificator = EmpiriaString.Clean(fields.Identificator);
-      Currency = Currency.Parse(fields.CurrencyUID);
+      Currency = Patcher.Patch(fields.CurrencyUID, Currency);
       HolderName = EmpiriaString.Clean(fields.HolderName);
       AskForReferenceNumber = fields.AskForReferenceNumber;
       ReferenceNumber = EmpiriaString.Clean(fields.ReferenceNumber);

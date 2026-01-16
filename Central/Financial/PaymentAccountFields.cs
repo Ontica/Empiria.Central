@@ -18,11 +18,6 @@ namespace Empiria.Financial {
     } = string.Empty;
 
 
-    public string PartyUID {
-      get; set;
-    } = string.Empty;
-
-
     public string AccountTypeUID {
       get; set;
     } = string.Empty;
@@ -67,6 +62,44 @@ namespace Empiria.Financial {
       get; set;
     } = string.Empty;
 
+
+    internal void EnsureValid() {
+      UID = Patcher.CleanUID(UID);
+      AccountTypeUID = Patcher.CleanUID(AccountTypeUID);
+      PaymentMethodUID = Patcher.CleanUID(PaymentMethodUID);
+      InstitutionUID = Patcher.CleanUID(InstitutionUID);
+      CurrencyUID = Patcher.CleanUID(CurrencyUID);
+
+      AccountNo = Patcher.PatchClean(AccountNo, string.Empty);
+      Identificator = Patcher.PatchClean(Identificator, string.Empty);
+
+      _ = PaymentAccountType.Parse(AccountTypeUID);
+      _ = Currency.Parse(CurrencyUID);
+
+      var paymentMethod = PaymentMethod.Parse(PaymentMethodUID);
+
+      if (!paymentMethod.AccountRelated) {
+        InstitutionUID = string.Empty;
+        AccountNo = string.Empty;
+        AskForReferenceNumber = false;
+        ReferenceNumber = string.Empty;
+
+        return;
+      }
+
+      Assertion.Require(InstitutionUID.Length != 0,
+                       "Requiero se proporcione la institución financiera a la que pertenece la cuenta.");
+
+      Assertion.Require(AccountNo.Length != 0,
+                        "Requiero se proporcione el número de cuenta.");
+
+      Assertion.Require(AccountNo.Length == 18,
+                        "El número de cuenta debe contener 18 dígitos (cuenta CLABE).");
+
+      Assertion.Require(EmpiriaString.AllDigits(AccountNo),
+                        "El número de cuenta debe conformarse únicamente por 18 dígitos (cuenta CLABE).");
+
+    }
 
   }  // class PaymentAccountFields
 
