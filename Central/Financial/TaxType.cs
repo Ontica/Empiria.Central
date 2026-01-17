@@ -35,6 +35,13 @@ namespace Empiria.Financial {
 
     #region Properties
 
+    public bool IsBudgetable {
+      get {
+        return ExtData.Get("isBudgetable", false);
+      }
+    }
+
+
     public bool ProductAppliable {
       get {
         return ExtData.Get("productAppliable", false);
