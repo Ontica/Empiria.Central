@@ -42,6 +42,13 @@ namespace Empiria.Financial {
     }
 
 
+    public bool IsForControl {
+      get {
+        return ExtData.Get("isForControl", false);
+      }
+    }
+
+
     public bool ProductAppliable {
       get {
         return ExtData.Get("productAppliable", false);
