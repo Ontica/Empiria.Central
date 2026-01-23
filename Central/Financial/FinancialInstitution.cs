@@ -13,7 +13,7 @@ using Empiria.Parties;
 namespace Empiria.Financial {
 
   /// <summary>Represents a financial institution like a bank or a payments broker.</summary>
-  public class FinancialInstitution : CommonStorage {
+  public class FinancialInstitution : CommonStorage, INamedEntity {
 
     #region Constructors and parsers
 
@@ -49,6 +49,16 @@ namespace Empiria.Financial {
     public string CommonName {
       get {
         return base.ExtData.Get("commonName", base.Name);
+      }
+    }
+
+
+    string INamedEntity.Name {
+      get {
+        if (base.Code.Length != 0) {
+          return $"{base.Name} ({base.Code})";
+        }
+        return base.Name;
       }
     }
 
