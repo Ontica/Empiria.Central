@@ -93,11 +93,11 @@ namespace Empiria.Financial {
       Assertion.Require(AccountNo.Length != 0,
                         "Requiero se proporcione el número de cuenta.");
 
-      Assertion.Require(AccountNo.Length == 18,
-                        "El número de cuenta debe contener 18 dígitos (cuenta CLABE).");
+      Assertion.Require(AccountNo.Length >= 5,
+                        "El número de cuenta debe contener cuando menos 5 dígitos.");
 
       Assertion.Require(EmpiriaString.AllDigits(AccountNo),
-                        "El número de cuenta debe conformarse únicamente por 18 dígitos (cuenta CLABE).");
+                        "El número de cuenta debe conformarse únicamente por dígitos.");
 
     }
 
