@@ -49,6 +49,20 @@ namespace Empiria.Financial {
     }
 
 
+    public bool NoPayable {
+      get {
+        return ExtData.Get("noPayable", false);
+      }
+    }
+
+
+    public bool Payable {
+      get {
+        return !NoPayable;
+      }
+    }
+
+
     public bool ProductAppliable {
       get {
         return ExtData.Get("productAppliable", false);
@@ -63,6 +77,7 @@ namespace Empiria.Financial {
     }
 
     #endregion Properties
+
   } // class TaxType
 
 } // namespace Empiria.Financial
