@@ -2,31 +2,31 @@
 *                                                                                                            *
 *  Module   : Financial                                  Component : Domain Types                            *
 *  Assembly : Empiria.Central.dll                        Pattern   : Common Storage Type                     *
-*  Type     : CreditCategory                             License   : Please read LICENSE.txt file            *
+*  Type     : CreditProjectType                          License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Categorizes the purpose of a credit.                                                           *
+*  Summary  : Describes a project type as the purpose of a credit.                                           *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
 namespace Empiria.Financial {
 
-  /// <summary>Categorizes the purpose of a credit.</summary>
-  public class CreditCategory : CommonStorage {
+  /// <summary>Describes a project type as the purpose of a credit.</summary>
+  public class CreditProjectType : CommonStorage {
 
     #region Constructors and parsers
 
-    static public CreditCategory Parse(int id) => ParseId<CreditCategory>(id);
+    static public CreditProjectType Parse(int id) => ParseId<CreditProjectType>(id);
 
-    static public CreditCategory Parse(string uid) => ParseKey<CreditCategory>(uid);
+    static public CreditProjectType Parse(string uid) => ParseKey<CreditProjectType>(uid);
 
-    static public CreditCategory Empty => ParseEmpty<CreditCategory>();
+    static public CreditProjectType Empty => ParseEmpty<CreditProjectType>();
 
-    static public FixedList<CreditCategory> GetList() {
-      return GetStorageObjects<CreditCategory>();
+    static public FixedList<CreditProjectType> GetList() {
+      return GetStorageObjects<CreditProjectType>();
     }
 
     #endregion Constructors and parsers
 
-  } // class CreditCategory
+  } // class CreditProjectType
 
 } // namespace Empiria.Financial
