@@ -25,6 +25,18 @@ namespace Empiria.Financial {
       return GetStorageObjects<CreditProjectType>();
     }
 
+    static public CreditProjectType TryParseWithID(string objectCode) {
+      Assertion.Require(objectCode, nameof(objectCode));
+
+      var creditProjectType = TryParse<CreditProjectType>($"OBJECT_CODE = '{objectCode}' AND OBJECT_TYPE_ID = 293");
+
+      if (creditProjectType == null) {
+        return null;
+      }
+
+      return (CreditProjectType) creditProjectType;
+    }
+
     #endregion Constructors and parsers
 
   } // class CreditProjectType
