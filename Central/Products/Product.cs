@@ -25,6 +25,10 @@ namespace Empiria.Products {
 
     #region Constructors and parsers
 
+    public Product() {
+      //no-op
+    }
+
     protected Product(ProductType powertype) : base(powertype) {
       // Required by Empiria Framework for all partitioned types.
     }
@@ -143,7 +147,7 @@ namespace Empiria.Products {
 
 
     [DataField("PRODUCT_EXT_DATA")]
-    protected internal JsonObject ExtensionData {
+    public JsonObject ExtensionData {
       get;
       private set;
     }
@@ -194,6 +198,26 @@ namespace Empiria.Products {
       get {
         return EmpiriaString.BuildKeywords(InternalCode, Name,
                                            ProductType.DisplayName, Description, _identificators, _tags, _roles);
+      }
+    }
+
+
+    public string Group {
+      get {
+        return ExtensionData.Get("Grupo", string.Empty);
+      }
+      private set {
+        ExtensionData.SetIfValue("Grupo", value);
+      }
+    }
+
+
+    public string Subgroup {
+      get {
+        return ExtensionData.Get("SubGrupo", string.Empty);
+      }
+      private set {
+        ExtensionData.SetIfValue("SubGrupo", value);
       }
     }
 
