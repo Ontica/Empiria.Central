@@ -78,6 +78,10 @@ namespace Empiria.Documents {
       get; internal set;
     }
 
+    public bool CanDelete {
+      get; internal set;
+    }
+
   }  // class DocumentDto
 
 

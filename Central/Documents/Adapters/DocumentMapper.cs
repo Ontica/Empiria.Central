@@ -37,7 +37,8 @@ namespace Empiria.Documents {
         Status = document.Status.MapToDto(),
         File = document.FileDto(),
         FullLocalName = document.FullLocalName,
-        ApplicationContentType = document.DocumentProduct.ApplicationContentType
+        ApplicationContentType = document.DocumentProduct.ApplicationContentType,
+        CanDelete = true
       };
     }
 
