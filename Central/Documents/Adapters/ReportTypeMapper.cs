@@ -21,7 +21,7 @@ namespace Empiria.Documents {
 
     static private ReportTypeDto Map(ReportType reportType) {
       return new ReportTypeDto {
-        UID = reportType.UID,
+        UID = reportType.NamedKey,
         Name = reportType.Name,
         Group = reportType.Group,
         Controller = reportType.Controller,

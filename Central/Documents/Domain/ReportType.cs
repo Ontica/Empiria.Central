@@ -23,6 +23,8 @@ namespace Empiria.Documents {
 
     static public ReportType Parse(string uid) => ParseKey<ReportType>(uid);
 
+    static public ReportType ParseWithNameKey(string namedKey) => ParseNamedKey<ReportType>(namedKey);
+
     static public ReportType Empty => ParseEmpty<ReportType>();
 
     static public FixedList<ReportType> GetList() {
@@ -42,6 +44,7 @@ namespace Empiria.Documents {
       }
     }
 
+
     public string Group {
       get {
         return base.ExtData.Get<string>("group", string.Empty);
@@ -51,12 +54,17 @@ namespace Empiria.Documents {
       }
     }
 
-    #endregion Properties
 
-    #region Methods
+    public new string NamedKey {
+      get {
+        return base.NamedKey;
+      }
+      private set {
+        base.NamedKey = value;
+      }
+    }
 
-
-    #endregion Methods
+    #endregion Properties   
 
   } // class ReportType
 
