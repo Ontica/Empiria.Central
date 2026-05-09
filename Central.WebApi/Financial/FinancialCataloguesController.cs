@@ -20,6 +20,16 @@ namespace Empiria.Financial.WebApi {
     #region Query web apis
 
     [HttpGet]
+    [Route("v8/financial/credit-risk-stages")]
+    public CollectionModel GetCreditRiskStages() {
+
+      FixedList<CreditRiskStage> creditRiskStages = CreditRiskStage.GetList();
+
+      return new CollectionModel(Request, creditRiskStages.MapToNamedEntityList());
+    }
+
+
+    [HttpGet]
     [Route("v8/financial/currencies")]
     public CollectionModel GetCurrencies([FromUri] string role = null) {
 

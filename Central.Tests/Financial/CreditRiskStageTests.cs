@@ -2,9 +2,9 @@
 *                                                                                                            *
 *  Module   : Financial                                  Component : Test cases                              *
 *  Assembly : Empiria.Central.Tests.dll                  Pattern   : Unit tests                              *
-*  Type     : CreditStageTests                           License   : Please read LICENSE.txt file            *
+*  Type     : CreditRiskStageTests                       License   : Please read LICENSE.txt file            *
 *                                                                                                            *
-*  Summary  : Unit tests for CreditStage type.                                                               *
+*  Summary  : Unit tests for CreditRiskStage type.                                                           *
 *                                                                                                            *
 ************************* Copyright(c) La Vía Óntica SC, Ontica LLC and contributors. All rights reserved. **/
 
@@ -14,14 +14,14 @@ using Empiria.Financial;
 
 namespace Empiria.Tests.Financial {
 
-  /// <summary>Unit tests for CreditStage type.</summary>
-  public class CreditStageTests {
+  /// <summary>Unit tests for CreditRiskStage type.</summary>
+  public class CreditRiskStageTests {
 
     #region Facts
 
     [Fact]
-    public void Should_Parse_All_Credit_Types() {
-      var creditStages = CreditStage.GetList();
+    public void Should_Parse_All_Credit_Risk_Stages() {
+      var creditStages = CreditRiskStage.GetList();
 
       foreach (var sut in creditStages) {
         Assert.NotEmpty(sut.Name);
@@ -30,8 +30,8 @@ namespace Empiria.Tests.Financial {
 
 
     [Fact]
-    public void Should_Read_All_Credit_Types() {
-      var sut = CreditStage.GetList();
+    public void Should_Read_All_Credit_Risk_Stages() {
+      var sut = CreditRiskStage.GetList();
 
       Assert.NotNull(sut);
       Assert.NotEmpty(sut);
@@ -39,12 +39,12 @@ namespace Empiria.Tests.Financial {
 
 
     [Fact]
-    public void Should_Read_Empty_CreditType() {
-      var sut = CreditStage.Empty;
+    public void Should_Read_Empty_CreditRiskStage() {
+      var sut = CreditRiskStage.Empty;
 
       Assert.NotNull(sut);
       Assert.Equal("Empty", sut.UID);
-      Assert.Equal(CreditStage.Parse("Empty"), sut);
+      Assert.Equal(CreditRiskStage.Parse("Empty"), sut);
     }
 
     #endregion Facts
