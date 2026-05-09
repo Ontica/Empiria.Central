@@ -25,7 +25,7 @@ namespace Empiria.Financial.WebApi {
 
       FixedList<CreditProcessStage> creditProcessStages = CreditProcessStage.GetList();
 
-      return new CollectionModel(Request, creditProcessStages.MapToNamedEntityList());
+      return new CollectionModel(Request, creditProcessStages.MapToNamedEntityList(false));
     }
 
 

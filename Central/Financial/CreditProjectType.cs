@@ -11,7 +11,7 @@
 namespace Empiria.Financial {
 
   /// <summary>Describes a project type as the purpose of a credit.</summary>
-  public class CreditProjectType : CommonStorage {
+  public class CreditProjectType : CommonStorage, INamedEntity {
 
     #region Constructors and parsers
 
@@ -28,16 +28,20 @@ namespace Empiria.Financial {
     static public CreditProjectType TryParseWithID(string objectCode) {
       Assertion.Require(objectCode, nameof(objectCode));
 
-      var creditProjectType = TryParse<CreditProjectType>($"OBJECT_CODE = '{objectCode}' AND OBJECT_TYPE_ID = 293");
-
-      if (creditProjectType == null) {
-        return null;
-      }
-
-      return (CreditProjectType) creditProjectType;
+      return TryParse<CreditProjectType>($"OBJECT_CODE = '{objectCode}'");
     }
 
     #endregion Constructors and parsers
+
+    #region Properties
+
+    string INamedEntity.Name {
+      get {
+        return $"({base.Code.PadLeft(3, '0')}) {base.Name}";
+      }
+    }
+
+    #endregion Properties
 
   } // class CreditProjectType
 

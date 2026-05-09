@@ -22,7 +22,8 @@ namespace Empiria.Financial {
     static public CreditProcessStage Empty => ParseEmpty<CreditProcessStage>();
 
     static public FixedList<CreditProcessStage> GetList() {
-      return GetStorageObjects<CreditProcessStage>();
+      return GetStorageObjects<CreditProcessStage>()
+            .Sort((x, y) => x.Position.CompareTo(y.Position));
     }
 
     #endregion Constructors and parsers

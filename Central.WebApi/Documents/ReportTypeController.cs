@@ -22,7 +22,7 @@ namespace Empiria.Documents.WebApi {
     #region Web Apis
 
     [HttpGet]
-    [Route("v2/documents/report-types/")]
+    [Route("v2/reporting/report-types")]
     public CollectionModel GetReportTypes() {
 
       using (var useCase = ReportTypesUseCases.UseCaseInteractor()) {
