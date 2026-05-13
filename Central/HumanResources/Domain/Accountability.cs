@@ -42,15 +42,13 @@ namespace Empiria.HumanResources {
     }
 
 
-    static public FixedList<T> GetCommissionersFor<T>(Party responsible,
-                                                      string listName, string role) where T : Party {
+    static public FixedList<T> GetCommissionersFor<T>(Party responsible, string role) where T : Party {
 
       Assertion.Require(responsible, nameof(responsible));
-      Assertion.Require(listName, nameof(listName));
       Assertion.Require(role, nameof(role));
 
       FixedList<T> commissioners = Party.GetList<T>(DateTime.Today)
-                                        .FindAll(x => x.PlaysRole(listName));
+                                        .FindAll(x => x.PlaysRole(role));
 
       commissioners.Sort((x, y) => ((INamedEntity) x).Name.CompareTo(((INamedEntity) y).Name));
 
