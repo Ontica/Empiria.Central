@@ -25,6 +25,12 @@ namespace Empiria.Financial {
       return GetStorageObjects<CreditRiskStage>();
     }
 
+    static public CreditRiskStage TryParseWithCode(string creditRiskStage) {
+      Assertion.Require(creditRiskStage, nameof(creditRiskStage));
+
+      return TryParseWithCode<CreditRiskStage>(creditRiskStage);
+    }
+
     #endregion Constructors and parsers
 
   } // class CreditRiskStage
