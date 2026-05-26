@@ -25,19 +25,26 @@ namespace Empiria.Financial {
       return GetStorageObjects<CreditProjectType>();
     }
 
-    static public CreditProjectType TryParseWithCode(string creditProjectTypeCode) {
-      Assertion.Require(creditProjectTypeCode, nameof(creditProjectTypeCode));
+    static public CreditProjectType TryParseWithCode(string code) {
+      Assertion.Require(code, nameof(code));
 
-      return TryParseWithCode<CreditProjectType>(creditProjectTypeCode);
+      return TryParseWithCode<CreditProjectType>(code);
     }
 
     #endregion Constructors and parsers
 
     #region Properties
 
+    public new string Code {
+      get {
+        return base.Code.PadLeft(3, '0');
+      }
+    }
+
+
     string INamedEntity.Name {
       get {
-        return $"({base.Code.PadLeft(3, '0')}) {base.Name}";
+        return $"({this.Code}) {base.Name}";
       }
     }
 
