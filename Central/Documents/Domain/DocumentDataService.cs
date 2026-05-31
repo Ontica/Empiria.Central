@@ -15,6 +15,15 @@ namespace Empiria.Documents {
   /// <summary>Provides documents data persistence services.</summary>
   static internal class DocumentDataService {
 
+    static internal FixedList<Document> GetDocumentsFor(BaseObject entity) {
+      string filter = $"DOCUMENT_BASE_ENTITY_TYPE_ID = {entity.GetEmpiriaType().Id} AND " +
+                      $"DOCUMENT_BASE_ENTITY_ID = {entity.Id} AND " +
+                      $"DOCUMENT_STATUS != 'X'";
+
+      return SearchDocuments(filter, "DOCUMENT_ID");
+    }
+
+
     static internal FixedList<Document> SearchDocuments(string filter, string sort) {
       Assertion.Require(filter, nameof(filter));
       Assertion.Require(sort, nameof(sort));

@@ -54,11 +54,7 @@ namespace Empiria.Documents {
     static internal FixedList<Document> GetListFor(BaseObject entity) {
       Assertion.Require(entity, nameof(entity));
 
-      return BaseObject.GetFullList<Document>()
-                       .ToFixedList()
-                       .FindAll(x => x.BaseEntityId == entity.Id &&
-                                     x.BaseEntityTypeId == entity.GetEmpiriaType().Id &&
-                                     x.Status != EntityStatus.Deleted);
+      return DocumentDataService.GetDocumentsFor(entity);
     }
 
     static public Document Empty => ParseEmpty<Document>();
