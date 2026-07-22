@@ -36,6 +36,12 @@ namespace Empiria.Locations {
 
     #region Properties
 
+    [DataField("OBJECT_UID")]
+    public string LocationUID {
+      get; protected set;
+    }
+
+
     public string LocationCode {
       get {
         return base.Code;
