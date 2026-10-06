@@ -50,6 +50,9 @@ namespace Empiria.Documents {
 
     public new DocumentCategory ProductCategory {
       get {
+        if (IsEmptyInstance) {
+          return DocumentCategory.Empty;
+        }
         return (DocumentCategory) base.ProductCategory;
       }
     }

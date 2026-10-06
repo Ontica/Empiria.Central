@@ -72,6 +72,8 @@ namespace Empiria.Tests.Documents {
     public void Should_Get_Empty_Document() {
       var sut = Document.Empty;
 
+      Assert.True(DocumentCategory.Empty is DocumentCategory);
+
       Assert.Equal(-1, sut.Id);
       Assert.Equal("Empty", sut.UID);
       Assert.NotNull(sut.DocumentType);

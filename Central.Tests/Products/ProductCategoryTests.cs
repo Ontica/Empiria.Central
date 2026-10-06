@@ -22,6 +22,7 @@ namespace Empiria.Tests.Products {
     [Fact]
     public void Should_Create_A_ProductCategory() {
 
+
       var productType = ProductType.Parse(TestingConstants.PRODUCT_TYPE_UID);
       var name = "   The new   category ";
 

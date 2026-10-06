@@ -36,7 +36,7 @@ namespace Empiria.Tests.Documents {
       Assert.NotNull(sut.ProductType);
       //Assert.Equal(DocumentType.Empty, sut.ProductType);
       Assert.NotNull(sut.ProductCategory);
-      Assert.Equal(ProductCategory.Empty, sut.ProductCategory);
+      Assert.Equal(DocumentCategory.Empty, sut.ProductCategory);
       Assert.NotEmpty(sut.Name);
       Assert.NotNull(sut.InternalCode);
       Assert.NotNull(sut.Description);
