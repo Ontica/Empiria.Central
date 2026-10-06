@@ -21,6 +21,8 @@ namespace Empiria.Financial {
 
     static public TaxType Parse(string uid) => ParseKey<TaxType>(uid);
 
+    static public TaxType TryParse(string namedKey) => TryParseNamedKey<TaxType>(namedKey);
+
     static public TaxType Empty => ParseEmpty<TaxType>();
 
     static public FixedList<TaxType> GetList() {
