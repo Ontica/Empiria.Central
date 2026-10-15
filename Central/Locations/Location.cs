@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 
 using Empiria.Data;
+using Empiria.Json;
 
 namespace Empiria.Locations {
 
@@ -39,6 +40,18 @@ namespace Empiria.Locations {
     [DataField("OBJECT_UID")]
     public string LocationUID {
       get; protected set;
+    }
+
+
+    [DataField("OBJECT_EXT_DATA")]
+    public JsonObject Ext_Data {
+      get; private set;
+    }
+
+
+    [DataField("OBJECT_NAMED_KEY")]
+    public string ShortName {
+      get; private set;
     }
 
 
